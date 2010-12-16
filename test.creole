@@ -1,9 +1,0 @@
-//emphasized//
-
-**strongly emphasized**
-
-* Bullet list
-* Second item
-** Sub item
-
-[[http://blinkkin.pl|W mgnieniu oka]]

@@ -1,0 +1,217 @@
+<html>
+<head>
+<link rel="Stylesheet" type="text/css" href="http://www.w3.org/StyleSheets/Core/Swiss" />
+<title>NetBSD</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<body>
+<h1 id="toc_1">NetBSD</h1>
+<h2 id="toc_1.1">Wprowadzenie</h2>
+<p>
+Wolny (od wolności) <a href="http://pl.wikipedia.org/wiki/Unix">system uniksopodobny</a> z rodziny <a href="http://pl.wikipedia.org/wiki/BSD">BSD</a>, utworzony 20 kwietnia 1993 roku (<a href="ftp://ftp.netbsd.org/pub/NetBSD/misc/release/NetBSD/NetBSD-0.8">NetBSD 0.8</a>). Znany z powodu <a href="http://www.netbsd.org/ports/">niezrównanej przenośności</a>.
+<h2 id="toc_1.2">Przenośność — Of course it runs NetBSD</h2>
+Cechą wyróżniającą NetBSD jest ogromna liczba <a href="http://www.netbsd.org/Ports/">obsługiwanych platform</a>, jedną z nich jest... <a href="http://hardware.slashdot.org/article.pl?sid=05/08/11/1754253">toster</a> :-) Dlatego motto systemu brzmi "Of course it runs NetBSD." (oczywiście, że NetBSD działa na tej platformie).
+<h2 id="toc_1.3">Goło i wesoło</h2>
+NetBSD jest tradycyjnym systemem unikso-podobnym, charakteryzującym się dużą surowością. Bazowa dystrybucja NetBSD jest bardzo mała w porównaniu do innych systemów - symbolem tego stało się usunięcie <a href="http://mail-index.netbsd.org/current-users/2006/05/29/0005.html">sendmaila</a> czy brak dynamicznego języka jak Perl czy Python, spotykanego zazwyczaj w innych systemach. Dodatkowo niewiele rzeczy skonfigurowanych jest zaraz po instalacji - nawet podstawowe demony itd. NetBSD wymaga od użytkownika obszernej wiedzy na temat administracji systemem, dlatego nie jest zalecany dla początkujących użytkowników.
+<h2 id="toc_1.4">Cykl rozwojowy</h2>
+Kolejną rzeczą wyróżniającą NetBSD są dwa niezależne plany rozwoju. NetBSD jest wydawane zgodnie z zasadą, kiedy będzie gotowe. Natomiast pkgsrc jest wydawane cyklicznie co kwartał. Pozwala to użytkownikom starszych wersji NetBSD np. 4.0 (wydanie z 2007 roku) cieszyć się najnowszym zestawem aplikacji z pkgsrc 2010Q3. Prowadzi to jednak do błędów, popełnianych przez początkujących użytkowników. Sytuacja kiedy taki użytkownik instaluje pakiety binarne z pkgsrc 2010Q1, a następnie kompiluje programy ze źródeł pkgsrc 2010Q3 jest dosyć częsta. Powoduje to poważne problemy z zależnościami, a w konsekwencji rezygnację z NetBSD.
+<h2 id="toc_1.5">Bezpieczeństwo</h2>
+Bardzo wysokie. Zarówno sam <a href="http://www.netbsd.org/support/security/">system</a> jak i <a href="http://www.netbsd.org/docs/pkgsrc/using.html#vulnerabilities">baza luk</a> w systemie pakietów <a href="http://www.netbsd.org/docs/pkgsrc/">pkgsrc</a> są regularnie aktualizowane pod kątem występowania luk w bezpieczeństwie.
+</p>
+
+<p>
+Można włączyć <a href="http://netbsd.gw.com/cgi-bin/man-cgi?cgd+4+NetBSD-current">kryptograficzny sterownik dysku</a> CGD,który szyfruje dane podczas odczytu i zapisu na dysk. Więcej informacji można znaleźć w <a href="http://www.netbsd.org/docs/guide/en/chap-cgd.html">przewodniku</a>.
+</p>
+
+<p>
+<a href="http://en.wikipedia.org/wiki/Comparison_of_operating_systems#Security">Porównaj NetBSD</a> z innymi systemami pod względem bezpieczeństwa na Wikipedii.
+<h2 id="toc_1.6">Wirtualizacja i emulacja</h2>
+NetBSD od wydania 3.0 posiada <a href="http://www.netbsd.org/ports/xen/">wsparcie dla Xena</a>, zarówno domU jak i dom0. Dodatkowo na poziomie użytkownika są dostępne maszyny wirtualne VirtualBox i QEMU. Oprócz tego NetBSD potrafi odpalać programy z Linuksa, <a href="http://www.netbsd.org/docs/guide/en/chap-linux.html">korzystając z emulacji</a> na poziomie jądra.
+<h2 id="toc_1.7">Magazynowanie danych</h2>
+Standardowo NetBSD obsługuje tradycyjne dla rodziny BSD systemy plików, czyli FFS i FFS2. FFS2 posiada możliwość włączenia obsługi księgowania za pomocą WAPBL, które zwiększa wydajność systemu plików. Od wydania NetBSD 5.1 istnieje możliwość użycia menadżera woluminów logicznych - LVM znanego z Linuksa. Dostęp do wielu innych systemów plików jak np. FAT, NTFS czy ext2 dostępny jest za pomocą FUSE, bądź Puffs. Dodatkowo trwają prace nad dodaniem natywnej obsługi ZFS - obecnie na eksperymentalnym etapie.
+<h2 id="toc_1.8">System pakietów pkgsrc</h2>
+W odróżnieniu od <a href="http://jakilinux.org/bsd/freebsd/">FreeBSD</a> i <a href="http://jakilinux.org/bsd/openbsd/">OpenBSD</a>, w terminologii NetBSD słowo <a href="http://www.netbsd.org/Ports/">"port"</a> oznacza platformę na której system działa i nie ma nic wspólnego z systemem portów (ang. ports). W NetBSD odpowiednik <a href="http://en.wikipedia.org/wiki/Ports_collection">systemu portów</a> nazywa się kolekcją pakietów (packages collection, The NetBSD Packages Collection) lub pkgsrc. Umożliwia on instalację oprogramowania <a href="http://www.netbsd.org/docs/pkgsrc/using.html#building-packages-from-source">ze źródeł</a>, co daje możliwość dostosowania wszystkich opcji, ale w przypadku dużych programów, takich jak <a href="http://www.kde.org/">KDE</a> czy <a href="http://www.gnome.org/">GNOME</a>, może to trwać zbyt długo. Zainstalowanie programu jest banalnie proste i polega na przejściu do odpowiedniego katalogu w pkgsrc i wpisaniu # make install (np. # cd /usr/pkgsrc/wm/ratpoison/; make install), aby zainstalować menadżer okien <a href="http://www.nongnu.org/ratpoison/">ratpoison</a>.
+</p>
+
+<p>
+Czas instalacji można skrócić posługując się gotowymi <a href="http://www.netbsd.org/docs/pkgsrc/using.html#using-pkg">pakietami binarnymi</a> (instalacja menadżera okien <a href="http://www.nongnu.org/ratpoison/">ratpoison</a>: # pkg_add -v ratpoison, należy pamiętać o ustawieniu zmiennej <a href="http://www.netbsd.org/docs/pkgsrc/using.html#installing-binary-packages">PKG_PATH</a>). W obu przypadkach użytkownik nie musi troszczyć się o zależności. Warto zauważyć, że pkgsrc jest również, jak NetBSD, <a href="http://www.netbsd.org/docs/pkgsrc/platforms.html">wieloplatformowy</a>.
+</p>
+
+<p>
+Obecnie dostępnych jest ponad <a href="http://pkgsrc.se/statistics.php">7000</a> pakietów.
+</p>
+
+<p>
+Czas <a href="http://www.netbsd.org/docs/pkgsrc/getting.html#getting-first">instalacji pkgsrc</a> można skrócić poprzez pobranie i rozpakowanie do katalogu /usr pliku <a href="ftp://ftp.netbsd.org/pub/pkgsrc/current/pkgsrc.tar.gz">pkgsrc.tar.gz</a> (wersja current) lub <a href="ftp://ftp.netbsd.org/pub/pkgsrc/pkgsrc-2008Q1/pkgsrc-2008Q1.tar.gz">pkgsrc-2008Q1.tar.gz</a> (wersja stable). Należy pamiętać o systematycznej <a href="http://www.netbsd.org/docs/pkgsrc/getting.html#uptodate">aktualizacji pkgsrc</a>.
+<h2 id="toc_1.9">Dokumentacja</h2>
+Podobnie jak pozostałe znaczące systemy z rodziny <a href="http://pl.wikipedia.org/wiki/BSD">BSD</a>, NetBSD jest dobrze udokumentowany. Lekturę warto zacząć od <a href="http://www.netbsd.org/docs/">zbiorczego spisu dokumentacji</a>. Świetną pomocą są również polskie samouczki ze strony <a href="http://www.netbsd.pl">www.netbsd.pl</a>.
+<h2 id="toc_1.10">Po zainstalowaniu</h2>
+Po zakończeniu instalacji NetBSD, warto przeczytać stronę man <a href="http://netbsd.gw.com/cgi-bin/man-cgi?afterboot++NetBSD-current">afterboot</a>, która zawiera wiele wartościowych informacji dla nowych użytkowników oraz dokonać <a href="http://netbsd.org/docs/guide/en/chap-updating.html">aktualizacji systemu</a>.
+</p>
+
+<p>
+Po <a href="http://www.netbsd.org/docs/guide/en/chap-boot.html">pierwszym</a> i <a href="http://www.netbsd.org/docs/guide/en/chap-2boot.html">drugim</a> uruchomieniu systemu, możemy "na całego" rozpocząć <a href="http://www.netbsd.org/docs/guide/en/chap-tuning.html">dostosowywanie</a> go do własnych potrzeb.
+</p>
+
+<p>
+Użytkownicy, którzy potrzebują płatnej pomocy technicznej, powinni zapoznać się z <a href="http://www.netbsd.org/gallery/consultants.html">ofertą firm i konsultantów</a>.
+<h4 id="toc_1.10.0.1">Plusy</h4>
+</p>
+<ul>
+<li>
+Bardzo wysokie <a href="http://www.netbsd.org/support/security/">bezpieczeństwo</a>
+</li>
+<li>
+Działa na <a href="http://www.netbsd.org/ports/">58 platformach</a>
+</li>
+<li>
+Dojrzałość, stabilność i niezawodność
+</li>
+<li>
+Dobra <a href="http://www.netbsd.org/docs/">dokumentacja</a>
+</li>
+<li>
+System pakietów <a href="http://www.netbsd.org/docs/pkgsrc/">pkgsrc</a> + <a href="http://pkgsrc.se/pkgtools">narzędzia pkgtools</a>
+</li>
+<li>
+Szybka reakcja <a href="http://www.netbsd.org/people/developers.html">deweloperów</a> na luki w bezpieczeństwie
+</li>
+<li>
+Niskie wymagania sprzętowe
+</li>
+</ul>
+<h4 id="toc_1.10.0.2">Minusy</h4>
+<ul>
+<li>
+Brak graficznych <a href="http://en.wikipedia.org/wiki/Wizard_%28software%29">konfiguratorów</a>
+</li>
+<li>
+Brak graficznego instalatora
+</li>
+<li>
+Mniej popularny niż <a href="http://www.gnu.org/">GNU</a>/<a href="http://www.kernel.org/">Linux</a>, mniejsza społeczność użytkowników
+</li>
+</ul>
+<h4 id="toc_1.10.0.3">Odnośniki</h4>
+<ul>
+<li>
+<a href="http://www.netbsd.org/">Oficjalna strona NetBSD</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/support/security/">NetBSD Security Advisories</a>
+</li>
+<li>
+Opis na <a href="http://wikipedia.org/">Wikipedii</a> po <a href="http://pl.wikipedia.org/wiki/NetBSD">polsku</a> i <a href="http://en.wikipedia.org/wiki/NetBSD">angielsku</a>
+</li>
+<li>
+<a href="http://distrowatch.com/table.php?distribution=netbsd">NetBSD@DistroWatch</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/about/roadmap.html">The NetBSD Project's roadmap</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/~ad/smp/tasks.html">NetBSD SMP status</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.4">Nowości</h4>
+<ul>
+<li>
+<a href="http://distrowatch.com/index.php?distribution=netbsd">NetBSD news@DistroWatch</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/gallery/events.html">NetBSD Events</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/gallery/events/">NetBSD Events Gallery</a>
+</li>
+<li>
+<a href="http://planet.netbsd.se/">planet.NetBSD.se — BSD News Watcher</a>
+</li>
+<li>
+<a href="http://netbsd.gw.com/">NetBSD News Beat</a>
+</li>
+<li>
+<a href="http://www.feyrer.de/NetBSD/bx/blosxom.cgi/index.front">Blog Huberta Feyrera</a>
+</li>
+<li>
+<a href="http://julipedia.blogspot.com/">The Julipedia</a>
+</li>
+<li>
+<a href="http://netbsd.pl/">netbsd.pl</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.5">Dokumentacja, przewodniki i porady</h4>
+<ul>
+<li>
+Dokumentacja dla: <a href="http://www.netbsd.org/docs/">użytkowników</a>, <a href="http://www.netbsd.org/developers/">programistów</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/docs/pkgsrc/">Przewodnik po pkgsrc</a>
+</li>
+<li>
+<a href="http://wiki.netbsd.org/">NetBSD Wiki</a>
+</li>
+<li>
+<a href="http://multiplicity.bsd.lv/netbsd-xen.html">The NetBSD Xen Guide</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.6">Oprogramowanie</h4>
+<ul>
+<li>
+<a href="http://www.netbsd.org/docs/software/">Application Software for NetBSD</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/docs/compat.html">NetBSD Binary Emulation</a>
+</li>
+<li>
+<a href="ftp://ftp.netbsd.org/pub/pkgsrc/">pkgsrc snapshots (stable and current)</a>
+</li>
+<li>
+<a href="http://pkgsrc.se/">pkgsrc.se</a>
+</li>
+<li>
+<a href="http://maciejewski.org/?p=49">pkg_comp czyli Bezpieczny update paczek w NetBSD</a>
+</li>
+<li>
+<a href="http://wiki-static.aydogan.net/How_to_upgrade_packages">How to upgrade packages</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.7">Pomoc, fora, społeczność</h4>
+<ul>
+<li>
+Dział NetBSD na: <a href="http://forums.bsdnexus.com/viewforum.php?id=6">BSDnexus</a>, <a href="http://www.bsdguru.org/dyskusja/viewforum.php?f=49">BSDGuru</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/mailinglists/">Listy dyskusyjne</a>
+</li>
+<li>
+<a href="http://mail-index.netbsd.org/">Archiwum list dyskusyjnych</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.8">Dystrybucje pochodne i LiveCD</h4>
+<ul>
+<li>
+Nieoficjalne <a href="http://en.wikipedia.org/wiki/LiveCD">LiveCD</a>: <a href="http://www.jibbed.org/">Jibbed</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.9">Zrzuty ekranu</h4>
+<ul>
+<li>
+<a href="http://www.netbsd.org/gallery/in-Action/">See NetBSD® in Action</a>
+</li>
+</ul>
+<h4 id="toc_1.10.0.10">Download</h4>
+<ul>
+<li>
+5.0.2: <a href="http://ftp.netbsd.org/pub/NetBSD/iso/5.0.2/i386cd-5.0.2.iso">i386</a>, <a href="http://ftp.netbsd.org/pub/NetBSD/iso/5.0.2/amd64cd-5.0.2.iso">amd64</a> i <a href="http://ftp.netbsd.org/pub/NetBSD/iso/5.0.2/SHA512">sumy kontrolne SHA512</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/mirrors/#iso">Lista serwerów lustrzanych</a>
+</li>
+<li>
+<a href="http://www.netbsd.org/mirrors/torrents/">NetBSD BitTorrents</a>
+</li>
+</ul>
+
+</body>
+</html>
