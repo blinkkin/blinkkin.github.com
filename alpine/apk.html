@@ -1,0 +1,559 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<link rel="stylesheet" href="./example.style.css" type="text/css" media="all">
+<title>
+APK(1)</title>
+</head>
+<body>
+<table summary="Document Header" class="head">
+<tbody>
+<tr>
+<td class="head-ltitle">
+APK(1)</td>
+<td class="head-vol">
+General Commands Manual</td>
+<td class="head-rtitle">
+APK(1)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1 id="4e414d45">NAME</h1> <b class="name">apk</b> &#8212; <span class="desc">is the tool used to install, upgrade, or delete software on a running sytem.</span></div>
+<div class="section">
+<h1 id="53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">COMMAND</i> &#91;<span class="opt"><i class="arg">OPTIONS</i></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">COMMAND</i> &#91;<span class="opt"><b class="flag">&#45;h</b> | <b class="flag">&#45;-help</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;p</b> | <b class="flag">&#45;-root</b> <i class="arg">DIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;X</b> | <b class="flag">&#45;-repository</b> <i class="arg">REPO</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;q</b> | <b class="flag">&#45;-quiet</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;v</b> | <b class="flag">&#45;-verbose</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-interactive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;V</b> | <b class="flag">&#45;-version</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;f</b> | <b class="flag">&#45;-force</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> | <b class="flag">&#45;-update-cache</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-progress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-noprogress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-clean-protected</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-purge</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-allow-untrusted</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-simulate</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-wait</b> <i class="arg">TIME</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-keys-dir</b> <i class="arg">KEYSDIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-repositories-file</b> <i class="arg">REPOFILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-no-network</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-overlay-from-stdin</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-arch</b> <i class="arg">ARCH</i></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">add</i> &#91;<span class="opt"><b class="flag">&#45;-initdb</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-virtual</b> <i class="arg">NAME</i></span>&#93; <i class="arg">PACKAGE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">del</i> &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PACKAGE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">fix</i> &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-reinstall</b></span>&#93; <i class="arg">PACKAGE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">update</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">info</i> &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-contents</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;e</b> | <b class="flag">&#45;-installed</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;W</b> | <b class="flag">&#45;-who-owns</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-depends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-install-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-rinstall-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;w</b> | <b class="flag">&#45;-webpage</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-size</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-triggers</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;-all</b></span>&#93; <i class="arg">PACKAGE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">search</i> &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PATTERN</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">upgrade</i> &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;available</b></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">cache</i> <i class="arg">sync</i> | <i class="arg">clean</i> | <i class="arg">download</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">version</i> &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-indexes</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-test</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;c</b> | <b class="flag">&#45;-check</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">index</i> &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">FILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> | <b class="flag">&#45;-index</b> <i class="arg">INDEX</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b> <i class="arg">TEXT</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></span>&#93; <i class="arg">FILE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">fetch</i> &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-link</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-recursive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-stdout</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">DIR</i></span>&#93; <i class="arg">PACKAGE</i></td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">audit</i> &#91;<span class="opt"><b class="flag">&#45;-backup</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-system</b></span>&#93;</td>
+</tr>
+</tbody>
+</table>
+<br>
+<table class="synopsis">
+<col style="width: 3.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+apk</td>
+<td>
+<i class="arg">verify</i> <i class="arg">FILE</i></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1 id="434f4d4d414e4453">COMMANDS</h1> The following commands are supported:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">add</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Add (or update) PACKAGEs to main dependencies and install them, while ensuring that all dependencies are met.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">del</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Remove PACKAGEs from the main dependencies and uninstall them.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">fix</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Repair package or upgrade it without modifying main dependencies.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">update</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Update repository indexes from all remote repositories.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">info</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Give detailed information about PACKAGEs or repositores.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">search</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Search package by PATTERNs or by indexed dependencies.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">upgrade</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Upgrade (or downgrade with -a) the currently installed packages to versions available in repositories.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">cache</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Download missing PACKAGEs to cache directory, or delete files no longer required. Package caching is enabled by making /etc/apk/cache a symlink to the directory (on boot media) that will be used as package cache.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">version</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Compare package versions (in installed database vs. available) or do tests on version strings given on command line.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">index</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Create repository index file from FILEs.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">fetch</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Download PACKAGEs from global repositories to a local directory from which a local mirror repository can be created.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">audit</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Audit the filesystem for changes compared to installed database.</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<i class="arg">verify</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Verify package integrity and signature</dd>
+</dl>
+</div>
+<div class="section">
+<h1 id="4f5054494f4e53">OPTIONS</h1><div class="subsection">
+<h2 id="47454e455249433a">GENERIC:</h2> The following command-line options are generic:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;h</b> | <b class="flag">&#45;-help</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Show generic help or applet specific help</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;p</b> | <b class="flag">&#45;-root</b> <i class="arg">DIR</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Install packages to DIR</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;X</b> | <b class="flag">&#45;-repository</b> <i class="arg">REPO</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Use packages from REPO</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;q</b> | <b class="flag">&#45;-quiet</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print less information</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;v</b> | <b class="flag">&#45;-verbose</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print more information</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;i</b> | <b class="flag">&#45;-interactive</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Ask confirmation for certain operations</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;V</b> | <b class="flag">&#45;-version</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print program version and exit</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;f</b> | <b class="flag">&#45;-force</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Do what was asked even if it looks dangerous</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-progress</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Show a progress bar</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-no-progress</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Disable progress bar even for TTYs</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-clean-protected</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Do not create .apk-new files to configuration dirs</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-purge</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Delete also modified configuration files on package removal</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-allow-untrusted</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Blindly install packages with untrusted signatures or no signature at all</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-simulate</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Show what would be done without actually doing it</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-wait</b> <i class="arg">TIME</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Wait for TIME seconds to get an exclusive repository lock before failing</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-keys-dir</b> <i class="arg">KEYSDIR</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Override directory of trusted keys</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-repositories-file</b> <i class="arg">REPOFILE</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Override repositories file</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-no-network</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Do not use network (cache is still used)</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-overlay-from-stdin</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Read list of overlay files from stdin</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-arch</b> <b class="flag">&#45;ARCH</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Use architecture with --root</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="41444420434f4d4d414e443a">ADD COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-initdb</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Initialize database</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Prefer to upgrade package</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;t</b> | <b class="flag">&#45;-virtual</b> <i class="arg">NAME</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Instead of adding all the packages to 'world', create a new virtual package with the listed dependencies and add that to 'world'. The actions of the command are easily reverted by deleting the virtual package.</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="44454c20434f4d4d414e443a">DEL COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Recursively delete all top-level reverse dependencies too.</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="46495820434f4d4d414e443a">FIX COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Upgrade package if possible</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;r</b> | <b class="flag">&#45;-reinstall</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Reinstall the package</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="494e464f20434f4d4d414e443a">INFO COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;L</b> | <b class="flag">&#45;-contents</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List contents of the PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;e</b> | <b class="flag">&#45;-installed</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Check if PACKAGE is installed</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;W</b> | <b class="flag">&#45;-who-owns</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print the package owning the specified file</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;R</b> | <b class="flag">&#45;-depends</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List packages that the PACKAGE depends on</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List all packages depending on PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;i</b> | <b class="flag">&#45;-install-if</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List the PACKAGE's install-if rule</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;I</b> | <b class="flag">&#45;-rinstall-if</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List all packages having install-if referencing PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;w</b> | <b class="flag">&#45;-webpage</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Show URL for more information about PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b> | <b class="flag">&#45;-size</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Show installed size of PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print description for PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;t</b> | <b class="flag">&#45;-triggers</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print active triggers of PACKAGE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;a</b> | <b class="flag">&#45;-all</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print all information about PACKAGE</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="53454152434820434f4d4d414e443a">SEARCH COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Search also package descriptions</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print reverse dependencies of package</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="5550475241444520434f4d4d414e443a">UPGRADE COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;a</b> | <b class="flag">&#45;-available</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Re-install or downgrade if currently installed package is not currently available from any repository</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="56455253494f4e20434f4d4d414e443a">VERSION COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;I</b> | <b class="flag">&#45;-indexes</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Print description and versions of indexes</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;t</b> | <b class="flag">&#45;-test</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Compare two given versions</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;c</b> | <b class="flag">&#45;-check</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Check if the given version string is valid</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Limit output to packages whos status matches LIMCHAR</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="494e44455820434f4d4d414e443a">INDEX COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <b class="flag">&#45;FILE</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Write the generated index to FILE</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;x</b> | <b class="flag">&#45;-index</b> <i class="arg">INDEX</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Read INDEX to speed up new index creation by reusing the information from an old index</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b> <i class="arg">TEXT</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Read TEXT as description and version information of the repository index</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Use ARCH as architery for all packages</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="464554434820434f4d4d414e44">FETCH COMMAND</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;L</b> | <b class="flag">&#45;-link</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Create hard links if possible</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;R</b> | <b class="flag">&#45;-recursive</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Fetch the PACKAGE and all it's dependencies</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;s</b> | <b class="flag">&#45;-stdout</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Dump the .apk to stdout (incompatible with -o and -R)</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">DIR</i></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Directory to place the PACKAGEs to</dd>
+</dl>
+</div>
+<div class="subsection">
+<h2 id="415544495420434f4d4d414e443a">AUDIT COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-backup</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+List all modified configuration files that need to be backed up</dd>
+<dt class="list-tag" style="margin-top: 1.00em;">
+<b class="flag">&#45;-system</b></dt>
+<dd class="list-tag" style="margin-left: 6.00ex;">
+Verify checksums of all installed files (-q to print only modfied packages)</dd>
+</dl>
+</div>
+</div>
+<div class="section">
+<h1 id="53454520414c534f">SEE ALSO</h1> <a class="link-man">lbu(1)</a></div>
+<div class="section">
+<h1 id="415554484f5253">AUTHORS</h1> The <b class="name">apk</b> utility was written by <span class="author">yourname</span> &#60;you@domain.tdl&#62;.</div>
+<table summary="Document Footer" class="foot">
+<tbody>
+<tr>
+<td class="foot-date">
+June 2, 2010</td>
+<td class="foot-os">
+Linux 2.6.33.7-co-0.7.9</td>
+</tr>
+</tbody>
+</table>
+</body>
+</html>
+
