@@ -3,25 +3,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="resource-type" content="document">
-<link rel="stylesheet" href="./example.style.css" type="text/css" media="all">
 <title>
 APK(1)</title>
 </head>
 <body>
-<table summary="Document Header" class="head">
+<table summary="Document Header" class="head" width="100%">
+<col width="30%">
+<col width="30%">
+<col width="30%">
 <tbody>
 <tr>
 <td class="head-ltitle">
 APK(1)</td>
-<td class="head-vol">
+<td class="head-vol" align="center">
 General Commands Manual</td>
-<td class="head-rtitle">
+<td class="head-rtitle" align="right">
 APK(1)</td>
 </tr>
 </tbody>
 </table>
 <div class="section">
-<h1 id="4e414d45">NAME</h1> <b class="name">apk</b> &#8212; <span class="desc">is the tool used to install, upgrade, or delete software on a running sytem.</span></div>
+<h1 id="4e414d45">NAME</h1> <b class="name">apk</b> &#8212; <span class="desc">are the tool used to install, upgrade, or delete software on a running sytem.</span></div>
 <div class="section">
 <h1 id="53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 3.00ex;">
@@ -219,7 +221,8 @@ apk</td>
 </table>
 </div>
 <div class="section">
-<h1 id="434f4d4d414e4453">COMMANDS</h1> The following commands are supported:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h1 id="4445534352495054494f4e">DESCRIPTION</h1> The following commands are supported.<div class="subsection">
+<h2 id="436f6d6d616e64733a">Commands:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <i class="arg">add</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -274,9 +277,8 @@ Audit the filesystem for changes compared to installed database.</dd>
 Verify package integrity and signature</dd>
 </dl>
 </div>
-<div class="section">
-<h1 id="4f5054494f4e53">OPTIONS</h1><div class="subsection">
-<h2 id="47454e455249433a">GENERIC:</h2> The following command-line options are generic:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<div class="subsection">
+<h2 id="47656e65726963206f7074696f6e733a">Generic options:</h2> The following command-line options are generic:<dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;h</b> | <b class="flag">&#45;-help</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -284,11 +286,11 @@ Show generic help or applet specific help</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;p</b> | <b class="flag">&#45;-root</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Install packages to DIR</dd>
+Install packages to <i class="arg">DIR</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;X</b> | <b class="flag">&#45;-repository</b> <i class="arg">REPO</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Use packages from REPO</dd>
+Use packages from <i class="arg">REPO</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;q</b> | <b class="flag">&#45;-quiet</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -336,7 +338,7 @@ Show what would be done without actually doing it</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-wait</b> <i class="arg">TIME</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Wait for TIME seconds to get an exclusive repository lock before failing</dd>
+Wait for <i class="arg">TIME</i> seconds to get an exclusive repository lock before failing</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-keys-dir</b> <i class="arg">KEYSDIR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -356,11 +358,11 @@ Read list of overlay files from stdin</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-arch</b> <b class="flag">&#45;ARCH</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Use architecture with --root</dd>
+Use architecture with <b class="flag">&#45;-root</b></dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="41444420434f4d4d414e443a">ADD COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="61646420636f6d6d616e643a">add command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-initdb</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -376,7 +378,7 @@ Instead of adding all the packages to 'world', create a new virtual package with
 </dl>
 </div>
 <div class="subsection">
-<h2 id="44454c20434f4d4d414e443a">DEL COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="64656c20636f6d6d616e643a">del command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -384,7 +386,7 @@ Recursively delete all top-level reverse dependencies too.</dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="46495820434f4d4d414e443a">FIX COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="66697820636f6d6d616e643a">fix command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -396,15 +398,15 @@ Reinstall the package</dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="494e464f20434f4d4d414e443a">INFO COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="696e666f20636f6d6d616e643a">info command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;L</b> | <b class="flag">&#45;-contents</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-List contents of the PACKAGE</dd>
+List contents of the <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;e</b> | <b class="flag">&#45;-installed</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Check if PACKAGE is installed</dd>
+Check if <i class="arg">PACKAGE</i> is installed</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;W</b> | <b class="flag">&#45;-who-owns</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -412,11 +414,11 @@ Print the package owning the specified file</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;R</b> | <b class="flag">&#45;-depends</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-List packages that the PACKAGE depends on</dd>
+List packages that the <i class="arg">PACKAGE</i> depends on</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-List all packages depending on PACKAGE</dd>
+List all packages depending on <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;i</b> | <b class="flag">&#45;-install-if</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -424,31 +426,31 @@ List the PACKAGE's install-if rule</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> | <b class="flag">&#45;-rinstall-if</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-List all packages having install-if referencing PACKAGE</dd>
+List all packages having install-if referencing <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;w</b> | <b class="flag">&#45;-webpage</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Show URL for more information about PACKAGE</dd>
+Show URL for more information about <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;s</b> | <b class="flag">&#45;-size</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Show installed size of PACKAGE</dd>
+Show installed size of <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Print description for PACKAGE</dd>
+Print description for <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;t</b> | <b class="flag">&#45;-triggers</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Print active triggers of PACKAGE</dd>
+Print active triggers of <i class="arg">PACKAGE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;a</b> | <b class="flag">&#45;-all</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Print all information about PACKAGE</dd>
+Print all information about <i class="arg">PACKAGE</i></dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="53454152434820434f4d4d414e443a">SEARCH COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="73656172636820636f6d6d616e643a">search command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -460,7 +462,7 @@ Print reverse dependencies of package</dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="5550475241444520434f4d4d414e443a">UPGRADE COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="7570677261646520636f6d6d616e643a">upgrade command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;a</b> | <b class="flag">&#45;-available</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -468,7 +470,7 @@ Re-install or downgrade if currently installed package is not currently availabl
 </dl>
 </div>
 <div class="subsection">
-<h2 id="56455253494f4e20434f4d4d414e443a">VERSION COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="76657273696f6e20636f6d6d616e643a">version command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;I</b> | <b class="flag">&#45;-indexes</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -484,31 +486,31 @@ Check if the given version string is valid</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Limit output to packages whos status matches LIMCHAR</dd>
+Limit output to packages whos status matches <i class="arg">LIMCHAR</i></dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="494e44455820434f4d4d414e443a">INDEX COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="696e64657820636f6d6d616e643a">index command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <b class="flag">&#45;FILE</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Write the generated index to FILE</dd>
+Write the generated index to <i class="arg">FILE</i></dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;x</b> | <b class="flag">&#45;-index</b> <i class="arg">INDEX</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Read INDEX to speed up new index creation by reusing the information from an old index</dd>
+Read <i class="arg">INDEX</i> to speed up new index creation by reusing the information from an old index</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b> <i class="arg">TEXT</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Read TEXT as description and version information of the repository index</dd>
+Read <i class="arg">TEXT</i> as description and version information of the repository index</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Use ARCH as architery for all packages</dd>
+Use <i class="arg">ARCH</i> as architery for all packages</dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="464554434820434f4d4d414e44">FETCH COMMAND</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="666574636820636f6d6d616e643a">fetch command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;L</b> | <b class="flag">&#45;-link</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -516,11 +518,11 @@ Create hard links if possible</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;R</b> | <b class="flag">&#45;-recursive</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Fetch the PACKAGE and all it's dependencies</dd>
+Fetch the <i class="arg">PACKAGE</i> and all it's dependencies</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;s</b> | <b class="flag">&#45;-stdout</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Dump the .apk to stdout (incompatible with -o and -R)</dd>
+Dump the .apk to stdout (incompatible with <b class="flag">&#45;o</b> and <b class="flag">&#45;R</b> )</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">DIR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -528,7 +530,7 @@ Directory to place the PACKAGEs to</dd>
 </dl>
 </div>
 <div class="subsection">
-<h2 id="415544495420434f4d4d414e443a">AUDIT COMMAND:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
+<h2 id="617564697420636f6d6d616e643a">audit command:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-backup</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
@@ -536,7 +538,7 @@ List all modified configuration files that need to be backed up</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-system</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Verify checksums of all installed files (-q to print only modfied packages)</dd>
+Verify checksums of all installed files ( <b class="flag">&#45;q</b> to print only modfied packages)</dd>
 </dl>
 </div>
 </div>
@@ -544,12 +546,14 @@ Verify checksums of all installed files (-q to print only modfied packages)</dd>
 <h1 id="53454520414c534f">SEE ALSO</h1> <a class="link-man">lbu(1)</a></div>
 <div class="section">
 <h1 id="415554484f5253">AUTHORS</h1> The <b class="name">apk</b> utility was written by <span class="author">yourname</span> &#60;you@domain.tdl&#62;.</div>
-<table summary="Document Footer" class="foot">
+<table summary="Document Footer" class="foot" width="100%">
+<col width="50%">
+<col width="50%">
 <tbody>
 <tr>
 <td class="foot-date">
 June 2, 2010</td>
-<td class="foot-os">
+<td class="foot-os" align="right">
 Linux 2.6.33.7-co-0.7.9</td>
 </tr>
 </tbody>
