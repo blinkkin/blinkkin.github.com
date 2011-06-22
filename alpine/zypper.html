@@ -1,0 +1,4597 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<link rel="stylesheet" href="./example.style.css" type="text/css" media="all">
+<title>
+zypper(8)</title>
+</head>
+<body>
+<table summary="Document Header" class="head">
+<tbody>
+<tr>
+<td class="head-ltitle">
+zypper(8)</td>
+<td class="head-vol">
+System Tools</td>
+<td class="head-rtitle">
+zypper(8)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1>NAME</h1><p>
+zypper - Command&#45;line interface to ZYpp system management library (libzypp)<p>
+</div>
+<div class="section">
+<h1>SYNTAX</h1><p>
+zypper [<i>&#45;&#45;global&#45;opts</i>] &lt;<b>command</b>&gt; [<i>&#45;&#45;command&#45;opts</i>] [<b>command-arguments</b>]<p>
+zypper <b>help</b> [<b>command</b>]</div>
+<div class="section">
+<h1>DESCRIPTION</h1><p>
+zypper is a command&#45;line interface to ZYpp system management library. It can be used to install, update, remove software, manage repositories, perform various queries, and more.<p>
+</div>
+<div class="section">
+<h1>CONCEPTS</h1><p>
+Most of the following concepts are common for all applications based on the libzypp package management library, but there are some zypper specifics.<p>
+<div class="subsection">
+<h2>Repositories</h2><p>
+Libzypp works with package metadata, that is information about packages and their relations extracted from RPM packages and other data like patch information, pattern definitions, etc. These data are stored together with the RPM files in folders called  <b>repositories</b>. Repositories can be placed on various media like an HTTP or FTP server, DVD, or a folder on a local disc.<p>
+There is a special set of commands in zypper intented to manipulate repositories. Also many commands and options take a repository as an arugment. See section  <b>COMMANDS</b>, subsection <b>Repository Management</b> for more details.<p>
+</div>
+<div class="subsection">
+<h2>Resource Identfiers (URI)</h2> To specify locations of repositories or other resources (RPM files, .repo files) you can use any type of URIs supported by libzypp. See http://en.opensuse.org/openSUSE:Libzypp_URIs for a complete list and usage examples.<p>
+Zypper also accepts special URIs identifying openSUSE Build Service (OBS) repositories in the  <b>addrepo</b> command. These URIs have the form of  <b>obs://&lt;project&gt;/[platform]</b>, where <i>project</i> is the name of the OBS project and  <i>platform</i> is the target platform (OS) for which the repository is intended. For example: obs://server:http/openSUSE_11.3.<p>
+If <i>platform</i> is omitted, zypper.conf's <i>obs.platform</i> value is used. See also other options in the [obs] section of zypper.conf.<p>
+In addition to these URIs you can use plain directory and file paths in which case zypper automatically treats them as dir:/path URIs.<p>
+</div>
+<div class="subsection">
+<h2>Refresh</h2><p>
+Refreshing a repository means downloading metadata of packages from the medium (if needed), storing it in local cache (typically under /var/cache/zypp/raw/&lt;alias&gt; directory) and preparsing the metadata into .solv files (building the solv cache), typically under /var/cache/zypp/solv/&lt;alias&gt;.<p>
+The metadata get refreshed either automatically or on user request. An  <b>automatic refresh</b> takes place right before reading metadata from the database if the  <b>auto-refresh is enabled</b> for the repository and the metada is reported to be out of date. If the  <b>auto-refresh is disabled</b>, the repository will only be refreshed on user request. You can request a refresh by calling  <b>zypper refresh</b> (see the documentation of the refresh command for details).<p>
+The repository metadata are checked for changes before actually doing the refresh. A change is detected by downloading one or two metadata index files (small files) and comparing the checksums of the cached ones and the remote ones. If the files differ, the repository is out of date and will be refreshed.<p>
+To delay the up-to-date check (and thus the automatic refresh) for a certain number of minutes, edit the value of the repo.refresh.delay attribute of ZYpp config file (/etc/zypp/zypp.conf). This means, zypper will not even try to download and check the index files, and you will be able to use zypper for operations like search or info without internet access or root privileges.<p>
+</div>
+<div class="subsection">
+<h2>Services</h2><p>
+Services are one level above repositories and serve to manage repositories or to do some special tasks. Libzypp currently supports only one type of services, the Repository Index Service (RIS).<p>
+Repository Index Service (RIS) is a special type of repository which contains a list of other repositories. This list can be generated dynamically by the server according to some URI parameters or user name, or can be static. Once such service is added to your system, zypper takes care of adding, modifying, or removing these repositories on your system to reflect the current list. See section Service Management and http://old-en.opensuse.org/Standards/Repository_Index_Service for more details.<p>
+</div>
+<div class="subsection">
+<h2>Package Types</h2><p>
+zypper works with several types of resource objects, called <b>resolvables.</b> A resolvable is a package, patch, pattern, or a product.<p>
+<b>package</b> &#45; an ordinary RPM package.<div style="height: 0.00em;">
+&#160;</div>
+<b>patch</b> &#45; update of one or more packages. A patch can include special scripts and messages to be run or shown during installation of the update.<div style="height: 0.00em;">
+&#160;</div>
+<b>pattern</b> &#45; group of packages required or recommended to install some functionality.<div style="height: 0.00em;">
+&#160;</div>
+<b>product</b> &#45; group of packages which are necessary to install a product.<div style="height: 0.00em;">
+&#160;</div>
+<b>srcpackage</b> &#45; source code package (.src.rpm). This type works in  <b>search</b> and<br>
+   <b>install</b> commands.<p>
+Throughout this manual we will refer to resolvables simply as <i>packages</i> and to resolvable types as  <i>package types</i>. These type names can be used as arguments of  <i>--type</i> option in several commands like <b>install</b>,  <b>info</b>, or <b>search</b>.<p>
+</div>
+<div class="subsection">
+<h2>Package Dependencies</h2><p>
+Software packages depend on each other in various ways. Packages usually require or recommend other packages, they can declare that they conflict with other packages, etc. Packages can also depend on specific hardware. See http://old-en.opensuse.org/Software_Management/Dependencies for more information. Zypper utilizes a  <i>dependency solver</i> to find out what packages are needed to be installed according to user's request.<p>
+<p>
+</div>
+</div>
+<div class="section">
+<h1>COMMANDS</h1><p>
+zypper provides a number of <b>commands</b>. Each command accepts the options listed in the GLOBAL OPTIONS section. These options must be specified  <i>before</i> the command name. In addition, many commands have specific options, which are listed in this section. These command-specific options must be specified  <i>after</i> the name of the command and <i>before</i> any of the command arguments.<p>
+<div class="subsection">
+<h2>General Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>help [command]</b></td>
+<td>
+Shows help texts. If invoked without any argument (just &#769;zypper&#769; or &#769;zypper&#160;help&#769;), zypper displays global help text which lists all available global options and commands (except those provided only for compatibility with rug).<p>
+If invoked with a command name argument, zypper displays help for the specified command, if such command exists. Long as well as short variants of the command names can be used.<p>
+For your convenience, zypper help can be invoked in any of the following ways:<p>
+<b>$ zypper help [command]</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper -h|--help [command]</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper [command] -h|--help</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>shell (sh)</b></td>
+<td>
+Starts a shell for entering multiple commands in one session. Exit the shell using "exit", "quit", or Ctrl-D.<p>
+The shell support is not complete so expect bugs there. However, there's no urgent need to use the shell since libzypp became so fast thanks to the SAT solver and its tools (openSUSE 11.0), but still, you're welcome to experiment with it.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Package Management Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>info (if) [options] &lt;name&gt; ...</b></td>
+<td>
+Displays detailed informaion about the specified packages.<p>
+For each specified package, zypper finds the best available version in defined repositories and shows information for this package.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type &lt;type&gt;</i></td>
+<td>
+Type of package (default: package). See section <b>Package Types</b> for list of available package types.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;requires</i></td>
+<td>
+Show also symbols required and pre-required by the package. Available for package and patch type only.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;recommends</i></td>
+<td>
+Show also symbols recommended by the package. Available for package and patch type only.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Show information about package 'workrave':<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper info workrave</b><p>
+Show information about patch 'libzypp':<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper info -t patch libzypp</b><p>
+Show information about pattern 'lamp_server':<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper info -t pattern lamp_server</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>install (in) [options] &lt;name|capability|rpm_file_uri&gt; ...</b></td>
+<td>
+Install or update packages.<p>
+The packages can be selected by their name or by a capability they provide.<p>
+Capability is: NAME, or "NAME[.ARCH][OP&lt;EDITION&gt;]", where ARCH is architecture code, OP is &lt;, &lt;=, =, &gt;=, or &gt; and EDITION is VERSION[-RELEASE]. For example: zypper=0.8.8-2.<p>
+The NAME component of a capability is not only a package name but any symbol provided by packages: /bin/vi, libcurl.so.3, perl(Time::ParseDate). Just remember to quote to protect the special characters from the shell, for example: zypper\&gt;0.8.10 or 'zypper&gt;0.8.10'<p>
+If EDITION is not specified, the newest installable version will be installed. This also means that if the package is already installed and newer versions are available, it will get upgraded to the newest installable version.<p>
+If ARCH is not specified, or the last dot of the capability name string is not followed by known architecture, the solver will treat the whole string as a capability name. If the ARCH is known, the solver will select a package matching that architecture and complain if such package cannot be found.<p>
+Zypper will report packages that it cannot find. Further, in interactive mode, zypper proceeds with installation of the rest of requested packages, and it will abort immediately in non-interactive mode. In both cases zypper returns ZYPPER_EXIT_INF_CAP_NOT_FOUND after finishing the operation.<p>
+Zypper is also able to install plain RPM files while trying to satisfy their dependencies using packages from defined repositories. You can install a plain RPM file by specifying its location in the install command arguments either as a local path or an URI. E.g.:<p>
+<b>$ zypper install ~/rpms/foo.rpm http://some.site/bar.rpm</b><p>
+Zypper will download the files into its cache directory (/var/cache/zypper/RPMS), add this directory as a temporary  <b>plaindir</b> repository and mark the respective packages for installation.<p>
+In the install command, you can specify also packages you wish to remove in addition to the packages you wish to install, by prepending their names by a '-' or '~' character. For example:<p>
+<b>$ zypper install vim -emacs</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper remove emacs +vim</b><p>
+will both install vim and remove emacs. Note that if you choose to use '-' with the first package you specify, you need to write '--' before it to prevent its interpretation as a command option.<p>
+<b>$ zypper install -- -boring-game great-game great-game-manual</b></td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type</i> &lt;type&gt;</td>
+<td>
+Type of package to install (default: package). See section <b>Package Types</b> for list of available package types.<p>
+If <i>pattern</i> is specified, and the pattern is not yet installed, all packages required and recommended by the pattern will be installed. A pattern is considered installed if all the packages and patterns it requires are installed. Thus a pattern can be evalueated as installed even if you do not install the pattern itself, but rather the packages it requries. Use  <b>zypper search -t pattern [name]</b> to look for available patterns and  <b>zypper info -t pattern &lt;name&gt;</b> to list its contents.<p>
+If <i>patch</i> is specified, zypper will install and/or remove packages to satisfy specified patch. This is a way to ensure that specific bug fix is installed. Like patterns, patches can also be evaluated as installed by installing the packages needed to satisfy the patch. Use  <b>zypper list-patches</b> to look for available needed patches and  <b>zypper info -t patch &lt;name&gt;</b> to display detailed information about a patch.<p>
+If <i>product</i> is specified, zypper ensures all packages required by the product are installed. Use  <b>zypper se -t product [name]</b> to look for available products and  <b>zypper info -t product &lt;name&gt;</b> to display detailed information about a product.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Select packages by their name, don't try to select by capabilities.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;f, &#45;&#45;force</i></td>
+<td>
+Install even if the item is already installed (reinstall)</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;from &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Select packages from specified repository. If strings specified as arguments to the install command match packages in repositories specified in this option, they will be marked for installation. This option currently implies  <i>&#45;&#45;name</i>, but allows using wildcards for specifying packages.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;C, &#45;&#45;capability</i></td>
+<td>
+Select packages by capabilities.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;auto&#45;agree&#45;with&#45;licenses</i></td>
+<td>
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. Use this option, if you think the dependencies were not solved all right and attach the resulting /var/log/zypper.solverTestCase directory to your bug report. To use this option, simply add it to the problematic install or remove command.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;recommends</i></td>
+<td>
+By default, zypper installs also packages recommended by the requested ones. This option causes the recomended packages to be ignored and only the required ones to be installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;no&#45;force&#45;resolution</i></td>
+<td>
+Do not force the solver to find a solution. Instead, report dependency problem and prompt the user to resolve it manually.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;force&#45;resolution</i></td>
+<td>
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements.<p>
+The default behavior is 'force' in the interactive mode and 'no-force' in the non-interactive mode. If this option is specified, it takes the preference.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry&#45;run</i></td>
+<td>
+Test the installation, do not actually install any package. This option will add the &#45;&#45;test option to the rpm commands run by the install command.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Download-and-install mode options:</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;download&#45;only</i></td>
+<td>
+Only download the packages for later installation.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;download&#45;in&#45;advance</i></td>
+<td>
+First download all packages, then start installing.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;download&#45;in&#45;heaps</i></td>
+<td>
+(Not yet implemented, currently the same as <i>--download-in-advance</i>). Download a minimal set of packages that can be installed without leaving the system in broken state, and install them. Then download and install another heap until all are installed. This helps to keep the system in consistent state without the need to download all package in advance, which combines the advantages of  <i>--download-in-advance</i> and <i>--download-as-needed</i>. This is the default mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;download&#45;as&#45;needed</i></td>
+<td>
+Download one package, install it immediately, and continue with the rest until all are installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;download &lt;mode&gt;</i></td>
+<td>
+Use the specified download-and-install mode. Available modes are:  <b>only</b>, <b>in-advance</b>, <b>in-heaps</b>, <b>as-needed</b>. See corresponding  <i>--download-&lt;mode&gt;</i> options for their description.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+More examples:</td>
+<td>
+<p>
+Install lamp_server pattern:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install -t pattern lamp_server</b><p>
+Install GhostScript viewer, but ignore recommended packages:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install --no-recommends gv</b><p>
+Install version 2.0.6 of virtualbox-ose package (any of the following):<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install virtualbox-ose-2.0.6</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install virtualbox-ose=2.0.6</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install virtualbox-ose = 2.0.6</b><p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>source-install (si) &lt;name&gt; ...</b></td>
+<td>
+Install specified source packages and their build dependencies.<p>
+This command will try to find the newest available versions of the source packages and use rpm -i to install them and the packages that are required to build the source package.<p>
+Note that the source packages must be available in repositories you are using. You can check whether a repository contains any source packages using the following command:<p>
+<b>$ zypper search -t srcpackage -r &lt;alias|name|#|URI&gt;</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;build&#45;deps&#45;only</i></td>
+<td>
+Install only build dependencies of specified packages.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;no&#45;build&#45;deps</i></td>
+<td>
+Don't install build dependencies.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Install build dependencies of dbus-1 source package:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper si -d dbus-1</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>verify (ve) [options]</b></td>
+<td>
+Check whether dependencies of installed packages are satisfied.<p>
+In case that any dependency problems are found, zypper suggests packages to install or remove to fix them.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;recommends</i></td>
+<td>
+By default, zypper installs also packages recommended by the requested ones (the ones needed to fix broken dependencies in this case). This option causes the recomended packages to be ignored and only the required ones to be installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry-run</i></td>
+<td>
+Test the repair, do not actually do anything to the system.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. See the install command for details.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>install-new-recommends (inr) [options]</b></td>
+<td>
+Install newly added packages recommended by already installed ones. This can typically be used to install language packages recently added to repositories or drivers for newly added hardware.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry-run</i></td>
+<td>
+Test the installation, do not actually install anything.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. See the install command for details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+This command also accepts the download-and-install mode options described</td>
+<td>
+in the <b>install</b> command description.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>remove (rm) [options] &lt;name&gt; ...</b></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>remove (rm) [options] --capability &lt;capability&gt; ...</b></td>
+<td>
+Remove (uninstall) packages.<p>
+The packages can be selected by their name or by a capability they provide. For details on package selection see the  <b>install</b> command description.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, -&#45;type</i> &lt;type&gt;</td>
+<td>
+Type of package (default: package). See section <b>Package Types</b> for list of available package types.<p>
+Since <b>patches</b> are not installed in sense of copying files or recording a database entry, they cannot be uninstalled, even though zypper shows them as installed. The installed status is determined solely based on the installed status of its required dependencies. If these dependencies are satisified, the patch is rendered installed.<p>
+Uninstallation of <b>patterns</b> is currently not implemented.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Select packages by their name (default).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;C, &#45;&#45;capability</i></td>
+<td>
+Select packages by capabilities.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. See the install command for details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;no&#45;force&#45;resolution</i></td>
+<td>
+Do not force the solver to find a solution. Instead, report dependency problem and prompt the user to resolve it manually.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;force&#45;resolution</i></td>
+<td>
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements.<p>
+The default behavior is 'force' in the interactive mode and 'no-force' in the non-interactive mode. If this option is specified, it takes the preference.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;clean&#45;deps</i></td>
+<td>
+Automatically remove dependencies which become unneeded after removal of requested packages.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;U, &#45;&#45;no&#45;clean&#45;deps</i></td>
+<td>
+No automatic removal of unneeded dependencies.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry&#45;run</i></td>
+<td>
+Test the removal of packages, do not actually remove anything. This option will add the &#45;&#45;test option to the rpm commands run by the remove command.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Update Management Commands</h2><p>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>list-updates (lu) [options]</b></td>
+<td>
+List available updates.<p>
+This command will list only installable updates, i.e. updates which have no dependency problems, or which do not change package vendor. This list is what the  <b>update</b> command will propose to install. To list all packages for which newer version are available, use  <i>&#45;&#45;all</i> option.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, --type</i> &lt;type&gt;</td>
+<td>
+Type of package (default: package). See section <b>Package Types</b> for list of available package types.<p>
+If <i>patch</i> is specified, zypper acts as if the <b>list-patches</b> command was executed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;all</i></td>
+<td>
+List all packages for which newer versions are available, regardles whether they are installable or not.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;best&#45;effort</i></td>
+<td>
+See the <b>update</b> command for description.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>update (up) [options] [packagename] ...</b></td>
+<td>
+Update installed packages with newer versions, where possible.<p>
+This command will not update packages which would require change of package vendor unless the vendor is specified in /etc/zypp/vendors.d, or which would require manual resolution of problems with dependencies. Such non-installable updates will then be listed in separate section of the summary as "The following package updates will NOT be installed:".<p>
+To update individual packages, specify one or more package names. You can use the '*' and '?' wildcard characters in the package names to specify multiple packages matching the pattern.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, -&#45;type</i> &lt;type&gt;</td>
+<td>
+Type of package (default: package). See section <b>Package Types</b> for list of available package types.<p>
+If <i>patch</i> is specified, zypper acts as if the <b>patche</b> command was executed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;skip&#45;interactive</i></td>
+<td>
+This will skip interactive patches, that is, those that need reboot, contain a message, or update a package whose license needs to be confirmed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;auto&#45;agree&#45;with&#45;licenses</i></td>
+<td>
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. See the install command for details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;recommends</i></td>
+<td>
+By default, zypper installs also packages recommended by the requested ones. This option causes the recomended packages to be ignored and only the required ones to be installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;no&#45;force&#45;resolution</i></td>
+<td>
+Do not force the solver to find a solution. Instead, report dependency problem and prompt the user to resolve it manually.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;force&#45;resolution</i></td>
+<td>
+Force the solver to find a solution, even if it would mean removing all packages with unfulfilled requirements.<p>
+The default behavior is 'no-force'. If this option is specified, it takes the preference.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry&#45;run</i></td>
+<td>
+Test the update, do not actually install or update any package. This option will add the &#45;&#45;test option to the rpm commands run by the update command.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;best&#45;effort</i></td>
+<td>
+Do a 'best effort' approach to update. This method does not explicitly select packages with best version and architecture, but instead requests installation of a package with higher version than the installed one and leaves the rest on the dependency solver. This method is always used for packages, and is optional for products and patterns. It is not applicable to patches.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+This command also accepts the download-and-install mode options described</td>
+<td>
+in the <b>install</b> command description.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>list-patches (lp) [options]</b></td>
+<td>
+List all available needed patches.<p>
+This command is similar to 'zypper list-updates -t patch'.<p>
+Note that since the arguments of some of the following options are not required, they must be specified using '=' instead of a space.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;b, &#45;&#45;bugzilla</i>[=#]</td>
+<td>
+List available needed patches for all Bugzilla issues, or issues whose number matches the given string.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i> &#160;&#160;&#160;&#160;&#45;&#45;cve</i>[=#]</td>
+<td>
+List available needed patches for all CVE issues, or issues whose number matches the given string.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i> &#160;&#160;&#160;&#160;&#45;&#45;issues</i>[=string]</td>
+<td>
+Look for issues whose number, summary, or description matches the specified string. Issues found by number are displayed separately from those found by descriptions. In the latter case, use  <b>zypper patch-info &lt;patchname&gt;</b> to get information about issues the patch fixes.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;all</i></td>
+<td>
+By default, only patches that are relevant and needed on your system are listed. This option causes all available released patches to be listed. This option can be combined with all the rest of the  <b>list-updates</b> command options.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>patch-check (pchk)</b></td>
+<td>
+Check for patches. Displays a count of applicable patches and how many of them have the security category.</td>
+</tr>
+</tbody>
+</table>
+<p>
+See also the EXIT CODES section for details on exit status of 0, 100, and 101 returned by this command.<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Check for patches only in the repository specified by the alias, name, number, or URI. This option can be used multiple times.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>patch [options]</b></td>
+<td>
+Install all available needed patches.<p>
+If there are patches that affect the package management itself, those will be installed first and you will be asked to run the  <b>patch</b> command again.<p>
+This command is similar to 'zypper update -t patch'.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;b, &#45;&#45;bugzilla</i> &lt;#&gt;</td>
+<td>
+Install patch fixing a Bugzilla issue specified by number. Use  <b>list-patches --bugzilla</b> command to get a list of available needed patches for specific issues.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i> &#160;&#160;&#160;&#160;&#45;&#45;cve</i> &lt;#&gt;</td>
+<td>
+Install patch fixing a MITRE's CVE issue specified by number. Use  <b>list-patches --cve</b> command to get a list of available needed patches for specific issues.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;skip&#45;interactive</i></td>
+<td>
+Skip interactive patches.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;with&#45;interactive</i></td>
+<td>
+Avoid skipping of  interactive patches when in non-interactive mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;auto&#45;agree&#45;with&#45;licenses</i></td>
+<td>
+See the <b>update</b> command for description of this option.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;recommends</i></td>
+<td>
+By default, zypper installs also packages recommended by the requested ones. This option causes the recomended packages to be ignored and only the required ones to be installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create test case for debugging of dependency resolver.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry&#45;run</i></td>
+<td>
+Test the update, do not actually update.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+This command also accepts the download-and-install mode options described</td>
+<td>
+in the <b>install</b> command description.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>dist-upgrade (dup) [options]</b></td>
+<td>
+Perform a distribution upgrade. This command applies the state of (specified) repositories onto the system; upgrades (or even downgrades) installed packages to versions found in repositories, removes packages that are no longer in the repositories and pose a dependency problem for the upgrade, handles package splits and renames, etc.<p>
+If no repositories are specified via --from or --repo options, zypper will do the upgrade with all defined repositories. This can be a problem if the system contains conflicting repositories, like repositories for two different distribution releases. This often happens if one forgets to remove older release repository after adding a new one, say openSUSE 11.1 and openSUSE 11.2.<p>
+To avoid the above trouble, you can specify the repositories from which to do the upgrade using the --from or --repo options. The difference between these two is that when --repo is used, zypper acts as if it knew only the specified repositories, while with --from zypper can eventually use also the rest of enabled repositories to satisfy package dependencies.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;from</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Restricts the upgrade to the specified repositories (the option can be used multiple times) only, but can satisfy dependencies also from the rest of enabled repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;auto&#45;agree&#45;with&#45;licenses</i></td>
+<td>
+Automatically say 'yes' to third party license confirmation prompt. By using this option, you choose to agree with licenses of all third-party software this command will install. This option is particularly useful for administators installing the same set of packages on multiple machines (by an automated process) and have the licenses confirmed before.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;recommends</i></td>
+<td>
+By default, zypper installs also packages recommended by the requested ones. This option causes the recomended packages to be ignored and only the required ones to be installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;debug&#45;solver</i></td>
+<td>
+Create solver test case for debugging. See the install command for details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;dry&#45;run</i></td>
+<td>
+Test the upgrade, do not actually install or update any package. This option will add the &#45;&#45;test option to the rpm commands run by the dist-upgrade command.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+This command also accepts the download-and-install mode options described</td>
+<td>
+in the <b>install</b> command description.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Upgrade the system using 'factory' and 'packman' repository:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper install zypper libzypp</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper dup --from factory --from packman</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Query Commands</h2><p>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>search</b> (<b>se</b>) [<i>options</i>] [<b>querystring</b>] ...</td>
+<td>
+Search for packages matching given strings. * (any substring) and ? (any character) wildcards can also be used within search strings.<p>
+Results of search are printed in a table with following columns: S (status), Catalog, Type (type of package), Name, Version, Arch (architecture). The status column can contain the following values: i - installed, v - another version installed, or an empty space for neither of the former cases.<p>
+The 'v' status is only shown if the version or the repository matters ( <i>&#45;&#45;details</i> or <i>&#45;&#45;repo</i> is used), and the installed version differs from the one listed or is from a repository other than specified.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+This command accepts the following options:<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;match&#45;all</i></td>
+<td>
+Search for a match to all search strings (default).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;match&#45;any</i></td>
+<td>
+Search for a match to any of the search strings.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;match&#45;substrings</i></td>
+<td>
+Matches for search strings may be partial words (default).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;match&#45;words</i></td>
+<td>
+Matches for search strings may only be whole words.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;match-exact</i></td>
+<td>
+Searches for an exact name of the package.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;search&#45;descriptions</i></td>
+<td>
+Search also in summaries and descriptions.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;C, &#45;&#45;case&#45;sensitive</i></td>
+<td>
+Perform case-sensitive search.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;i, &#45;&#45;installed&#45;only</i></td>
+<td>
+Show only packages that are already installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uninstalled&#45;only</i></td>
+<td>
+Show only packages that are not currently installed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, -&#45;type &lt;type&gt;</i></td>
+<td>
+Search only for packages of specified type. See section <b>Package Types</b> for list of available package types. Multiple &#45;t option are allowed.<p>
+See also the type-specific query commands like <b>packages</b>, <b>patterns</b>, etc.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Work only with the repository specified by the alias, name, number, or URI. This option can be used multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;sort&#45;by&#45;name</i></td>
+<td>
+Sort packages by name (default).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;sort&#45;by&#45;repo</i></td>
+<td>
+Sort packages by catalog, not by name.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;s, &#45;&#45;details</i></td>
+<td>
+Show all available versions of found packages, each version in each repository on a separate line.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Search for YaST packages (quote the string to prevent the shell from expanding the wildcard):<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper se 'yast*'</b><p>
+Show all available versions of package 'kernel-default':<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper se -s --match-exact kernel-default</b><p>
+Look for RSI acronym (case-sensitively), also in summaries and descriptions:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper se -dC --match-words RSI</b><p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>packages (pa) [options] [repository] ...</b></td>
+<td>
+List all available packages or all packages from specified repositories. Similar to  <b>zypper search -s -t package</b>.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Just another means to specify repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;i, &#45;&#45;installed&#45;only</i></td>
+<td>
+Show only installed packages.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uninstalled&#45;only</i></td>
+<td>
+Show only packages which are not installed.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>patches (pch) [options] [repository] ...</b></td>
+<td>
+List all available patches from specified repositories, including those not needed. Similar to  <b>zypper search -s -t patch</b>.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;alias|name|#|URI&gt;</td>
+<td>
+Just another means to specify repositories.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>patterns (pt) [options] [repository] ...</b></td>
+<td>
+List all available patterns or all patterns from specified repositories. Similar to  <b>zypper search -s -t pattern</b>.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Just another means to specify repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;i, &#45;&#45;installed&#45;only</i></td>
+<td>
+Show only installed patterns.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uninstalled&#45;only</i></td>
+<td>
+Show only patterns which are not installed.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>products (pd) [options] [repository] ...</b></td>
+<td>
+List all available products or all products from specified repositories. Similar to  <b>zypper search -s -t product</b>, but shows also the type of the product (base, add-on).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Just another means to specify repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;i, &#45;&#45;installed&#45;only</i></td>
+<td>
+Show only installed products.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uninstalled&#45;only</i></td>
+<td>
+Show only products which are not installed.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>what-provides (wp) &lt;capability&gt;</b></td>
+<td>
+List all packages providing the specified capability. See also the <b>install</b> command for hint about capabilities.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Repository Management</h2><p>
+<p>
+Zypper is able to work with YaST, RPM-MD (yum) software repositories, and plain directories containing .rpm files.<p>
+Repositories are primarily identified using their <i>URI</i> or <i>alias</i>. Alias serves as a shorthand for the long URI or name of the repository. The  <i>name</i> of the repository should briefly describe the repository and is shown to the user in tables and messages. The name is not required, and if not known, the alias is shown instead. The alias is required and uniquely identifies the repository on the system.<p>
+The <i>alias</i>, <i>name</i>, <i>URI</i>, or the <i>number</i> from <b>zypper repos</b> list can be used to specify a repository as an argument of various zypper commands and options like  <b>refresh</b>, <b>--repo</b>, or <b>--from</b>.<p>
+Apart from the above, repositories have several other properties which can be set using the commands described in this section below, or by manually editing the repository definition files (.repo files, see section FILES).<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>addrepo (ar) [options] &lt;URI&gt; &lt;alias&gt;</b></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>addrepo (ar) [options] &lt;FILE.repo&gt;</b></td>
+<td>
+<p>
+Add a new repository specified by URI and assign specified alias to it or specify URI to a .repo file.<p>
+Newly added repositories have auto-refresh disabled by default (except for repositories imported from a .repo, having the auto-refresh enabled). To enable auto-refresh, use the  <b>&#45;&#45;refresh</b> option of the <b>modifyrepo</b> command.<p>
+Also, this command does not automatically refresh the newly added repositories. The repositories will get refreshed when used for the first time, or you can use the  <b>refresh</b> command after finishing your modifications with <b>*repo</b> commands. See also METADATA REFRESH POLICY section for more details.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo</i> &lt;file.repo&gt;</td>
+<td>
+Read URI and alias from specified .repo file</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type</i> &lt;type&gt;</td>
+<td>
+Type of repository (yast2, rpm-md, or plaindir). There are several aliases defined for these types:  <b>yast2</b> - susetags, yast, YaST, YaST2, YAST;  <b>rpm-md</b> - repomd, rpmmd, yum, YUM;  <b>plaindir</b> - Plaindir.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;disable</i></td>
+<td>
+Add the repository as disabled. Repositories are added as enabled by default.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;c, &#45;&#45;check</i></td>
+<td>
+Probe given URI.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;C, &#45;&#45;nocheck</i></td>
+<td>
+Don't probe URI, probe later during refresh.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Specify descriptive name for the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;k, &#45;&#45;keep&#45;packages</i></td>
+<td>
+Enable RPM files caching for the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;K, &#45;&#45;no-keep-packages</i></td>
+<td>
+Disable RPM files caching.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;f, &#45;&#45;refresh</i></td>
+<td>
+Enable autorefresh of the repository. The autorefresh is disabled by default when adding new repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Add an HTTP repository, probe it, name it 'Packman 11.1 repo', and use 'packman' as alias:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper ar -c -n 'Packman 11.1 repo' http://packman.iu-bremen.de/suse/11.1 packman</b><p>
+Add repositories from a repo file:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper ar http://download.opensuse.org/repositories/zypp:/svn/openSUSE_Factory/zypp:svn.repo</b><div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper ar myreposbackup.repo</b><p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>removerepo (rr) [options] &lt;alias|name|#|URI&gt; ...</b></td>
+<td>
+Delete repositories specified by aliases, names, numbers or URIs.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    --loose-auth</i></td>
+<td>
+Ignore user authentication data in the URI</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    --loose-query</i></td>
+<td>
+Ignore query string in the URI<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>repos (lr) [options] [repo] ...</b></td>
+<td>
+List all defined repositories or show detailed information about those specified as arguments</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+The following data can be printed for each repository found on the sytem: # (repository number), Alias (shorthand for Name), Name, Enabled (whether the repository is enabled), Refresh (whether auto-refresh is enabled for the repository), Priority, Type (repository meta-data type: rpm-md, yast2, plaindir). Which of the data is shown is determined by command line options listed below and the main.repoListColumns setting from zypper.conf. By default, #, Alias, Name, Enabled, and Refresh is shown.<p>
+Repository number is a unique identifier of the repository in current set of repositories. If you add, remove or change a repository, the numbers may change. Keep that in mind when using the numbers with the repository handling commands. On the other hand, using the alias instead of the number is always safe.<p>
+To show detailed information about specific repositories, specify them as arguments, either by alias, name, number from simple  <b>zypper lr</b>, or by URI; e.g. fB  <b>zypper lr factory</b>, or <b>zypper lr 2</b>.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;e, &#45;&#45;export &lt;FILE.repo|-&gt;</i></td>
+<td>
+This option causes zypper to write repository definition of all defined repositories into a single file in repo file format. If '&#45;' is specified instead of a file name, the repositories will be written to the standard output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;alias</i></td>
+<td>
+Add alias column to the output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Add name column to the output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uri</i></td>
+<td>
+Add base URI column to the output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;p, &#45;&#45;priority</i></td>
+<td>
+Add repository priority column to the output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;refresh</i></td>
+<td>
+Add the autorefresh column to the output.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;details</i></td>
+<td>
+Show more information like URI, priority, type, etc.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;U, &#45;&#45;sort&#45;by&#45;uri</i></td>
+<td>
+Add base URI column and sort the list it.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;P, &#45;&#45;sort&#45;by&#45;priority</i></td>
+<td>
+Add repository priority column and sort the list by it.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;A, &#45;&#45;sort&#45;by&#45;alias</i></td>
+<td>
+Sort the list by alias.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;N, &#45;&#45;sort&#45;by&#45;name</i></td>
+<td>
+Sort the list by name.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Backup your repository setup:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper repos -e myreposbackup.repo</b><p>
+List repositories with their URIs and priorities:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper lr -pu</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>renamerepo (nr) &lt;alias|name|#|URI&gt; &lt;new-alias&gt;</b></td>
+<td>
+Assign new alias to the repository specified by alias, name, number, or URI.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Example:</td>
+<td>
+<p>
+Rename repository number 8 to 'myrepo' (useful if the repo has some dreadful alias which is not usable on the command line).<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper nr 8 myrepo</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>modifyrepo (mr) &lt;options&gt; &lt;alias|name|#|URI&gt; ...</b></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>modifyrepo (mr) &lt;options&gt; &lt;--all|--remote|--local|--medium-type&gt;</b></td>
+<td>
+Modify properties of repositories specified by alias, name, number, or URI or one of the aggregate options.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;e, &#45;&#45;enable</i></td>
+<td>
+Enable the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;disable</i></td>
+<td>
+Disable the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;refresh</i></td>
+<td>
+Enable auto-refresh for the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;no&#45;refresh</i></td>
+<td>
+Disable auto-refresh for the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;p, &#45;&#45;priority &lt;positive-integer&gt;</i></td>
+<td>
+Set priority of the repository. Priority of 1 is the highest, the higher the number the lower the priority. Default priority is 99. Packages from repositories with higher priority will be preferred even in case there is a higher installable version available in the repository with a lower priority.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Set a descriptive name for the repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;k, &#45;&#45;keep&#45;packages</i></td>
+<td>
+Enable RPM files caching.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;K, &#45;&#45;no&#45;keep&#45;packages</i></td>
+<td>
+Disable RPM files caching.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;all</i></td>
+<td>
+Apply changes to all repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;local</i></td>
+<td>
+Apply changes to all local repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;remote</i></td>
+<td>
+Apply changes to all remote repositories (http/https/ftp).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;m, &#45;&#45;medium&#45;type &lt;type&gt;</i></td>
+<td>
+Apply changes to repositories of specified type. The type corresponds to the repository URI scheme identifier like http, dvd, etc. You can find complete list of valid types at http://en.opensuse.org/openSUSE:Libzypp_URIs.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Examples:</td>
+<td>
+<p>
+Enable keeping of packages for all remote repositories:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper mr -kt</b><p>
+Enable repository 'updates' and switch on autorefresh for the repo:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper mr -er updates</b><p>
+Disable all repositories:<div style="height: 0.00em;">
+&#160;</div>
+<b>$ zypper mr -da</b><p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>refresh (ref) [alias|name|#|URI] ...</b></td>
+<td>
+Refresh repositories specified by their alias, name, number, or URI. If no repositories are specified, all enabled repositories will be refreshed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+See also METADATA REFRESH POLICY section for more details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;f, &#45;&#45;force</i></td>
+<td>
+Force a complete refresh of specified repositories. This option will cause both the download of raw metadata and parsing of the metadata to be forced even if everything indicates a refresh is not needed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;b, &#45;&#45;force&#45;build</i></td>
+<td>
+Force only reparsing of cached metadata and rebuilding of the database. Raw metadata download will not be forced.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;force&#45;download</i></td>
+<td>
+Force only download of current copy of repository metadata. Parsing and rebuild of the database will not be forced.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;B, &#45;&#45;build&#45;only</i></td>
+<td>
+Only parse the metadata and build the database, don't download raw metadata into the cache. This will enable you to repair damaged database from cached data without accessing network at all.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;download&#45;only</i></td>
+<td>
+Only download the raw metadata, don't parse it or build the database.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;s, &#45;&#45;services</i></td>
+<td>
+Refresh also services before refreshing repositories.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>clean (cc) [options] [alias|name|#|URI] ...</b></td>
+<td>
+Clean the local caches for all known or specified repositories. By default,<br>
+ only caches of downloaded packages are cleaned.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;m, &#45;&#45;metadata</i></td>
+<td>
+Clean repository metadata cache instead of package cache.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;M, &#45;&#45;raw&#45;metadata</i></td>
+<td>
+Clean repository raw metadata cache instead of package cache.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;all</i></td>
+<td>
+Clean both repository metadata and package caches.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Service Management</h2><p>
+The <b>services</b>, <b>addservice</b>, <b>removeservice</b>, <b>modifyservice</b>, and  <b>refresh-services</b> commands serve for manipulating services. A service is specified by its URI and needs to have a unique alias defined (among both services and repositories).<p>
+Standalone repositories (not belonging to any service) are treated like services, too. The  <b>ls</b> command will list them, <b>ms</b> command will modify them, etc. Repository specific options, like --keep-packages are not available here, though. You can use repository handling commands to manipulate them.<p>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>addservice (as) [options] &lt;URI&gt; &lt;alias&gt;</b></td>
+<td>
+Adds a service specified by <b>URI</b> to the system. The <b>alias</b> must be unique and serves to identify the service.<p>
+Newly added services are not refereshed automatically. Use the  <b>refresh-services</b> command to refresh them. Zypper does not access the service URI when adding the service, so the type of the services is unknown until it is refreshed.<p>
+This command also allows to add also ordinary repositories when used with --type option, where you specify the type of the repository. See the addrepo command for the list of supported repository types.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type &lt;TYPE&gt;</i></td>
+<td>
+Type of the service (possible values: ris). There are several aliases defined for this type:  <b>ris</b> - RIS, nu, NU</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;disable</i></td>
+<td>
+Add the service as disabled.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Specify descriptive name for the service.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>removeservice (rs) [options] &lt;alias|name|#|URI&gt; ...</b></td>
+<td>
+<p>
+Remove specified repository index service from the sytem.<p>
+Removing an RIS service will result in removing of all of its repositories.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;loose&#45;auth</i></td>
+<td>
+Ignore user authentication data in the URI.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;loose-query</i></td>
+<td>
+Ignore query string in the URI.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>modifyservice (ms) &lt;options&gt; &lt;alias|name|#|URI&gt;</b></td>
+<td>
+<b>modifyservice (ms) &lt;options&gt; &lt;--all|--remote|--local|--medium-type&gt;</b> Modify properties of specified services.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+Common Options</td>
+<td>
+These options are common to all types of services and repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;disable</i></td>
+<td>
+Disable the service (but don't remove it).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;e, &#45;&#45;enable</i></td>
+<td>
+Enable a disabled service.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;refresh</i></td>
+<td>
+Enable auto-refresh of the service.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;no&#45;refresh</i></td>
+<td>
+Disable auto-refresh of the service.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;name</i></td>
+<td>
+Set a descriptive name for the service.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;a, &#45;&#45;all</i></td>
+<td>
+Apply changes to all services.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;l, &#45;&#45;local</i></td>
+<td>
+Apply changes to all local services.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;remote</i></td>
+<td>
+Apply changes to all remote services.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;m, &#45;&#45;medium&#45;type &lt;type&gt;</i></td>
+<td>
+Apply changes to services of specified type.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+RIS Service Specific Options</td>
+<td>
+These options are ignored by services other than Repository Index Services.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;i, --ar-to-enable &lt;alias&gt;</i></td>
+<td>
+Schedule an RIS service repository to be enabled at next service refresh.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;I, --ar-to-disable &lt;alias&gt;</i></td>
+<td>
+Schedule an RIS service repository to be disabled at next service refresh.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;j, --rr-to-enable &lt;alias&gt;</i></td>
+<td>
+Remove a RIS service repository to enable.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;J, --rr-to-disable &lt;alias&gt;</i></td>
+<td>
+Remove a RIS service repository to disable.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;k, --cl-to-enable</i></td>
+<td>
+Clear the list of RIS repositories to enable.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;K, --cl-to-disable</i></td>
+<td>
+Clear the list of RIS repositories to disable.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>services (ls) [options]</b></td>
+<td>
+List services defined on the system.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;u, &#45;&#45;uri</i></td>
+<td>
+Show also base URI of repositories.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;p, &#45;&#45;priority</i></td>
+<td>
+Show also repository priority.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;details</i></td>
+<td>
+Show more information like URI, priority, type.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;with&#45;repos</i></td>
+<td>
+Show also repositories belonging to the services.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;P, &#45;&#45;sort&#45;by&#45;priority</i></td>
+<td>
+Sort the list by repository priority.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;U, &#45;&#45;sort-by-uri</i></td>
+<td>
+Sort the list by URI.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;N, &#45;&#45;sort&#45;by&#45;name</i></td>
+<td>
+Sort the list by name.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>refresh-services (refs) [options] &lt;alias|name|#|URI&gt; ...</b></td>
+<td>
+Refreshing a service mean executing the service's special task.<p>
+RIS services add, remove, or modify repositories on your system based on current content of the repository index. Services only manage defined repositories, they do not refresh them. To refresh also repositories, use  <i>&#45;&#45;with&#45;repos</i> option or the <b>refresh</b> command.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;with&#45;repos</i></td>
+<td>
+Refresh also repositories.<p>
+TODO more info<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Package Locks Management</h2> Package locks serve the purpose of preventing changes to the set of installed packages on the system. The locks are stored in form of a  <i>query</i> in /etc/zypp/locks file (see also locks(5)). Packages matching this query are then forbidden to change their installed status; an installed package can't be removed, not installed package can't be installed. When requesting to install or remove such locked package, you will get a dependency problem dialog.<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>locks (ll)</b></td>
+<td>
+List currently active package locks.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>addlock (al) [options] &lt;package-name&gt; ...</b></td>
+<td>
+Add a package lock. Specify packages to lock by exact name or by a glob pattern using '*' and '?' wildcard characters.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Restrict the lock to the specified repository.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type &lt;type&gt;</i></td>
+<td>
+Lock only packages of specified type (default: package). See section  <b>Package Types</b> for list of available package types.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>removelock (rl) [options] &lt;lock-number|package-name&gt; ...</b></td>
+<td>
+Remove specified package lock. Specify the lock to remove by its number obtained with <b>zypper locks</b> or by the package name.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;repo &lt;alias|name|#|URI&gt;</i></td>
+<td>
+Restrict the lock to the specified repository.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>cleanlocks (cl)</b></td>
+<td>
+Remove unused locks.<p>
+This command looks for locks that do not currently (with regard to repositories used) lock any package and for each such lock it asks user whether to remove it.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Other Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>versioncmp (vcmp) &lt;version1&gt; &lt;version2&gt;</b></td>
+<td>
+Compare the versions supplied as arguments and tell whether version1 is older or newer than version2 or the two version strings match.<p>
+The default output is in human-friendly form. If <b>--terse</b> global option is used, the result is an integer number, negative/positive if version1 is older/newer than version2, zero if they match.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;m, &#45;&#45;match</i></td>
+<td>
+Takes missing release number as any release. For example<div style="height: 0.00em;">
+&#160;</div>
+$ zypper vcmp -m 0.15.3 0.15.3-2<div style="height: 0.00em;">
+&#160;</div>
+0.15.3 matches 0.15.3-2<div style="height: 0.00em;">
+&#160;</div>
+$ zypper vcmp 0.15.3 0.15.3-2<div style="height: 0.00em;">
+&#160;</div>
+0.15.3 is older than 0.15.3-2<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>targetos (tos)</b></td>
+<td>
+Shows the ID string of the target operating system. The string has a form of  <b>distroname-arch</b>. The string is determined by libzypp, the <b>distroname</b> is read from &lt;current-rootdir&gt;/etc/products.d/baseproduct and the architecture is determined from uname and CPU flags.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>licenses</b></td>
+<td>
+Prints a report about <b>licenses</b> and <b>EULA</b>s of installed packages to standard output.<p>
+First, a list of all packages and their licenses and/or EULAs is shown. This is followed by a summary, including the total number of installed packages, the number of installed packages with EULAs that required a confirmation from the user. Since the EULAs are not stored on the system and can only be read from repository metadata, the summary includes also the number of installed packages that have their counterpart in repositories. The report ends with a list of all licenses uses by the installed packages.<p>
+This command can be useful for companies redistributiong a custom distribution (like appliances) to figure out what licenses they are bound by.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>ps</b></td>
+<td>
+After each upgrade or removal of packages, there may be running processes on the system which then use files meanwhile deleted by the upgrade.  <b>zypper ps</b> lists these processes, together with the corresponding deleted files, and a service name hint, in case it's a known service. The list contains the following information:<p>
+* PID&#160;&#160;&#160;&#160;&#160;&#160;ID of the process<div style="height: 0.00em;">
+&#160;</div>
+* PPID&#160;&#160;&#160;&#160;&#160;ID of the parent process<div style="height: 0.00em;">
+&#160;</div>
+* UID&#160;&#160;&#160;&#160;&#160;&#160;ID of the user running the process<div style="height: 0.00em;">
+&#160;</div>
+* Login&#160;&#160;&#160;&#160;login name of the user running the process<div style="height: 0.00em;">
+&#160;</div>
+* Command&#160;&#160;command used to execute the process<div style="height: 0.00em;">
+&#160;</div>
+* Service&#160;&#160;guessed name of the service. If an init script exists for this<br>
+ &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;service, you can do "rcservicename restart" to restart it.<div style="height: 0.00em;">
+&#160;</div>
+* Files&#160;&#160;&#160;&#160;the list of the deleted files<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h1>GLOBAL OPTIONS</h1><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;h, &#45;&#45;help</i></td>
+<td>
+Help. If a <b>command</b> is specified together with --help option, command specific help is displayed.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;V, &#45;&#45;version</i></td>
+<td>
+Print zypper version number and exit.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;c, &#45;&#45;config &lt;file&gt;</i></td>
+<td>
+Use specified config file instead of the default files. Other command line options specified together with --config and having their counterpart in the config file are still prefered. The order of preference with --config is as follows:<p>
+* Command line options<div style="height: 0.00em;">
+&#160;</div>
+* --config &lt;file&gt;<div style="height: 0.00em;">
+&#160;</div>
+* /etc/zypp/zypp.conf<p>
+See also FILES section for more information.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;v, &#45;&#45;verbose</i></td>
+<td>
+Increase verbosity. For debugging output specify this option twice.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;q, &#45;&#45;quiet</i></td>
+<td>
+Suppress normal output. Brief (esp. result notification) messages and error messages will still be printed, though. If used together with conflicting --verbose option, the --verbose option takes preference.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;A, &#45;&#45;no&#45;abbrev</i></td>
+<td>
+Do not abbreviate text in tables. By default zypper will try to abbreviate texts in some columns so that the table fits the width of the screen. If you need to see the whole text, use this option.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;terse</i></td>
+<td>
+Terse output for machine consumption. Currently not used and provided only for compatibility with rug.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;s, &#45;&#45;table&#45;style</i></td>
+<td>
+Specifies table style to use. Table style is identified by an integer number. TODO</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;r, &#45;&#45;rug&#45;compatible</i></td>
+<td>
+Turns on rug compatibility. See section COMPATIBILITY WITH RUG for details.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;n, &#45;&#45;non&#45;interactive</i></td>
+<td>
+Switches to non-interactive mode. In this mode zypper doesn't ask user to type answers to various prompts, but uses default answers automatically. The behaviour of this option is somewhat different than that of options like '--yes', since zypper can answer different answers to different questions. The answers also depend on other options like '--no-gpg-checks'.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;x, &#45;&#45;xmlout</i></td>
+<td>
+Switches to XML output. This option is useful for scripts or graphical frontends using zypper.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;D, &#45;&#45;reposd&#45;dir &lt;dir&gt;</i></td>
+<td>
+Use the specified directory to look for the repository definition (*.repo) files. The default value is /etc/zypp/repos.d.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;C, &#45;&#45;cache&#45;dir &lt;dir&gt;</i></td>
+<td>
+Use an alternative directory to look for the repository metadata cache database files (solv files). The default value is /var/cache/zypp/solv.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;raw&#45;cache&#45;dir &lt;dir&gt;</i></td>
+<td>
+Use the specified directory for storing raw copies of repository metadata files. The default value is /var/cache/zypp/raw.</td>
+</tr>
+</tbody>
+</table>
+<p>
+Repository Options:<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;gpg&#45;checks</i></td>
+<td>
+Ignore GPG check failures and continue. If a GPG issue occurs when using this option zypper prints and logs a warning and automatically continues without interrupting the operation. Use this option with caution, as you can easily overlook security problems by using it.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;gpg&#45;auto&#45;import&#45;keys</i></td>
+<td>
+If new repository signing key is found, do not ask what to do; trust and import it automatically. This option causes that the new key is imported also in non-interactive mode, where it would otherwise got rejected.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;p, &#45;&#45;plus&#45;repo &lt;URI&gt;</i></td>
+<td>
+Use an additional repository for this operation. The repository aliased tmp# and named by the specified URI will be added for this operation and removed at the end. You can specify this option multiple times.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;disable&#45;repositories</i></td>
+<td>
+Do not read metadata from repositories. This option will prevent loading of packages from repositories, thus making zypper work only with the installed packages (if &#45;&#45;disable&#45;system&#45;resolvables was not specified).</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;refresh</i></td>
+<td>
+Do not auto-refresh repositories (ignore the auto-refresh setting). Useful to save time when doing operations like search, if there is not a need to have a completely up to date metadata.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;cd</i></td>
+<td>
+Ignore CD/DVD repositories. When this option is specified, zypper acts as if the CD/DVD repositories were not defined at all.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;no&#45;remote</i></td>
+<td>
+Ignore remote repositories like http, ftp, smb and similar. This makes using zypper easier when being offline. When this option is specified, zypper acts as if the remote repositories were not defined at all.</td>
+</tr>
+</tbody>
+</table>
+<p>
+Target Options:<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;root &lt;dir&gt;</i></td>
+<td>
+Operates on a different root directory. This option influences the location of the repos.d directory and the metadata cache directory and also causes rpm to be run with the --root option to do the actual installation or removal of packages. Note that the ZYpp lock is still created in the original system, as well as temporary files. See also the FILES section.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#160;&#160;&#160;&#160;&#45;&#45;disable&#45;system&#45;resolvables</i></td>
+<td>
+This option serves mainly for testing purposes. It will cause zypper to act as if there were no packages installed in the system. Use with caution as you can damage your system using this option.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1>FILES</h1><p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/etc/zypp/zypper.conf, $HOME/.zypper.conf</b></td>
+<td>
+Global (system-wide) and user's configuration file for zypper. These files are read when zypper starts up and  <i>--config</i> option is not used.<p>
+User's settings are prefered over global settings. Similarly, command line options override the settings in either of these files. Settings from zypp.conf (see below) having their counterparts in zypper.conf are overriden by zypper's values. To sum it up, the order of preference is as follows (from highest to lowest):<p>
+* Command line options<div style="height: 0.00em;">
+&#160;</div>
+* $HOME/.zypper.conf<div style="height: 0.00em;">
+&#160;</div>
+* /etc/zypp/zypper.conf<div style="height: 0.00em;">
+&#160;</div>
+* /etc/zypp/zypp.conf<p>
+See the comments in /etc/zypp/zypper.conf for a list and description of available options.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/etc/zypp/zypp.conf</b></td>
+<td>
+ZYpp configuration file affecting all ZYpp-based applications. See the comments in the file for desciption of configurable properties. Many of locations of files and directories listed in this section are also configurable via zypp.conf.<p>
+Options having their counterpart in zypper.conf are overriden by zypper's setting.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/etc/zypp/locks</b></td>
+<td>
+File with package lock definitions, see locks(5) manual page for details. The package lock commands (addlock, removelock, etc.) can be used to manipulate this file.<p>
+This file is used by all ZYpp-based applications.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/etc/zypp/repos.d</b></td>
+<td>
+Directory containing repository definition (*.repo) files. You can use the Repository Management commands to manipulate these files, or you can edit them yourself. In either case, after doing the modifications, executing  <b>zypper refresh</b> is strongly recommended.<p>
+This directory is used by all ZYpp-based applications.<p>
+You can use the &#45;&#45;reposd&#45;dir global option to use an alternative directory for this purpose or the &#45;&#45;root option to make this directory relative to the specified root directory.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/etc/zypp/services.d</b></td>
+<td>
+Directory containing service definition (*.service) files. You can use the Service Management Commands to manipulate theese files, or you can edit them youself. Running  <b>zypper refs</b> is recommended after modifications have been done.<p>
+This directory is used by all ZYpp-based applications.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/var/cache/zypp/raw</b></td>
+<td>
+Directory for storing raw metadata contained in repositories. This directory is used by all ZYpp-based applications. Use the &#45;&#45;raw&#45;cache&#45;dir global option to use an alternative directory for this purpose or the &#45;&#45;root option to make this directory relative to the specified root directory.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/var/cache/zypp/solv</b></td>
+<td>
+Directory containing preparsed metadata in form of <b>solv</b> files. This directory is used by all ZYpp-based applications.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/var/cache/zypp/packages</b></td>
+<td>
+If <b>keeppackages</b> property is set for a repository (see the  <b>modifyrepo</b> command), all the RPM file downloaded during installation will be kept here. See also the  <b>clean</b> command for cleaning these cache directories.<p>
+This directory is used by all ZYpp-based applications.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>/var/log/zypp/history</b></td>
+<td>
+Installation history log.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<b>~/.zypper_history</b></td>
+<td>
+Command history for the shell.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1>EXIT CODES</h1><p>
+There are several exit codes defined for zypper for use e.g. within scripts. These codes are defined in header file src/zypper-main.h found in zypper source package. Codes from interval (1-5) denote an error, numbers (100-105) provide a specific information, 0 represents a normal successful run. Following is a list of these codes with descriptions.<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+0 - ZYPPER_EXIT_OK</td>
+<td>
+Successfull run of zypper with no special info.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+1 - ZYPPER_EXIT_ERR_BUG</td>
+<td>
+Unexpected situation occured, probably caused by a bug.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+2 - ZYPPER_EXIT_ERR_SYNTAX</td>
+<td>
+zypper was invoked with an invalid command or option, or a bad syntax.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+3 - ZYPPER_EXIT_ERR_INVALID_ARGS</td>
+<td>
+Some of provided arguments were invalid. E.g. an invalid URI was provided to the addrepo command.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+4 - ZYPPER_EXIT_ERR_ZYPP</td>
+<td>
+A problem reported by ZYPP library. E.g. another instance of ZYPP is running.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+5 - ZYPPER_EXIT_ERR_PRIVILEGES</td>
+<td>
+User invoking zypper has insufficient privileges for specified operation.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+100 - ZYPPER_EXIT_INF_UPDATE_NEEDED</td>
+<td>
+Returned by the patch-check command if there are patches available for installation.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+101 - ZYPPER_EXIT_INF_SEC_UPDATE_NEEDED</td>
+<td>
+Returned by the patch-check command if there are security patches available for installation.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+102 - ZYPPER_EXIT_INF_REBOOT_NEEDED</td>
+<td>
+Returned after a successfull installation of a patch which requires reboot of computer.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+103 - ZYPPER_EXIT_INF_RESTART_NEEDED</td>
+<td>
+Returned after a successfull installation of a patch which requires restart of the package manager itself. This means that one of patches to be installed affects the package manager itself and the command used (e.g. zypper update) needs to be executed once again to install any remaining patches.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+104 - ZYPPER_EXIT_INF_CAP_NOT_FOUND</td>
+<td>
+Returned by the <b>install</b> and the <b>remove</b> command in case any of the arguments does not match any of the available (or installed) package names or other capabilities.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+105 - ZYPPER_EXIT_ON_SIGNAL</td>
+<td>
+Returned upon exiting after receiving a SIGINT or SIGTERM.<p>
+<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1>COMPATIBILITY WITH RUG</h1><p>
+zypper is designed to be compatible with rug, which is a command&#45;line interface to the ZENworks Linux Management (ZLM) agent. Compared to rug, zypper does not need the ZLM daemon to run, and is intented to provide more and improved functionality. Following is a list of zypper-rug command aliases, supported rug command line options, and compatibility notes. See also compatibility notes in descriptions of zypper commands.<p>
+To enable rug-compatible behavior, use the <i>&#45;r or &#45;&#45;rug&#45;compatible</i> global option with each command.<p>
+<div class="subsection">
+<h2>Service Management Commands</h2><p>
+ZENworks uses different terminology than ZYpp. ZLM <b>services</b> are ZYpp's repositories and services. Additionally some ZLM services can contain  <b>catalogs</b> (rpmmd-type repositories in ZYpp speak).<p>
+Zypper tries to mimick rug's behavior in its service handling commands when used with the -r global option. It also supports the  <i>&#45;&#45;catalog</i> option for specifying catalogs to work with in current operation (this is an alias for zypper's &#45;&#45;repo option).<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug service-add (sa)</i></td>
+<td>
+zypper addservice (as) When used with -r global option, this command probes the type of service or repository at the specified URI, if not explicitly specified. Without -r option the URI is not accessed at all and the URI is added as ZYpp service.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug service-delete (sd)</i></td>
+<td>
+zypper removeservice (rs)<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug service-list (sl)</i></td>
+<td>
+zypper services (ls)<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug catalogs (ca)</i></td>
+<td>
+zypper repos (lr)</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+<br>
+ zypper doesn't include 'Enabled' and 'Refresh' columns and prints rug's 'Status' column with values "Active" or "Disabled" instead.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug subscribe</i></td>
+<td>
+This command is not implemented in zypper. Enabling zypper repositories is closest to rug's subscription of catalogs. Thus, you can use  <b>zypper mr -e &lt;alias|name|#|URI&gt;</b> to enable repositories added by the service. Use  <b>zypper lr</b> (or <b>zypper ca</b>) to list available repositories.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug unsubscribe</i></td>
+<td>
+See <b>subscribe</b> above, with the difference that <i>-d</i> will be used instead of <i>-e</i> in the  <b>zypper mr</b> command.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Package Management Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug install (in)</i></td>
+<td>
+zypper install (in)</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-left: 5.00ex;">
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;y, &#45;&#45;no&#45;confirm</i></td>
+<td>
+Don't require user interaction. This option is implemented using zypper's non-interactive mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;agree&#45;to&#45;third&#45;party&#45;licenses</i></td>
+<td>
+This option is an alias to zypper's &#45;&#45;auto-agree&#45;with&#45;licenses option.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;force&#45;resolution &lt;on|off&gt;</i></td>
+<td>
+This option is not available in rug and zypper uses the 'force-resolution' solver mode by default when running in rug-compatible mode. However, it is possible to turn the forcing of resolution off using this option even in rug-compatible mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;entire&#45;catalog &lt;catalog&gt;</i></td>
+<td>
+This option serves for marking all packages from specified catalog for installation. This is achieved by simulating 'zypper in --from &lt;repo&gt; '*''.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug remove (rm)</i></td>
+<td>
+zypper remove (rm)</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-left: 5.00ex;">
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;y, &#45;&#45;no&#45;confirm</i></td>
+<td>
+Don't require user interaction. This option is implemented using zypper's non-interactive mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;force&#45;resolution &lt;on|off&gt;</i></td>
+<td>
+This option is not available in rug and zypper uses the 'force-resolution' solver mode by default when running in rug-compatible mode. However, it is possible to turn the forcing of resolution off using this option even in rug-compatible mode.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug verify (ve)</i></td>
+<td>
+zypper verify (ve)</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-left: 5.00ex;">
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;y, &#45;&#45;no&#45;confirm</i></td>
+<td>
+Don't require user interaction. This option is implemented using zypper's non-interactive mode.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug update (up) [catalog] ...</i></td>
+<td>
+zypper update (up) [package] ...</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+Zypper interprets the update command arguments as repository identifiers in rug-compatibilty mode. The update operation is restricted to the specified repositories.</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-left: 5.00ex;">
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;y, &#45;&#45;no&#45;confirm</i></td>
+<td>
+Don't require user interaction. This option is implemented using zypper's non-interactive mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;agree&#45;to&#45;third&#45;party&#45;licenses</i></td>
+<td>
+This option is an alias to zypper's &#45;&#45;auto-agree&#45;with&#45;licenses option.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;R, &#45;&#45;force&#45;resolution &lt;on|off&gt;</i></td>
+<td>
+This option is not available in rug and zypper uses the 'force-resolution' solver mode by default when running in rug-compatible mode. However, it is possible to turn the forcing of resolution off using this option even in rug-compatible mode.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;d, &#45;&#45;downloade&#45;only</i></td>
+<td>
+This option has currently no effect.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;&#45;category</i></td>
+<td>
+This option has currently no effect.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug search (se)</i></td>
+<td>
+zypper search (se)</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+Instead of the Type column, rug's Bundle column is printed, however, with no contents.</td>
+</tr>
+</tbody>
+</table>
+<div style="margin-left: 5.00ex;">
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;t, &#45;&#45;type</i></td>
+<td>
+In rug compatibility mode the --type option defaults to <i>package</i>. Zypper searches all package types by default.</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>    &#45;&#45;sort&#45;by&#45;catalog</i></td>
+<td>
+Sort packages by catalog, not by name. This option is an alias to zypper's &#45;&#45;sort&#45;by&#45;repo option.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="subsection">
+<h2>Patch Management Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug patch-info</i></td>
+<td>
+zypper info -t patch<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Pattern Management Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug pattern-info</i></td>
+<td>
+zypper info -t pattern<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Product Management Commands</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug product-info</i></td>
+<td>
+zypper info -t product<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>System Commands</h2><p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>rug ping</i></td>
+<td>
+zypper ping</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+</td>
+<td>
+This command just returns 0 without producing any output or doing anything to the system. Rug's ping command is used to wake up the ZLM daemon or to check whether it is up and running. Since zypper does no require ZLM or any other daemon to run, it is safe to always return 0 here to indicate it is ready for operation.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="subsection">
+<h2>Other Compatibility Notes</h2><p>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;c, &#45;&#45;catalog</i> &lt;catalog&gt;</td>
+<td>
+This option is an alias to zypper's &#45;&#45;repo &lt;alias&gt; and it will restrict the operation of commands like search, install, etc to the repository specified by the alias.<p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>
+<table>
+<col style="width: 5.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+<i>&#45;N, &#45;&#45;dry&#45;run</i></td>
+<td>
+Zypper uses -D shorthand for this option, but -N is provided for the sake of compatibility. Zypper (libzypp) implements this option by passing the  <b>&#45;&#45;test</b> option to <b>rpm</b>. The option is used in <b>install</b>, <b>remove</b>,  <b>update</b>, <b>dist-upgrade</b> (not available in rug), and <b>verify</b> commands.<p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section">
+<h1>HOMEPAGE</h1><p>
+http://en.opensuse.org/Portal:Zypper<p>
+</div>
+<div class="section">
+<h1>AUTHORS</h1><p>
+Martin Vidner &lt;mvidner@suse.cz&gt;<div style="height: 0.00em;">
+&#160;</div>
+Duncan Mac-Vicar &lt;dmacvicar@suse.de&gt;<div style="height: 0.00em;">
+&#160;</div>
+Jan Kupec &lt;jkupec@suse.cz&gt;<div style="height: 0.00em;">
+&#160;</div>
+Stanislav Visnovsky &lt;visnov@suse.cz&gt;<div style="height: 0.00em;">
+&#160;</div>
+Josef Reidinger &lt;jreidinger@suse.cz&gt;<p>
+</div>
+<div class="section">
+<h1>SEE ALSO</h1><p>
+rug(1), YaST2(8), locks(5), zypper-log(8)</div>
+<table summary="Document Footer" class="foot">
+<tr>
+<td class="foot-date">
+1.5.1</td>
+<td class="foot-os">
+zypper</td>
+</tr>
+</table>
+</body>
+</html>
+
