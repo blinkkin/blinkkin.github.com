@@ -5,23 +5,23 @@
 <meta name="resource-type" content="document">
 <link rel="stylesheet" href="./example.style.css" type="text/css" media="all">
 <title>
-APK(1)</title>
+APK(8)</title>
 </head>
 <body>
 <table summary="Document Header" class="head">
 <tbody>
 <tr>
 <td class="head-ltitle">
-APK(1)</td>
+APK(8)</td>
 <td class="head-vol">
-General Commands Manual</td>
+System Manager's Manual</td>
 <td class="head-rtitle">
-APK(1)</td>
+APK(8)</td>
 </tr>
 </tbody>
 </table>
 <div class="section">
-<h1 id="4e414d45">NAME</h1> <b class="name">apk</b> &#8212; <span class="desc">are the tool used to install, upgrade, or delete software on a running sytem.</span></div>
+<h1 id="4e414d45">NAME</h1> <b class="name">apk</b> &#8212; <span class="desc">are the tool used to install, upgrade, or delete software on a running system.</span></div>
 <div class="section">
 <h1 id="53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
 <col style="width: 3.00ex;">
@@ -31,10 +31,11 @@ APK(1)</td>
 <td>
 apk</td>
 <td>
-<i class="arg">COMMAND</i> &#91;<span class="opt"><i class="arg">OPTIONS</i></span>&#93;</td>
+&#60;<b class="flag">command</b>&#62; &#60;<b class="flag">&#45;-global-opts</b>&#62; &#60;<b class="flag">&#45;-command-opts</b>&#62; &#60;<i class="arg">command-arguments</i>&#62;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -44,10 +45,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">COMMAND</i> &#91;<span class="opt"><b class="flag">&#45;h</b> | <b class="flag">&#45;-help</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;p</b> | <b class="flag">&#45;-root</b> <i class="arg">DIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;X</b> | <b class="flag">&#45;-repository</b> <i class="arg">REPO</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;q</b> | <b class="flag">&#45;-quiet</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;v</b> | <b class="flag">&#45;-verbose</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-interactive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;V</b> | <b class="flag">&#45;-version</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;f</b> | <b class="flag">&#45;-force</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> | <b class="flag">&#45;-update-cache</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-progress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-noprogress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-clean-protected</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-purge</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-allow-untrusted</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-simulate</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-wait</b> <i class="arg">TIME</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-keys-dir</b> <i class="arg">KEYSDIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-repositories-file</b> <i class="arg">REPOFILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-no-network</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-overlay-from-stdin</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-arch</b> <i class="arg">ARCH</i></span>&#93;</td>
+&#60;<b class="flag">command</b>&#62; &#91;<span class="opt"><b class="flag">&#45;h</b> | <b class="flag">&#45;-help</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;p</b> | <b class="flag">&#45;-root</b> <i class="arg">DIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;X</b> | <b class="flag">&#45;-repository</b> <i class="arg">REPO</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;q</b> | <b class="flag">&#45;-quiet</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;v</b> | <b class="flag">&#45;-verbose</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-interactive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;V</b> | <b class="flag">&#45;-version</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;f</b> | <b class="flag">&#45;-force</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;U</b> | <b class="flag">&#45;-update-cache</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-progress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-noprogress</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-clean-protected</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-purge</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-allow-untrusted</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-simulate</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-wait</b> <i class="arg">TIME</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-keys-dir</b> <i class="arg">KEYSDIR</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-repositories-file</b> <i class="arg">REPOFILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-no-network</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-overlay-from-stdin</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-arch</b> <i class="arg">ARCH</i></span>&#93; &#60;<b class="flag">&#45;-command-opts</b>&#62; &#60;<i class="arg">command-arguments</i>&#62;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -57,10 +59,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">add</i> &#91;<span class="opt"><b class="flag">&#45;-initdb</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-virtual</b> <i class="arg">NAME</i></span>&#93; <i class="arg">PACKAGE</i></td>
+<b class="flag">add</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;-initdb</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-virtual</b> <i class="arg">NAME</i></span>&#93; <i class="arg">PACKAGE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -70,10 +73,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">del</i> &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PACKAGE</i></td>
+<b class="flag">del</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PACKAGE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -83,10 +87,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">fix</i> &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-reinstall</b></span>&#93; <i class="arg">PACKAGE</i></td>
+<b class="flag">fix</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;u</b> | <b class="flag">&#45;-upgrade</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-reinstall</b></span>&#93; <i class="arg">PACKAGE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -96,10 +101,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">update</i></td>
+<b class="flag">update</b> &#60;<b class="flag">&#45;-global-opts</b>&#62;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -109,10 +115,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">info</i> &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-contents</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;e</b> | <b class="flag">&#45;-installed</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;W</b> | <b class="flag">&#45;-who-owns</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-depends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-install-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-rinstall-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;w</b> | <b class="flag">&#45;-webpage</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-size</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-triggers</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;-all</b></span>&#93; <i class="arg">PACKAGE</i></td>
+<b class="flag">info</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-contents</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;e</b> | <b class="flag">&#45;-installed</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;W</b> | <b class="flag">&#45;-who-owns</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-depends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;i</b> | <b class="flag">&#45;-install-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-rinstall-if</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;w</b> | <b class="flag">&#45;-webpage</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-size</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-triggers</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;-all</b></span>&#93; <i class="arg">PACKAGE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -122,10 +129,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">search</i> &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PATTERN</i></td>
+<b class="flag">search</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;r</b> | <b class="flag">&#45;-rdepends</b></span>&#93; <i class="arg">PATTERN</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -135,10 +143,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">upgrade</i> &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;available</b></span>&#93;</td>
+<b class="flag">upgrade</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;a</b> | <b class="flag">&#45;available</b></span>&#93;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -148,10 +157,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">cache</i> <i class="arg">sync</i> | <i class="arg">clean</i> | <i class="arg">download</i></td>
+<b class="flag">cache</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; <b class="flag">sync</b> | <b class="flag">clean</b> | <b class="flag">download</b></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -161,10 +171,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">version</i> &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-indexes</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-test</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;c</b> | <b class="flag">&#45;-check</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></span>&#93;</td>
+<b class="flag">version</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;I</b> | <b class="flag">&#45;-indexes</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;t</b> | <b class="flag">&#45;-test</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;c</b> | <b class="flag">&#45;-check</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></span>&#93;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -174,10 +185,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">index</i> &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">FILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> | <b class="flag">&#45;-index</b> <i class="arg">INDEX</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b> <i class="arg">TEXT</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></span>&#93; <i class="arg">FILE</i></td>
+<b class="flag">index</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">FILE</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;x</b> | <b class="flag">&#45;-index</b> <i class="arg">INDEX</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;d</b> | <b class="flag">&#45;-description</b> <i class="arg">TEXT</i></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></span>&#93; <i class="arg">FILE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -187,10 +199,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">fetch</i> &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-link</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-recursive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-stdout</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">DIR</i></span>&#93; <i class="arg">PACKAGE</i></td>
+<b class="flag">fetch</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;L</b> | <b class="flag">&#45;-link</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;R</b> | <b class="flag">&#45;-recursive</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;s</b> | <b class="flag">&#45;-stdout</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;o</b> | <b class="flag">&#45;-output</b> <i class="arg">DIR</i></span>&#93; <i class="arg">PACKAGE</i></td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -200,10 +213,11 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">audit</i> &#91;<span class="opt"><b class="flag">&#45;-backup</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-system</b></span>&#93;</td>
+<b class="flag">audit</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; &#91;<span class="opt"><b class="flag">&#45;-backup</b></span>&#93; &#91;<span class="opt"><b class="flag">&#45;-system</b></span>&#93;</td>
 </tr>
 </tbody>
 </table>
+<p>
 <br>
 <table class="synopsis">
 <col style="width: 3.00ex;">
@@ -213,7 +227,7 @@ apk</td>
 <td>
 apk</td>
 <td>
-<i class="arg">verify</i> <i class="arg">FILE</i></td>
+<b class="flag">verify</b> &#60;<b class="flag">&#45;-global-opts</b>&#62; <i class="arg">FILE</i></td>
 </tr>
 </tbody>
 </table>
@@ -222,55 +236,55 @@ apk</td>
 <h1 id="4445534352495054494f4e">DESCRIPTION</h1> The following commands are supported.<div class="subsection">
 <h2 id="436f6d6d616e64733a">Commands:</h2><dl style="margin-top: 0.00em;margin-bottom: 0.00em;" class="list list-tag">
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">add</i></dt>
+<b class="flag">add</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Add (or update) PACKAGEs to main dependencies and install them, while ensuring that all dependencies are met.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">del</i></dt>
+<b class="flag">del</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Remove PACKAGEs from the main dependencies and uninstall them.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">fix</i></dt>
+<b class="flag">fix</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Repair package or upgrade it without modifying main dependencies.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">update</i></dt>
+<b class="flag">update</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Update repository indexes from all remote repositories.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">info</i></dt>
+<b class="flag">info</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Give detailed information about PACKAGEs or repositores.</dd>
+Give detailed information about PACKAGEs or repositories.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">search</i></dt>
+<b class="flag">search</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Search package by PATTERNs or by indexed dependencies.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">upgrade</i></dt>
+<b class="flag">upgrade</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Upgrade (or downgrade with -a) the currently installed packages to versions available in repositories.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">cache</i></dt>
+<b class="flag">cache</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Download missing PACKAGEs to cache directory, or delete files no longer required. Package caching is enabled by making /etc/apk/cache a symlink to the directory (on boot media) that will be used as package cache.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">version</i></dt>
+<b class="flag">version</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Compare package versions (in installed database vs. available) or do tests on version strings given on command line.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">index</i></dt>
+<b class="flag">index</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Create repository index file from FILEs.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">fetch</i></dt>
+<b class="flag">fetch</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Download PACKAGEs from global repositories to a local directory from which a local mirror repository can be created.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">audit</i></dt>
+<b class="flag">audit</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Audit the filesystem for changes compared to installed database.</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
-<i class="arg">verify</i></dt>
+<b class="flag">verify</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
 Verify package integrity and signature</dd>
 </dl>
@@ -484,7 +498,7 @@ Check if the given version string is valid</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;l</b> | <b class="flag">&#45;-limit</b> <i class="arg">LIMCHAR</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Limit output to packages whos status matches <i class="arg">LIMCHAR</i></dd>
+Limit output to packages whose status matches <i class="arg">LIMCHAR</i></dd>
 </dl>
 </div>
 <div class="subsection">
@@ -504,7 +518,7 @@ Read <i class="arg">TEXT</i> as description and version information of the repos
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-rewrite-arch</b> <i class="arg">ARCH</i></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Use <i class="arg">ARCH</i> as architery for all packages</dd>
+Use <i class="arg">ARCH</i> as architecture for all packages</dd>
 </dl>
 </div>
 <div class="subsection">
@@ -536,7 +550,7 @@ List all modified configuration files that need to be backed up</dd>
 <dt class="list-tag" style="margin-top: 1.00em;">
 <b class="flag">&#45;-system</b></dt>
 <dd class="list-tag" style="margin-left: 6.00ex;">
-Verify checksums of all installed files ( <b class="flag">&#45;q</b> to print only modfied packages)</dd>
+Verify checksums of all installed files ( <b class="flag">&#45;q</b> to print only modified packages)</dd>
 </dl>
 </div>
 </div>
