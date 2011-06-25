@@ -1,0 +1,412 @@
+.\"	$Id: template.in.1,v 1.1 2010/06/02 12:15:32 kristaps Exp $
+.\"
+.\" Copyright notice goes here.
+.\"
+.\" See mdoc(7) for further reference.
+.\"
+.Dd $Mdocdate: June 2 2010 $
+.\" Replace the following with the name of your utility in UPPERCASE.
+.Dt APK 8
+.Os
+.
+.Sh NAME
+.\" Replace the following two lines as indicated.
+.Nm apk
+.Nd are the tool used to install, upgrade, or delete software
+on a running system.
+.Sh SYNOPSIS
+.Nm apk
+.Aq command
+.Aq generic-opts
+.Aq command-opts
+.Aq command-arguments
+.Pp
+.Nm
+.Bk -words
+.Cm add
+.Aq generic-opts
+.Op Fl -initdb
+.Op Fl u | -upgrade
+.Op Fl t | -virtual Ar NAME
+.Ar PACKAGE
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm del
+.Aq generic-opts
+.Op Fl r | -rdepends
+.Ar PACKAGE
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm fix
+.Aq generic-opts
+.Op Fl u | -upgrade
+.Op Fl r | -reinstall
+.Ar PACKAGE
+.Ek
+.Pp
+.Nm
+.Cm update
+.Aq generic-opts
+.Pp
+.Nm
+.Bk -words
+.Cm info
+.Aq generic-opts
+.Op Fl L | -contents
+.Op Fl e | -installed
+.Op Fl W | -who-owns
+.Op Fl R | -depends
+.Op Fl r | -rdepends
+.Op Fl i | -install-if
+.Op Fl I | -rinstall-if
+.Op Fl w | -webpage
+.Op Fl s | -size
+.Op Fl d | -description
+.Op Fl t | -triggers
+.Op Fl a | -all
+.Ar PACKAGE
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm search
+.Aq generic-opts
+.Op Fl d | -description
+.Op Fl r | -rdepends
+.Ar PATTERN
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm upgrade
+.Aq generic-opts
+.Op Fl a | available
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm cache
+.Aq generic-opts
+.Cm sync | clean | download
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm version
+.Aq generic-opts
+.Op Fl I | -indexes
+.Op Fl t | -test
+.Op Fl c | -check
+.Op Fl l | -limit Ar LIMCHAR
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm index
+.Aq generic-opts
+.Op Fl o | -output Ar FILE
+.Op Fl x | -index Ar INDEX
+.Op Fl d | -description Ar TEXT
+.Op Fl -rewrite-arch Ar ARCH
+.Ar FILE
+.Ek
+.Pp
+.Nm
+.Bk -words
+.Cm fetch
+.Aq generic-opts
+.Op Fl L | -link
+.Op Fl R | -recursive
+.Op Fl s | -stdout
+.Op Fl o | -output Ar DIR
+.Ar PACKAGE
+.Ek
+.Pp
+.Nm
+.Cm audit
+.Aq generic-opts
+.Op Fl -backup
+.Op Fl -system
+.Pp
+.Nm
+.Cm verify
+.Aq generic-opts
+.Ar FILE
+.Pp
+.Nm
+.Bk -words
+.Aq command
+.Op Fl h | -help
+.Op Fl p | -root Ar DIR
+.Op Fl X | -repository Ar REPO
+.Op Fl q | -quiet
+.Op Fl v | -verbose
+.Op Fl i | -interactive
+.Op Fl V | -version
+.Op Fl f | -force
+.Op Fl U | -update-cache
+.Op Fl -progress
+.Op Fl -noprogress
+.Op Fl -clean-protected
+.Op Fl -purge
+.Op Fl -allow-untrusted
+.Op Fl -simulate
+.Op Fl -wait Ar TIME
+.Op Fl -keys-dir Ar KEYSDIR
+.Op Fl -repositories-file Ar REPOFILE
+.Op Fl -no-network
+.Op Fl -overlay-from-stdin
+.Op Fl -arch Ar ARCH
+.Aq command-opts
+.Aq command-arguments
+.Ek
+.Sh DESCRIPTION
+The following commands are supported.
+.Ss Commands:
+.Bl -tag -width Ds
+.It Cm add
+Add (or update) PACKAGEs to main dependencies and install them, while ensuring
+that all dependencies are met.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl -initdb
+Initialize database
+.It Fl u , -upgrade
+Prefer to upgrade package
+.It Fl t , -virtual Ar NAME
+Instead of adding all the packages to 'world', create
+a new virtual package with the listed dependencies
+and add that to 'world'. The actions of the command
+are easily reverted by deleting the virtual package.
+.El
+.Bl -tag -width Ds
+.It Cm del
+Remove PACKAGEs from the main dependencies and uninstall them.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl r , -rdepends
+Recursively delete all top-level reverse dependencies
+too.
+.El
+.Bl -tag -width Ds
+.It Cm fix
+Repair package or upgrade it without modifying main dependencies.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl u , -upgrade
+Upgrade package if possible
+.It Fl r , -reinstall
+Reinstall the package
+.El
+.Bl -tag -width Ds
+.It Cm update
+Update repository indexes from all remote repositories.
+.It Cm info
+Give detailed information about PACKAGEs or repositories.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl L , -contents
+List contents of the
+.Ar PACKAGE
+.It Fl e , -installed
+Check if
+.Ar PACKAGE
+is installed
+.It Fl W , -who-owns
+Print the package owning the specified file
+.It Fl R , -depends
+List packages that the
+.Ar PACKAGE
+depends on
+.It Fl r , -rdepends
+List all packages depending on
+.Ar PACKAGE
+.It Fl i , -install-if
+List the PACKAGE's install-if rule
+.It Fl I , -rinstall-if
+List all packages having install-if referencing
+.Ar PACKAGE
+.It Fl w , -webpage
+Show URL for more information about
+.Ar PACKAGE
+.It Fl s , -size
+Show installed size of
+.Ar PACKAGE
+.It Fl d , -description
+Print description for
+.Ar PACKAGE
+.It Fl t , -triggers
+Print active triggers of
+.Ar PACKAGE
+.It Fl a , -all
+Print all information about
+.Ar PACKAGE
+.El
+.Bl -tag -width Ds
+.It Cm search
+Search package by PATTERNs or by indexed dependencies.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl d , -description
+Search also package descriptions
+.It Fl r , -rdepends
+Print reverse dependencies of package
+.El
+.Bl -tag -width Ds
+.It Cm upgrade
+Upgrade (or downgrade with -a) the currently installed packages to versions
+available in repositories.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl a , -available
+Re-install or downgrade if currently installed
+package is not currently available from any
+repository
+.El
+.Bl -tag -width Ds
+.It Cm cache
+Download missing PACKAGEs to cache directory, or delete files no longer
+required. Package caching is enabled by making /etc/apk/cache a symlink to
+the directory (on boot media) that will be used as package cache.
+.It Cm version
+Compare package versions (in installed database vs. available) or do tests on
+version strings given on command line.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl I , -indexes
+Print description and versions of indexes
+.It Fl t , -test
+Compare two given versions
+.It Fl c , -check
+Check if the given version string is valid
+.It Fl l , -limit Ar LIMCHAR
+Limit output to packages whose status matches
+.Ar LIMCHAR
+.El
+.Bl -tag -width Ds
+.It Cm index
+Create repository index file from FILEs.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl o , -output FILE
+Write the generated index to
+.Ar FILE
+.It Fl x , -index Ar INDEX
+Read
+.Ar INDEX
+to speed up new index creation by reusing
+the information from an old index
+.It Fl d , -description Ar TEXT
+Read
+.Ar TEXT
+as description and version information of
+the repository index
+.It Fl -rewrite-arch Ar ARCH
+Use
+.Ar ARCH
+as architecture for all packages
+.El
+.Bl -tag -width Ds
+.It Cm fetch
+Download PACKAGEs from global repositories to a local directory from which a
+local mirror repository can be created.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl L , -link
+Create hard links if possible
+.It Fl R , -recursive
+Fetch the
+.Ar PACKAGE
+and all it's dependencies
+.It Fl s , -stdout
+Dump the .apk to stdout (incompatible with
+.Fl o
+and
+.Fl R
+)
+.It Fl o , -output Ar DIR
+Directory to place the PACKAGEs to
+.El
+.Bl -tag -width Ds
+.It Cm audit
+Audit the filesystem for changes compared to installed database.
+.El
+.Bl -tag -offset 2m -width Ds
+.It Fl -backup
+List all modified configuration files that need to be
+backed up
+.It Fl -system
+Verify checksums of all installed files (
+.Fl q
+to print
+only modified packages)
+.El
+.Bl -tag -width Ds
+.It Cm verify
+Verify package integrity and signature
+.El
+.Ss Generic options:
+The following command-line options are generic:
+.Bl -tag -width Ds
+.It Fl h , -help
+Show generic help or applet specific help
+.It Fl p , -root Ar DIR
+Install packages to
+.Ar DIR
+.It Fl X , -repository Ar REPO
+Use packages from
+.Ar REPO
+.It Fl q , -quiet
+Print less information
+.It Fl v , -verbose
+Print more information
+.It Fl i , -interactive
+Ask confirmation for certain operations
+.It Fl V , -version
+Print program version and exit
+.It Fl f , -force
+Do what was asked even if it looks dangerous
+.It Fl -progress
+Show a progress bar
+.It Fl -no-progress
+Disable progress bar even for TTYs
+.It Fl -clean-protected
+Do not create .apk-new files to configuration dirs
+.It Fl -purge
+Delete also modified configuration files on package
+removal
+.It Fl -allow-untrusted
+Blindly install packages with untrusted signatures or
+no signature at all
+.It Fl -simulate
+Show what would be done without actually doing it
+.It Fl -wait Ar TIME
+Wait for
+.Ar TIME
+seconds to get an exclusive repository
+lock before failing
+.It Fl -keys-dir Ar KEYSDIR
+Override directory of trusted keys
+.It Fl -repositories-file Ar REPOFILE
+Override repositories file
+.It Fl -no-network
+Do not use network (cache is still used)
+.It Fl -overlay-from-stdin
+Read list of overlay files from stdin
+.It Fl -arch ARCH
+Use architecture with
+.Fl -root
+.El
+.Sh SEE ALSO
+.\" What other utilities have you referred to?
+.Xr lbu 1
+.Sh AUTHORS
+The
+.Nm
+utility was written by
+.\" Enter your contact information here.
+.An yourname Aq you@domain.tdl .
