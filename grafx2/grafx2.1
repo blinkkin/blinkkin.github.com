@@ -1,0 +1,2341 @@
+.Dd Dec 1, 2011
+.Dt GRAFX2 1
+.Os
+.Sh NAME
+.Nm grafx2
+.Nd graphic editor
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.
+.Ss GRAFX 2
+.Dl "Dragon\(aqs Layers" Edition
+.Dl THE ULTIMATE MULTI-RESOLUTION GFX EDITOR
+http://grafx2.googlecode.com
+atari build
+.Pp
+Copyright 2007-2011, the Grafx2 project team
+Copyright 1996-2001, SUNSET DESIGN
+.Ss LICENSE
+.
+Grafx2 is FREE SOFTWARE, you can
+redistribute it and/or modify it under the
+terms of the GNU General Public License as
+published by the Free Software Foundation;
+version 2 of the License.
+.Pp
+Grafx2 is distributed in the hope that it
+will be useful, but WITHOUT ANY WARRANTY;
+without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR
+PURPOSE.  See the GNU General Public License
+for more details.
+.Pp
+You should have received a copy of the GNU
+General Public License along with Grafx2;
+if not, see http://www.gnu.org/licenses/ or
+write to the Free Software Foundation, Inc.
+59 Temple Place - Suite 330, Boston,
+MA  02111-1307, USA.
+.Ss HELP
+.
+Contextual help is available by pressing
+You can do it while hovering a menu icon,
+or while a window is open.
+When a keyboard shortcut is displayed it\(aqs
+your current configuration and you can
+change it by clicking it.
+.
+.Ss KEYBOARD SHORTCUTS
+.
+Scroll visible area
+Emulate mouse
+Switch freehand
+Continuous freehand
+Bezier\(aqs curve with
+Magnifier mode
+.Pp
+Scroll palette
+.Pp
+Change brush attachement
+.Pp
+Select foreground color
+.Pp
+.
+Select background color
+.Pp
+Select user-defined foreground color
+.Pp
+.
+Select user-defined background color
+.Pp
+LAYERS
+.Pp
+Select :
+Toggle :
+.
+.Ss GRAFX2 IS CREATED BY
+.
+.Dl THE GRAFX2 PROJECT TEAM
+.Pp
+Adrien Destugues (pulkomandy)
+Yves Rizoud (yrizoud)
+.Pp
+Got the source back to life in 2006
+.Pp
+.Dl SUNSET DESIGN
+.Dl AUTHORS OF GRAFX2.0 BETA 96.5%
+.Pp
+Guillaume Dorme alias "Robinson" (code)
+Karl Maritaud   alias "X-Man" (code&gfx)
+.
+.Pp
+Re-licensed GrafX2 under the GPL in 2001
+Huge thanks to them for their work !
+.Pp
+.Dl OTHER CODE CONTRIBUTORS
+.Pp
+Karl Bartel
+SFont: bitmap fonts rendering
+.Pp
+Petter Lindquist
+C64 file and image formats
+.Pp
+Pasi Kallinen
+Better command-line handling
+.Pp
+DawnBringer
+Lua scripts, image effects
+.Pp
+Nitrofurano
+Lua scripts
+.
+.Ss ART
+.
+Made (www.m4de.com)
+Logo (classic)
+.Pp
+X-Man
+Buttons and fonts (classic)
+.Pp
+iLKke (ilkke.blogspot.com)
+Buttons and logo (modern, scenish)
+Several fonts
+.Pp
+Jamon
+Buttons, logo and font (DPaint tribute)
+.Pp
+Hatch
+Vectorized icon
+.Pp
+Pixelled all the graphics
+.
+.Ss OTHER MACHINES PORTS
+.
+.Dl AMIGA OS 3 PORT
+.Pp
+Artur Jarosik
+.Pp
+.Dl AMIGA OS 4 PORT
+.Pp
+Peter Gordon (www.petergordon.org.uk)
+.Pp
+.Dl AROS PORT
+.Pp
+Fernando Mastandrea (masta.uy)
+Markus Weiss
+.Pp
+.Dl FREEBSD PORT
+.Pp
+Jean-Baptiste Berlioz (Tobe)
+.Pp
+.Dl HAIKU OS AND BEOS PORT
+.Pp
+Luc Schrijvers (Begasus)
+.Pp
+.Dl LINUX BINARIES
+.Pp
+Gentoo : Matteo \(aqPeach\(aq Pescarin
+Debian : Gürkan Sengün
+.Pp
+.Dl MAC OS X PORT
+.Pp
+Franck Charlet (hitchhikr)
+Per Olofsson (MagerValp)
+.Pp
+.Dl MORPHOS PORT
+.Pp
+Rusback
+OffseT
+.Pp
+.Dl NETBSD PORT
+.Pp
+Jeff Read
+.Pp
+.Dl SKYOS PORT
+.Pp
+Luc Schrijvers (Begasus)
+.Pp
+.Dl WIZ & CAANOO PORT
+.Pp
+Alexander Filyanov (PheeL)
+.Pp
+.Dl ATARI PORT
+.Pp
+Pawel Goralski (Saulot)
+.Pp
+.
+ made it work on your favourite toaster
+.
+.Ss BUGFINDERS
+.
+.
+anibiqme      blumunkee     BDCIron
+Ced           DarkDefende   DawnBringer
+El Topo       falenblood    fanickbux
+fano          fogbot121     Frost
+Grimmy        Gürkan Sengün Hatch
+HoraK-FDF     iLKke         Iw2evk
+jackfrost128  Jamon         keito
+kusma         Lord Graga    Lorenzo Gatti
+MagerValp     maymunbeyin   mind
+MooZ          Pasi Kallinen the Peach
+petter        PheeL         Ravey1138
+richienyhus   sm4tik        spratek
+Surt          tape.yrm      TeeEmCee
+tempest       Timo Kurrpa   titus^Rab
+Tobé          yakumo2975    00ai99
+.Pp
+ posted the annoying bug reports.
+.
+.Ss FILE FORMATS CREDITS
+.
+BMP : Microsoft
+CEL,KCF : K.O.S. (KISekae Set system)
+GIF : Compuserve
+IMG : Bivas (W. Wiedmann?)
+LBM : Electronic Arts
+PAL : ermmh... nobody (?)
+PCX : Z-Soft
+PI1,PC1 : Degas Elite
+PKM : Sunset Design
+PNG : W3C
+SCx : Colorix (?)
+.
+.
+.Ss OUR HOMEPAGE
+.
+.Dl http://grafx2.googlecode.com
+.Pp
+Please report any bug you may find there
+.
+.
+.Ss GREETINGS
+.
+.Dl Pulkomandy:
+.Pp
+To the Pouet.net BBS posters, the #CPC
+trolls and the bitfellas
+To every people who makes the scene alive!
+To all guys making nice pixelled pictures
+(with or without GrafX2)
+.Pp
+.Dl Sunset Designs:
+.Pp
+We send our best regards to...
+.Pp
+Access        Filter        Pink
+Ace           Fiver         Pixel
+AcidJam       Flan          Profil
+Acryl         Fred          Prowler
+Alexel        FreddyV       Puznik
+Alias         Frost         Quick
+Amiral        Gaël(GDC)     Ra
+Arrakis       GainX         Raster
+Avocado       Gandalf       Ravian
+Baloo         Goblin        RedBug
+Barti         Greenpix7     Rem
+Bat           Grid          Rez
+Biro          GrosQuick     Roudoudou
+Bisounours    HackerCroll   Sacrilege
+BlackAxe      Haplo         Sam
+Bonnie        Hof           SandMan
+Boo           Hornet        Scape
+Boz           Hulud         Sébastien
+Carine        Java          Shodan
+Chandra       JBT           Skal
+Cheetah       Jérôme        Skyfire
+Chill         Julien(JCA)   Sphair
+Cougar        KalMinDo      Sprocket
+Cremax        KaneWood      Stef
+Cyclone       Karma         Stony
+Dake          Keith303      Sumaleth
+Danny         Lazur         Sunday
+Danube        LightShow     Suny
+Darjul        Lluvia        Sybaris
+Darwin        Louie         TBF
+DarkAngel     Luk           Tempest
+Das           Made          Thor
+Decker        Mamos         TMK
+DerPiipo      Mandrixx      TwoFace
+Destop        Mangue        Underking
+Diabolo       Mars          Unreal
+DineS         Mephisto      VaeVictis
+Drac          Mercure       Vastator
+DrYes         Mirec         Vatin
+Edyx          Moa           Veckman
+Eller         Moxica        Wain
+Ellyn         MRK           Wally
+EOF           Nitch         WillBe
+Fall          Noal          Xoomie
+Fame          Nytrik        Xtrm
+Fantom        Optic         YannSulu
+Fear          Orome         Z
+Feather       Pahladin      Zeb
+Fennec        Phar          Zebig
+.Pp
+and all #pixel, #demofr and #coders.
+.Pp
+.
+Some information taken from several docs
+(PCGPE, Intervue, PC Interdit...)
+gave us an invaluable help.
+.Pp
+Thanks to Shawn Hargreaves for his filled
+polygon routine from Allegro v2.2.
+.Pp
+Thanks to Carlos "Made" Pardo for his
+great GrafX2 logo.
+.Pp
+This is our very first program compiled
+with the Gnu C Compiler.
+A thousand thanks to the authors of
+this compiler.
+.Pp
+We also would like to thank all the
+people who gave us ideas to improve
+GrafX2.
+.
+.Ss SNAIL MAIL
+.
+.
+ADRIEN DESTUGUES (PulkoMandy)
+3, rue Lapouble
+64000 PAU
+(Send emails! Welcome in 21th century!)
+.Pp
+GUILLAUME DORME (Robinson)
+15, rue de l\(aqobservatoire
+87000 LIMOGES (FRANCE)
+(May take some years to get an answer)
+.Pp
+.
+KARL MARITAUD (X-Man)
+10, rue de la Brasserie
+87000 LIMOGES (FRANCE)
+(From 2001, current status: unknown)
+.
+.
+.Ss PAINTBRUSHES
+.
+.Dl LEFT CLICK
+.Pp
+Displays a menu where you can choose the
+shape of your paintbrush.
+.Pp
+Paintbrushes are sorted by family. You can
+see some paintbrushes of the same family but
+with different sizes. There is at least one
+paint-brush from each family displayed in
+this menu.
+Here is the list of all the different
+paintbrush families:
+.Pp
+*******      ***      * * * *      * *
+*******     *****      * * *      * * *
+*******    *******    * * * *    * * * *
+*******    *******     * * *      * * *
+*******    *******    * * * *    * * * *
+*******     *****      * * *      * * *
+*******      ***      * * * *      * *
+.Pp
+Square      Disc       Sieve      Sieve
+square      disc
+.
+*           *                    *
+***       *    *                  *
+*****        *                     *
+*******               *******       *
+*****     *  *  *                  *
+***                               *
+*         *  *                   *
+.
+Diamond    Random      Horiz.    Vertical
+bar        bar
+.Pp
+.
+*    *          *     *       *
+*      *          *   *        *
+*        *          * *         *
+*          *          *       *******
+*            *        * *         *
+*              *      *   *        *
+*                *    *     *       *
+.Pp
+Slash      Back-     Cross X    Cross +
+slash
+.Pp
+When using one of these, you can change the
+brush size by using the keys:
+.Pp
+Other brushes are bitmaps, their size can\(aqt
+be adjusted.
+.Pp
+Click with left mouse button to choose a
+paintbrush, and right mouse button to store
+your current brush in the slot. If your
+current brush is a grabbed brush, it will
+store a monochrome version of it, maximum
+15x15. (See below \(aqBrush container\(aq to store
+backups of a big brush)
+The stored brushes are saved when you exit
+the program.
+.Pp
+The \(aqPreset\(aq button allows you to pick a
+brush from any family. It\(aqs useful if you\(aqve
+overwritten all normal slots with brushes
+that you use more often.
+.Pp
+.
+.Dl BRUSH CONTAINER
+.Pp
+The bottom row, initially showing empty
+buttons, is the brush container. You can
+right-click a button to store the current
+brush in it, and then whenever you need the
+brush back, open this menu again and
+left-click the button.
+The container can memorize resizable brushes
+as well as brushes grabbed from the image.
+Brushes are lost when you exit the program.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Transforms your current user-defined brush
+into a paintbrush. This is actually a
+"monochromisation" of your user-defined
+brush. This means that every color of the
+brush that aren\(aqt the Back-color will be
+set to the Fore-color. But this option
+doesn\(aqt alter the brush: you\(aqll just have
+to right-click on the "Get brush" buttons
+to get your brush back.
+.Pp
+Note: When you press (not in the menu) the
+paintbrush becomes the smallest member of
+the "Disc" family: i.e one pixel.
+.Ss ADJUST OR TRANSFORM PICTURE
+.
+.Pp
+.Dl LEFT CLICK
+.Pp
+Allows you to scroll the picture to
+re-center your graph for example.
+.Pp
+Any part of the picture that goes out of
+the image by a side comes back by the
+opposite one.
+.Pp
+Left clicking the picture will scroll only
+the active layer. Right-clicking will scroll
+all of them.
+.Pp
+It is assimilated to the drawing tools
+family.
+.Pp
+.
+.Dl RIGHT CLICK
+.Pp
+Opens the Picture Transform menu.
+.
+.
+.Ss PICTURE TRANSFORM
+.
+.Dl RESCALE
+.Pp
+Allows you to change the image\(aqs size,
+rescaling it accordingly. Enter new size
+and press RESIZE to confirm.
+.Pp
+.
+When \(aqLock proportions\(aq is checked and you
+change one dimension, the other one is
+automatically adjusted to preserve the
+proportions of the original image.
+.Pp
+You can use the dropdown button to choose
+between three ways to enter the dimensions:
+.Pp
+In \(aqPixels\(aq mode, the column \(aqold\(aq shows
+the original dimensions, and you can set
+the new size in pixels.
+.Pp
+In \(aqPercent\(aq mode, you set a percentage
+compared to the original image.
+.Pp
+In \(aqRatio\(aq mode, you can set 2 numbers for
+each dimension, and the resizing factor will
+be of \(aqnew\(aq÷\(aqold\(aq. For example you can use
+1:3 to divide the image by three, 2:1 to
+double it, and any fraction like 15:16.
+.Pp
+Be careful that moving from one mode to the
+next can lose precision, if the selected
+dimensions cannot be represented exactly in
+the new mode.
+.Pp
+.Dl MIRROR
+.Pp
+- X: Flip the picture horizontally.
+.Pp
+- Y: Flip the picture vertically.
+.Pp
+.Dl ROTATE
+.Pp
+-90°: Rotates the image by 90°
+clockwise.
+.Pp
++90°: Rotates the image by 90°
+counter-clockwise.
+180°: Rotates the image by 180°
+.
+.
+.Ss HAND-DRAWING
+.
+.Dl LEFT CLICK
+.Pp
+Selects the current hand-drawing mode as the
+active drawing tool. There are 4
+hand-drawing modes:
+.Pp
+Continuous hand-drawing: as you move the
+mouse, the paintbrush is regularily pasted
+on the picture. This drawing tool allows to
+change the fore and back colors when being
+in use.
+.Pp
+Discontinuous hand-drawing: as you move the
+mouse, the paintbrush is pasted on the
+picture every time a delay is passed
+(actually, the delay is 1 VBL
+(vertical blanking)). This drawing tool
+allows to change the fore and back colors
+when being in use.
+.Pp
+Dot by dot hand-drawing: the paintbrush is
+only pasted at the position where you first
+clicked.
+.Pp
+Contour fill: Draws pixels like continuous
+mode, but when you release the button Grafx2
+draws a line back to your starting position,
+and fills the area. This tool doesn\(aqt use
+the current brush, but single pixels.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Toggles the different hand-drawing modes
+and activates, at the same time, the
+hand-drawing tool.
+.Ss SPLINES
+.
+.Dl LEFT CLICK
+.Pp
+Selects the current curve-drawing mode as
+the active drawing tool. There are 2
+different curve-drawing modes:
+.Pp
+* 4 control points curves: define the basic
+line like a classical line, then move, with
+the left mouse button, the inner control
+points to choose the shape of your curve.
+When the curve has the shape you want, click
+with the right mouse button to draw it
+definitively.
+.Pp
+* 3 control points curves: the same as
+above, but you\(aqll have only one inner
+control point to place. Moreover, the spline
+will be traced just after placing this
+point.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Toggles the different curve-drawing modes
+and activates, at the same time, the
+curve-drawing tool.
+.Ss LINES
+.
+.Dl LEFT CLICK
+.Pp
+Selects the current line-drawing mode as the
+active drawing tool. There are 3
+line-drawing modes:
+.Pp
+* Classical lines: when first clicking on
+the picture, you\(aqll define the start of the
+line. Maintain your click to choose the end
+of the line and release the mouse button to
+set it.
+If you hold SHIFT when drawing, the line
+will be constrained to horizonal, vertical
+or diagonal.
+.Pp
+* Knotted lines: works like classical lines,
+but the end of your line will automatically
+become the start of the next one. When you
+want to stop chaining lines, use the
+opposite mouse button. "The opposite button"
+means that if you started to draw lignes
+with the left button (Fore-color), you\(aqll
+have to stop the procedure with the right
+button; and conversely.
+.Pp
+* Concentric lines: when first clicking on
+the picture, you\(aqll define center of the
+lines. In fact, the center is defined by the
+the position of the mouse when you release
+the mouse button. Then you can draw lines
+from the center to the current mouse
+position by clicking. To stop drawing
+concentric lines, use the opposite mouse
+button. This drawing tool allows to change
+the fore and back colors when being in use.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Toggles the different line-drawing modes and
+activates, at the same time, the
+line-drawing tool.
+.Ss SPRAY
+.
+.Dl LEFT CLICK
+.Pp
+Selects the spray as the active drawing
+tool. This drawing tool allows to change the
+fore and back colors when being in use.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Displays a menu where you can configure the
+spray:
+.Pp
+- Size: Defines the diameter of the circle
+in which will effectively fit the spray.
+.Pp
+- Delay: Defines the number of VBLs that
+will be waited for between two flows of
+spray.
+.Pp
+- Mode: Defines whether you want to use a
+monochrome spray or a multi- colored one.
+.Pp
+- Mono-flow: Defines the number of
+paintbrushes that will be pasted in the
+circle of the spray at each cycle.
+.Pp
+- Palette: Left-click on a color of the
+palette to see how much it will be used in
+the multicolored flow, and modify it by
+using the gauge on the right. If the flow of
+this color was equal to 0, then the "Init"
+value will be applied. Or set the flow of a
+color to 0 by clicking on it with the right
+mouse button.
+.Pp
+- Clear: Removes all the colors from the
+multicolored flow. Actually, this puts a 0
+value in the use of each color.
+.Pp
+- Init: Allows you to define a value that
+will be set to the color you click on in the
+palette if its value is equal to 0. This
+permits to tag a set of colors more quickly.
+.Pp
+- +1,-1,x2,/2: Modify the values of all the
+tagged colors (and only them).
+.Pp
+.
+Tip: If you often use the Shade mode, and
+are bored to click many times on a color to
+reach the color you want, you can define a
+spray with "Size"=1, "Mono-flow"=1, and
+"Delay"=2 (or more, according to your
+reflexes). And then, you\(aqll just have to
+click a few hundredths of second to modify a
+color.
+.Ss FLOODFILL
+.
+.Dl LEFT CLICK
+.Pp
+Selects the filler as the active drawing
+tool. The filler, as any drawing tool, will
+be affected by all the effects!
+.Pp
+Note that only the visible part of the
+picture will be filled (as every other
+drawing tools, the floodfill only alters the
+visible part of the picture; this avoids
+unwanted effects that wouldn\(aqt be controlled
+by the user).
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Selects the color replacement as the active
+drawing tool.
+.Pp
+Any rule has its exceptions and this one
+doesn\(aqt depart from that. Indeed, this tool
+is the only one to be affected by no effect
+(except Stencil) and to be able to modify
+non visible parts of the picture.
+The function of this tool being replacing
+all the occurences of a color in the picture
+by another, if would have been a shame to
+limit modifications only to the visible part
+of the picture.
+.Ss POLYGONS POLYFORMS
+.
+.Dl LEFT CLICK
+.Pp
+Selects the polygons as the active drawing
+tool.
+.Pp
+This works just like knotted-lines but loops
+the extremities when you\(aqre finished.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Selects the polyforms as the active drawing
+tool.
+.Pp
+This works like a combination of free-hand
+drawing and knotted-lines. If you keep the
+mouse button pressed, you\(aqll draw as if you
+were in free-hand drawing mode. And, if you
+release the mouse button, it will work like
+knotted lines.
+.Pp
+Click on the opposite mouse button (i.e.:
+click right if you started to draw with the
+left mouse button, and vice versa) to
+terminate the operation. The two extremities
+will be linked automatically.
+.Ss FILLED POLY
+Work exactly the same way as the polygons
+et polyforms above, but fill in the interior
+of the drawn shapes.
+.Ss RECTANGLES
+.
+Selects the empty rectangles as the active
+drawing tool.
+.Pp
+Set a corner of a rectangle. Maintain the
+click to move the opposite corner and
+release the mouse button to set it
+definitively.
+.Ss FILLED RECT
+.
+Selects the filled rectangles as the active
+drawing tool.
+.
+Works like an empty rectangle.
+.Ss CIRCLES ELLIPSES
+.
+.Pp
+.Dl LEFT CLICK
+.Pp
+Selects the empty circles as the active
+drawing tool.
+.Pp
+Position the center of the cercle and
+maintain the mouse button to select its
+radius.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Selects the empty ellipses as the active
+drawing tool.
+.Pp
+Position the center of the cercle and
+maintain the mouse button to select its
+dimensions.
+.Ss FILLED CIRCLES AND ELLIPSES
+.
+.Pp
+.Dl FILLED CIRCLES
+.Pp
+Works like empty circles.
+.Pp
+.Dl FILLED ELLIPSES
+.
+Works like empty ellipses.
+.Ss GRAD RECTANGLE
+.
+.Dl LEFT CLICK
+.Pp
+Selects the rectangle with gradations as
+the active drawing tool.
+.Pp
+Set a corner of a rectangle. Maintain the
+click to move the opposite corner and
+release the mouse button to set it
+definitively.
+.Pp
+If you don\(aqt like what you have done and
+want to restart, you can use the right
+click to cancel everything at this point.
+If you think it\(aqs nice, then click and hold
+the mouse in a point you want to have the
+starting color, drag to a point where you
+want the ending color, and release the
+button. You can press SHIFT to enforce your
+line to be vertical, horizontal, or
+diagonal.
+.Pp
+.
+.Dl RIGHT CLICK
+.Pp
+Opens a window where you can define the way
+gradations are processed. The different
+sections of this menu are:
+.Pp
+- Direction (arrow): Switches the direction
+of the gradation.
+.Pp
+- Dithering method: Toggles the 3 following
+methods:
+- No dithering
+- Basical dithering
+- Enhanced dithering
+.Pp
+- Mix: Mixes the gradation with a more or
+less random factor.
+.Pp
+- Palette: Select a color range to build a
+gradation.
+.Pp
+- Index scroller: Defines the current
+gradation among a set of 16 that will be
+memorised.
+.Pp
+.Dl COLOR CYCLING
+.Pp
+These options allow you to use animation of
+colors: Grafx2 will shift palette entries
+at real-time. Note that only the LBM file
+format can record these settings, and very
+few image viewers will play it back.
+.Pp
+- Cycling: Activates or desactivates the
+cycling of colors when you\(aqre in the editor.
+.Pp
+- Speed: Sets the speed for the cycling of
+this range. Zero means this range doesn\(aqt
+cycle. With 1, the range shifts 0.2856 times
+per second; at speed 64 it\(aqs 18.28 times
+per second. The program activates cycling
+while you hold the speed slider, so you can
+preview the speed.
+.
+.Ss GRAD SPHERE
+.Dl LEFT CLICK
+.Pp
+Selects the spheres as the active drawing
+tool.
+.Pp
+Position the center of the sphere and
+maintain the mouse button to select its
+radius. Then place the spot-light.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Selects the ellipses with gradation as the
+active drawing tool.
+.Pp
+Draw the shape like a normal ellipse, and
+then position the spot-light and click the
+left mouse button to finish the shape.
+.Pp
+.
+If you trace a sphere or an ellipse with
+gradation with the right mouse button, the
+result will be the same figure filled with
+the Back-color.
+.Ss GRAB BRUSH
+.Dl OR RESTORE BRUSH
+.Pp
+.Dl LEFT CLICK
+.Pp
+Engages a brush grabbing.
+.Pp
+Click on a corner of the rectangle
+containing the brush then maintain the click
+to define the opposite corner of the
+rectangle. Release the mouse button to grab
+the brush. Performing this operation with
+the right mouse button will erase the area
+where the brush was grabbed with the
+Back-color.
+.Pp
+.Dl RIGHT CLICK
+.
+Restores the old brush.
+.Ss POLY GRAB
+.
+.Dl LEFT CLICK
+.Pp
+Grabs a brush of any shape by defining a
+polyform (please refer to section 8 for more
+explanations).
+.Pp
+.Dl RIGHT CLICK
+.
+Restores the old brush (same as above).
+.Ss BRUSH FX
+.
+.
+Displays a menu where the following options
+are available:
+.Pp
+Flip horizontally.
+.Pp
+Flip vertically.
+.Pp
+Rotates the brush by an angle of 90 degrees.
+.Pp
+Rotates the brush by an angle of 180
+degrees.
+.Pp
+- Rotate by any angle:
+Triggers an interactive operation that
+allows you to rotate the brush. For this,
+start by placing the center or rotation with
+the left mouse button (if, at this moment,
+you press the right button, the operation
+with be cancelled). After that, you can
+define the angle of rotation as many times
+as you want by moving the mouse and
+left-clicking. Then validate with the right
+button when you are satisfied. Meanwhile,
+you can press on the 8 outer digits of the
+numeric pad for defining angles multiple of
+45 degrees:
+.Pp
+135     90      45
+\\     |     /
+\(aq7\(aq \(aq8\(aq \(aq9\(aq
+180  -\(aq4\(aq     \(aq6\(aq- 0
+\(aq1\(aq \(aq2\(aq \(aq3\(aq
+/     |     \\
+225     270    315
+.Pp
+Triggers an interactive operation
+that enables you to stretch the brush. For
+this, start by placing the upper-left
+cornerof the brush with the left mouse
+button (if, at this moment, you press the
+right button, the operation will be
+cancelled). after that, you can place the
+opposite corner as many times as you need,
+then validate with the right mouse button
+when you are satisfied. If you place this
+point at coordinates inferior to the ones of
+the first point, the brush will be inverted.
+Meanwhile, you can press the following keys
+whose effects are:
+\(aqD\(aq      : Double the brush
+\(aqH\(aq      : Reduce the brush by half
+\(aqX\(aq      : Double the brush in X
+\(aqShift+X\(aq: Reduce the brush by half in X
+\(aqY\(aq      : Double the brush in Y
+\(aqShift+Y\(aq: Reduce the brush by half in Y
+\(aqN\(aq      : Restore the normal size of the
+brush (can be useful because
+it\(aqs the only way for
+cancelling)
+.Pp
+Triggers an interactive operation
+that allows you to distort your brush.
+Start by placing the brush somewhere on the
+screen and left-click. The brush will
+appear, with a little peg at each corner.
+Use the left mouse button to displace the
+corners, which will deform the brush.
+When you\(aqre done, click the right mouse
+button.
+.Pp
+This option permits to draw the
+outlines of the brush with the Fore- color.
+.Pp
+This option "nibbles" the outlines
+of the brush. It\(aqs in some way the opposite
+effect of the Outline option.
+.Pp
+Remaps the brush so that it
+looks like it would in the spare page, using
+the current palette.
+.Pp
+Transfers the spare
+page\(aqs colors used by the brush to the
+current palette.
+.Pp
+- Brush handle:
+Allows you to choose where to place the
+handle of the brush. Shortcuts are :
+.Pp
+Load a brush from disk.
+.Pp
+Save a brush to disk.
+.Pp
+.
+.
+.Ss BRUSH FACTORY
+.
+.
+This menu allows you to run scripts. Scripts
+are written in the Lua language, and allow
+you to modify the brush (hence the name
+\(aqBrush factory\(aq), or even modify the image
+or palette, like a Photoshop filter. See
+the online documentation for more help
+on scripting.
+.Pp
+You can select a script with the selector,
+the bottom panel shows a short description
+of what it does, and you can click Run to
+launch it.
+.Pp
+The scripts are located in the application\(aqs
+data folder, under the \(aq/scripts\(aq
+subdirectory. The list is refreshed each
+time you open the window. Scripts are loaded
+from disk when you run them.
+.
+.
+.Ss DRAW MODES
+.
+This button opens a menu where you can
+switch on or off the different   drawing
+modes.
+In this menu, the "All off" button switches
+all the drawing modes off.   The [Del] key
+is the keyboard shortcut for this button.
+The "Feedback" button is only used in
+"Shade", "Quick-shade, "Transparency"
+and "Smooth" modes. When it is set, it means
+that the _current_   state of the picture
+has to be taken into account for the effect
+instead   of the state in which the image
+was when you started to click for drawing.
+The best, as often, is that you try by
+yourself with and without Feedback   to see
+the difference.
+The other buttons are the following:
+.
+.Ss SHADE
+It consists in increasing or decreasing the
+color number within a user-defined range.
+This shows its real dimension when used with
+a range of colors that shade off. Then,
+you can work on a part of your picture where
+colors belong to the same range without
+having to change your brush color all the
+time. You can choose the incrementation or
+decrementation of the color by pressing
+the left or right mouse button while
+drawing. If you click on a color that does
+not belong to the range, it will remain
+unchanged.
+.Dl LEFT CLICK
+.Pp
+Switches the Shade mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define one table
+of shades within a range of 8 memorised by
+the program. The different sections of this
+menu are:
+.Pp
+- Palette: You can define in it the color
+blocks that will be inserted
+into the table of shades.
+.Pp
+- Scroller: Used to change flick through the
+tables of shades.
+.Pp
+- Table of shades definition area: The 512
+squares should be widely
+sufficient to define the different shades
+since every 256 colors of
+the palette cannot be present more than once
+in each table.
+.Pp
+- A window (on the top-right side) permits
+to visualize the different
+shades defined in he current table.
+.Pp
+- Copy: Copy the contents of the table in a
+buffer.
+(Each time you open this menu, the current
+table is automatically
+transfered into this buffer).
+.Pp
+- Paste: Copy the contents of the buffer
+above in the current table.
+.Pp
+- Clear: Reset the "shades" table.
+.Pp
+- Insert: Used to insert the block selected
+in the palette at the
+cursor\(aqs position in the table of shades.
+IF you click with the left mouse button on
+this button THEN IF a block of more than one
+color is selected in the table THEN   It is
+deleted and the block defined in the palette
+is inserted. ELSE   The block defined in the
+palette is inserted at the postion just
+before the selected square. END IF
+ELSE The block defined in the palette is
+inserted by erasing the colors following the
+beginning of the bloc selected in the table.
+END IF
+.Pp
+- Delete: Delete the block selected in the
+table.
+.Pp
+- Blank: Follows this algorithm:
+IF you click with the left mouse button on
+this button THEN Replace the block selected
+in the table by blank squares.
+ELSE IF a block of more than one color is
+selected in the table THEN   Insert blank
+squares to the left and to the right of the
+block.   (this is useful for isolating a
+shade quickly) ELSE   Insert blank squares
+to the left of the selected square. END IF
+END IF
+.Pp
+- Invert: Invert the order of the block
+selected in the table.
+.Pp
+- Swap: Allows you you move a block (this
+exchanges it with what is
+where you want to move it).
+.Pp
+- Undo: Cancel the last modification of the
+table.
+.Pp
+- The 2 numbers displayed on the right of
+these buttons are: (above) - the number of
+the color selected in the palette if only
+one color is selected. (below) - the number
+of the color contained in a square in the
+shades table if this square is the only one
+selected.
+.Pp
+- The "mode" button displays 3 different
+modes:
+"Normal": Shades in the range and saturates
+to its boundaries.
+"Loop": Shades in the range and loops if
+boundaries are passed.
+"No saturation": Shades in the range and
+doesn\(aqt saturate if boundaries are passed.
+If the Step (see below) is set to 1, this
+option does exactly the same as the Normal
+mode.
+.Pp
+- Set/Disable: If you want to define several
+shades in the same table
+but you\(aqd like these shades not to be
+effective at the same time, you
+can mask (disable) some parts of the table
+so that they will be
+interpreted a blank squares.
+To do that, select a block in the table of
+shades and click on "Set".
+The block will be underlined with a white
+line; this means that it is
+disabled.
+.Pp
+- Clear/Enable: This does exactly the
+opposite as the button above.
+.Pp
+- Step: Defines the step of incrementation
+of the shade. The bigger,
+the faster you run through the colors of the
+shade.
+For example: if the step is 2 and that you
+have defined a shade with
+the colors 0,1,4,5,9 and that you click on a
+pixel of color 1, it will
+take the value 5 which is 2 positions next
+in the la table.
+.Pp
+(We are sorry for these technical
+considerations quite far from a purely
+artistic point of view; but know that this
+effect is really very useful and it is
+preferable that you understand its whole
+functionment if you want to fully take
+advantage of it).
+.
+.
+.Ss QUICK SHADE
+This drawing mode has about the same effect
+as Shade mode\(aqs except that   it is faster
+to configurate but a little bit less
+powerful. When you draw on a color of the
+image which is between the fore- and the
+back-color in the palette, the color tends
+towards the fore-color   (according to the
+step defined) if you draw with the left
+mouse button, or   it tends towards the
+back-color if you are using the right mouse
+button.
+.Dl LEFT CLICK
+.Pp
+Switches the Quick-shade mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu with a few parameters that mean
+exactly the same as in the menu of Shade
+mode. These parameters are the step and the
+loop/satu- ration mode (normal, loop, no
+saturation).
+.
+.
+.Ss STENCIL
+It is used to prevent some colors from
+being modified if you draw on   them. The
+main application of the stencil is when you
+want to change one   color or more into
+another.
+.Dl LEFT CLICK
+.Pp
+Switches the Stencil mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define a stencil.
+The different sections of this menu are:
+.Pp
+- Clear: No color is protected.
+.Pp
+- Invert: Colors that were protected are
+unprotected and vice versa.
+.Pp
+- Palette: Select colors that should be
+protected with the left mouse button or
+unprotect colors with the right mouse
+button.
+.
+.
+.Ss MASK
+This effect could have been called "True
+stencil" because it protects   some parts of
+the picture instead of some colors. The
+colors you tag   represent the pixels in the
+spare page, corresponding to the pixels in
+the   current page, that you don\(aqt want to
+alter. For example, draw a simple white
+figure on a black background in the   spare
+page. Then, tag the black color in the menu
+of the Mask mode. When   you\(aqll draw in the
+current page, only the pixels corresponding
+to the   white (non-black) ones in the spare
+page will be modified.
+.Dl LEFT CLICK
+.Pp
+Switches the Mask mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can set the colors of
+the Mask.
+This menu works the same way as the one of
+the Stencil, so please refer to the Stencil
+paragraph to know how to use it.
+.
+.
+.Ss GRID
+This is useful to snap the cursor to the
+cross-points of a grid. It\(aqs   generally
+used to draw a grid before drawing sprites
+of the same size such   as a font or tiles,
+or for drawing figures or grabbing brushes
+with their   dimensions multiple of the step
+of the grid.
+.Dl LEFT CLICK
+.Pp
+Switches the Snap-to-grid mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define the grid
+parameters. These parameters are:
+.Pp
+- X,Y: Steps of the grid.
+.Pp
+- dX,dY: Offsets of the grid.
+.Pp
+.
+The following shortcut hides or shows the
+grid in the magnified view:
+The grid size will be according to your
+snap-to-grid settings.
+.
+.
+.Ss SIEVE
+This effect allows you, by defining a
+pattern, to draw only on   particular points
+of the picture. If you are a Manga drawer,
+you might find this useful to make patterned
+shades or color transitions.
+.Dl LEFT CLICK
+.Pp
+Switches the Sieve mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define the Sieve
+parameters. This menu consists in:
+.Pp
+- 16x16 drawing area: You can define a
+pattern in it (left click => white pixel /
+right click => black pixel). All the white
+pixels indicate that, when you\(aqll draw,
+pixels will be applied on the picture at the
+corresponding positions whereas black pixels
+won\(aqt modify the picture: whites pixels are
+the "holes of the sieve".
+.Pp
+- 12 default patterns: They can be copied to
+the drawing area.
+.Pp
+- "Transfer to brush": Copies the pattern to
+the brush (white pixels => Fore-color /
+black pixels => Back-color).
+.Pp
+- "Get from brush": Puts the brush into the
+drawing area (back-color => black pixels /
+others => white pixels).
+.Pp
+- Scrolling 4-arrows pad: Scrolls the
+pattern in the drawing area.
+.Pp
+- Resizing 4-arrows pad: Defines the
+dimensions of the pattern.
+.Pp
+- Default-value (black or white square):
+Indicates which value must be inserted when
+you increase the dimensions of the pattern.
+.Pp
+- "Clear": Sets the whole pattern with the
+default value (see above).
+.Pp
+- "Invert": It... inverts :) ... black and
+white pixels.
+.
+.
+.Ss TRANSPARENCY
+This allows to mix the color(s) of the
+paintbrush with the colors of the   picture.
+It\(aqs used to make transparency effects like
+with watercolors.
+.Pp
+You can also use the following shortcuts to
+activate transparency mode and assign an
+amount of opacity:
+If you use two of these shortcuts quickly,
+the second will set the units for finer
+control. Ie: 4 5 makes 45%, 0 9 makes 9%.
+.Pp
+.Dl LEFT CLICK
+.Pp
+Switches the Transparency mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define the
+Transparency parameters. These parameters
+are:
+.Pp
+- Interpolation rate: Indicates the
+percentage of the applied color that will be
+considered upon the replaced color.
+.Pp
+- Interpolation method: Uses an
+interpolation algorithm to compute the
+color, according to the interpolation rate.
+.Pp
+- Additive method: Uses the lightest colors
+to choose the color to apply. For example:
+if you want to apply a color RGB:30,20,40 on
+a color RGB:10,50,20, the color applied will
+be the one, in the palette, that is the
+closest to the theoretic color RGB:30,50,40.
+.Pp
+- Subtractive method: uses the darkest
+colors to choose the color to apply. For
+example: if you want to apply a color
+RGB:30,20,40 on a color RGB:10,50,20, the
+color applied will be the one, in the
+palette, that is the closest to the
+theoretic color RGB:10,20,20.
+.
+.
+.Ss SMOOTH
+It provides an easy but not as efficient
+anti-aliasing as any artist\(aqs   touch.
+Anyway this effect finds a better use in
+making a blurry aspect.
+.Dl LEFT CLICK
+.Pp
+Switches the Smooth mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define the Smooth
+matrix or choose one among the 4 ones
+predefined.
+The middle square represents the pixel on
+which you draw and the 8 others represent
+the neighbour pixels. Then, the point on
+which one draw will be replaced by the
+weighted average (according to values of
+each squares) of the 9 defined points.
+.
+.
+.Ss SMEAR
+It smears pixels in the direction you are
+moving your paintbrush, just   as if you
+wanted to spread fresh paint with your
+fingers. You can combine   this effect with
+the transparency effect.
+.Pp
+Switches the Smear mode.
+.
+.
+.Ss TILING
+It consists in displaying parts of the
+brush that are adjusted on a   tiling when
+you are drawing. It\(aqs mainly used for
+quickly drawing a   background with a
+pattern, but there is a great number of
+other   possibilities.
+.Dl LEFT CLICK
+.Pp
+Switches the Tiling mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can define the Tiling
+parameters. These parameters are the offsets
+of the tiling.
+.Ss TEXT
+.
+.
+The text menu allows you to enter some text
+and render it as a brush.
+The current background and foreground colors
+are very important, they determine the text
+color, the transparent color, and also the
+color range to use for antialiasing.
+GrafX2 can use \(aqbitmap\(aq fonts as long as
+they are in the special layout supported
+by SFont.
+TrueType fonts can also be used if this
+version of GrafX2 was compiled with
+TrueType support.
+.Pp
+- Txt: Click and enter your text here, a
+line of up to 250 characters.
+.Pp
+- Clear txt: Empties the current text.
+When the text is empty, a standard string
+is shown instead in the preview area.
+.Pp
+- Antialias: Click to enable or disable
+Antialiasing. Only affects TrueType fonts.
+.Pp
+- Size: Determine the font height. Only
+affects TrueType fonts.
+.Pp
+- Font selector: Choose a font. You can
+use the arrow keys (up and down) to quickly
+browse your fonts.
+TrueType fonts are indicated by \(aqTT\(aq.
+.Pp
+- Preview area: Shows what the brush will
+look like.
+.Ss MAGNIFIER
+.
+.Dl LEFT CLICK
+.Pp
+Engages/Disengages the choice of the zoomed
+window. If you\(aqre already in magnifier mode,
+you\(aqll return to normal mode.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Displays a menu where you can choose the
+magnifying factor.
+.Pp
+Note: When you are in Zoom mode, you can
+move the "split" bar by   clicking on it and
+moving your mouse left or right while
+holding the mouse   button down.
+.Ss PIPETTE
+.
+.Dl LEFT CLICK
+.Pp
+Engages a color grabbing.
+.Pp
+Click on the picture to get the color of the
+pixel you\(aqre on. You can either get a new
+Fore-color or Back-color with respectively
+left or right mouse button.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Swap Fore-color and Back-color.
+.Pp
+The color currently pointed will be
+displayed in the tool-bar right   after the
+coordinates. If you click outside the
+picture, the color 0 will be returned.
+.Ss RESOLUTION AND IMAGE SIZE
+.
+.Pp
+.Dl LEFT CLICK
+.Pp
+Displays a menu where you can define the
+size of your picture and choose the
+screen resolution.
+.Pp
+- Image size
+Click in the boxes named "Width" and
+"Height" to change the size of the image
+you\(aqre editing, up to 9999x9999.
+You can also right-click a video mode to
+copy its dimensions to the image\(aqs.
+.Pp
+- Pixel size
+If you choose any Pixel size other than
+Normal, Grafx2 will emulate a lower
+resolution by scaling up everything it
+displays, including the menus and mouse
+cursor. In Double, Triple and Quadruple
+mode, the image will appear zoomed x2, x3 or
+x4, keeping the original proportions. The
+scaling is done in software, with no linear
+interpolation, so it can\(aqt cause blur. This
+setting is especially useful if your
+hardware or drivers don\(aqt support the low
+resolutions you need, but it also allows you
+to draw in low-resolution while staying in
+window mode.
+If you choose one of the scalers called
+Wide, Tall, Wide2 and Tall2, this will
+emulate a video mode which has rectangular
+pixels (longer horizontally or vertically),
+like some video modes of the C64, Amstrad
+CPC, and Commodore Amiga.
+.Pp
+- Video mode
+Click on a video mode to select it.
+Grafx2 only lists modes that are detected
+as available on your computer. Depending on
+your video card and drivers, there can be
+a huge difference in the number of modes
+it can propose.
+The small buttons on the left-hand side of
+the lines in the list of modes have been
+designed to allow you to disable some modes
+that are not supported by your card. So, the
+modes that you will disable won\(aqt be used
+when loading pictures with "Auto-set
+resolution" ON.
+.Pp
+When you click on one of these buttons, its
+color changes to one of the 4 following. The
+signification for each color of these
+buttons is:
+.Pp
+- Light gray: The video mode is OK. It can
+be used by the auto-set resolution option
+when you load picture, and you can select it
+in the menu of resolutions.
+.Pp
+- White: It works exactly the same as above.
+Moreover, it allows you to tag your
+favourite modes. Indeed, the huge number of
+video modes makes it more difficult to find
+the mode your want in the list; so you can
+tag your favoutite ones in white, so that it
+will be easier to locate them. (Note: you
+cannot disable the standard windowed mode)
+.Pp
+- Dark gray: It allows you to indicate which
+modes are not really perfect (flickering,
+not centered, etc...) but which can be used
+even so. The difference with the light grey
+button is that these modes won\(aqt be used by
+the auto-set resolution option.
+.Pp
+- Black: Use it for totally unsupported
+modes. Thus, these modes won\(aqt be selected
+the "auto-set res." and the program will
+not let you select them from the list of
+resolutions.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Automatically switches to the 640x400 window
+mode.
+.Ss SPARE
+.
+.Dl LEFT CLICK
+.Pp
+Jumps to spare page. The current page is
+then considered as the new spare page, and
+the spare page considered as the new current
+page.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a menu where you can choose whether
+you want to copy the whole picture (keyboard
+short-cut in this menu is [Return]), only
+the pixels, only the palette, or only some
+colors.
+In this last case, a second menu
+(stencil-like) will propose you to tag the
+colors you want to copy (they are all
+selected by default).
+Please refer to section "Stencil" to know
+how to use this last menu.
+The last option the menu ("Copy palette and
+remap\, remaps the spare page with the
+current palette and replicates this palette
+to the spare page. This option is useful to
+quickly remap a picture with the palette of
+another.
+.Ss SAVE
+.
+.Dl LEFT CLICK
+.Pp
+Displays a fileselector where the following
+options are available:
+.Pp
+- Select drive: Allow you to change the
+current drive.or volume (depending on your
+operating system
+.Pp
+- Format: Allows you to choose the file
+format you want. (PAL and KCF file formats
+are "palette" files).
+.Pp
+- Filename: Allows you to give a new name to
+the picture. If no extension is given, the
+default (according to the format) will be
+used.
+.Pp
+- Bookmarks: The four dropdown buttons allow
+you to bookmark frequently used directories.
+Use right-click to open a contextual menu
+to Set it (memorize current directory),
+Rename it to change its label, and Clear it
+if you no longer need it. Use left-click to
+change to the memorized directory.
+.Pp
+- File-list: Allows you to flick through the
+disk tree or to overwrite an existing file.
+.Pp
+- Delete: Allows you to delete the item
+under the selection bar. If the item is a
+directory, it must be empty to be removed.
+.Pp
+- Save: Saves the picture with the current
+filename, with the chosen format. If the
+current filename represents a directory,
+you\(aqll enter it.
+.Pp
+- Comment (Txt): If you\(aqre using the PKM
+or PNG format, you can type in a comment on
+your picture. It will be memorized in the
+image.
+.Pp
+Note: The Backspace key brings you directly
+to the parent directory. You can also type
+the first letters of a filename you are
+looking for, to access it faster.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Save the current picture with its current
+filename, format and comment.
+.Pp
+If the file already exists, a confirmation
+box will appear.
+.Ss LOAD
+.
+.Dl LEFT CLICK
+.Pp
+This works the same way as Save.
+.Pp
+You\(aqll have access in the format selector to
+a "*.*" filter. And of course, you won\(aqt be
+able to type in any comment.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Reloads the picture.
+.Pp
+If you want to load a picture and that you
+haven\(aqt saved the last modifications of the
+current picture, a confirmation box will
+appear.
+.Ss SETTINGS
+.
+.
+Displays a menu where you can configure some
+miscellaneous elements of the program.
+Detailed description of each setting is
+available when this screen is open (Use the
+.
+.
+.Ss SKINS
+.
+This window allow you to change the look and
+feel of the program.
+.Pp
+- Font: determines whether you want to use
+GrafX2 with a classical font, or another one
+a bit funnier.
+.Pp
+- Cursor: Allows you to choose the graphic
+mouse cursor: Solid and Thin are solid black
+and white cursors defined by the skin file,
+Transparent is a 1-pixel wide XOR cross.
+.Pp
+- Graphic file: you can change the whole
+interface by selecting where the sprites for
+all buttons are. Look at the files in the
+"skin" directory if you want to create your
+own. There are two skins available, the
+default for 2.1 is called modern. Classic is
+for nostalgics who wish to remember the old
+days of Sunset Design. If you create a good
+skin, feel free to share it with us! We may
+include it in a future release...
+.Pp
+- Separate colors: Draws a squaring around
+the colors of the tool-bar.
+.Pp
+- Show/Hide picture limits: Indicates if the
+picture boundaries must be displayed when
+you are in a resolution bigger than the
+picture.
+.
+.Ss DETAILED SETTINGS
+.
+.Ss FILE SELECTOR
+.
+.
+.Dl Show hidden files
+Hidden files appear.
+.Pp
+.Dl Show hidden directories
+Hidden directories appear.
+.Pp
+.Dl Preview delay
+Delay before displaying a preview in file-
+selectors (in 18.2th of second). Possible
+values range from 1 to 256.
+.Pp
+.Dl Maximize preview
+Maximize the preview of the pictures so that
+it is as big as possible. If you\(aqre not in
+the same resolution as the picture\(aqs one, it
+can try to correct the aspect ratio, but if
+the picture does not fill the whole screen,
+it can be worse.
+.Pp
+.Dl Find file fast
+This option is used to place the selection
+bar on a filename by typing its first
+letters. For example, if you want to find
+the \(aqPICTURE.PKM\(aq in a directory that also
+contains \(aqPALETTE.PAL\(aq, you\(aqll just have to
+type P and I. The different values of \(aqFFF\(aq
+indicate if you want to find the name in
+both files and directories or just in only
+one of these:
+0: files and directories
+1: files only
+2: directories only
+.Pp
+.Dl Auto set resolution
+Automatically set the resolution when
+loading a picture. You should set this value
+to \(aqyes\(aq after disabling the video modes
+that are notsupported by your video card or
+monitor.
+.Pp
+.Dl Set resolution according to
+If the variable above is set to \(aqyes\(aq, this
+one tells if you want to set the resolution
+according to:
+1: the internal \(aqoriginal screen\(aq dimensions
+of the picture
+2: the actual dimensions of the picture
+.
+.Dl Backup
+Create a backup file when saving.
+.
+.
+.Ss FILE FORMAT OPTIONS
+.
+.
+.Dl Save screen size in GIF
+Save the screen dimensions in GIF files. If
+you want to read these files with Photoshop
+or Alchemy, and maybe some other programs,
+you must set this option to \(aqno\(aq.
+.Pp
+.Dl Clear palette
+If you load a picture with a palette of less
+than 256 colors, this option defines if you
+want to clear the palette or to keep the
+colors of the previous picture that are over
+the number of colors of the new picture.
+For example, if you load a 32-color picture,
+the colors 32 to 255 will be set to black if
+this option is set to \(aqyes\(aq, or they will be
+kept unchanged if this option is set to \(aqno\(aq
+.
+.
+.Ss GUI
+.
+.
+.Dl Opening message
+Display a message at startup telling the
+version number of the program.
+.Pp
+.Dl Menu ratio
+Aspect ratio and size of the menus and the
+tool-bar.
+Possible values:
+0: Do not adapt (pixels are not stretched)
+1: Adapt the menus and the tool-bar
+according to the resolution
+2: Slightly adapt the ratio of the menus and
+tool-bar
+-1:Do not adapt (like 0)
+-2:Stretch by x2 maximum
+-3:Stretch by x3 maximum
+-4:Stretch by x4 maximum
+.Pp
+.Dl Draw limits
+Draw the limits of the picture.
+.Pp
+.Dl Coordinates
+Coordinates:
+1: Relative
+2: Absolute
+.Pp
+.Dl Separate colors
+Separate the colors in the tool-bar by a
+black squaring.
+.Pp
+.Dl Safety colors
+When you reduce the palette or \(aqzap\(aq some
+colors out of it, it is possible that there
+are not enough colors left to draw the
+menus. Switching the following variable on
+will bring back the colors of the menu if
+there are less than 4 colors left after
+\(aqreducing\(aq or \(aqzapping\(aq.
+.Pp
+.Dl Grid XOR color
+This determines the color value for the
+grid. Each pixel of the grid will be
+displayed by XOR-ing the original color with
+the value of this setting.
+For example, if you always paint 16-color
+images, you can set it to 16 so the color of
+the grid are 16 for 0, 17 for 1, etc. Then
+you can set colors 16-31 as lighter/darker
+variants of your original palette, resulting
+in a pretty grid !
+.Pp
+.Dl Sync views
+When this mode is active, scrolling the view
+(and the magnifier view) affects both the
+main image and the spare page - as long as
+they have the same dimensions.
+.Pp
+.
+.
+.Ss INPUT
+.
+.
+.Dl Gauges scrolling speed Left
+Speed of the scroll-bars (in VBLs waited)
+while clicking with the left or right button
+of the mouse.
+Values can be between 1 and 255. The bigger
+values, the slower.
+.Pp
+.Dl Gauges scrolling speed Right
+Speed of the scroll-bars (in VBLs waited)
+while clicking with the left or right button
+of the mouse.
+Values can be between 1 and 255. The bigger
+values, the slower.
+.Pp
+.Dl Merge movement
+This setting allows you merge successive
+mouse movements into a single mouse
+movement. You should only use it if you are
+using a mouse which reports at 200Hz or
+more, and you experience lag when using
+discontinuous hand-drawing with large
+brushes (this tool tries to paste the brush
+and update the screen on each new mouse
+position) In this case, set this to 2 or
+more, to ignore some intermediate mouse
+reports when a more recent one is present.
+Note that with a value superior to 1, you
+lose precision with continuous hand-drawing,
+as intermediate mouse positions are skipped.
+.Pp
+.Dl Double click speed
+This is the time (in milliseconds) between
+two clicks for Grafx2 to recognize a
+double-click. Double-click is used mostly in
+the palette area of the menu: double-click a
+color to open the palette.
+.Pp
+.Dl Double key speed
+When you press two digit keys in rapid
+succession (ex: 3 8), Grafx2 sets
+transparency to 38% (instead of 30% then
+80%). This setting allows you to set the
+maximum delay between two keypresses for
+GrafX2 to recognize them as a combo.
+.Pp
+.
+.Dl Swap buttons
+This setting determines which key inverts
+the mouse buttons when it\(aqs held : A left
+click is then interpreted as a right-click.
+It\(aqs especially useful for one-button
+controllers, such as touchscreens and
+tablets.
+.
+.Ss EDITING
+.
+.
+.Dl Adjust brush pick
+Adjust the brush grabbing in \(aqgrid\(aq mode.
+.Pp
+.Dl Undo pages
+Number of pages stored in memory for
+\(aqundoing\(aq.
+Values are between 1 and 99.
+.Pp
+.Dl Vertices per polygon
+Maximum number of vertices used in filled
+polygons and polyforms, and lasso. Possible
+values range from 2 to 16384.
+.Pp
+.Dl Fast zoom
+Automatically zoom into the pointed area
+when you press the short-key of the
+Magnifier button while being above the
+picture.
+.Pp
+.Dl Clear with stencil
+Take the Stencil into account when clearing
+the image.
+.Pp
+.Dl Auto discontinuous
+Directly set the discontinuous freehand
+drawing mode after brush grabbing.
+.Pp
+.Dl Auto nb colors used
+Automaticaly count the number of different
+colors used when opening the palette editor
+window. (Set it to \(aqno\(aq if you have a slow
+computer or if you edit huge pictures)
+.Pp
+.Dl Right click colorpick
+This enables a mode where the right mouse
+buttons acts as a color picker until
+it\(aqs released, and selects Foreground color.
+This mode prevents you from painting with
+Background color.
+This option is ignored when the Shade,
+Quick-shade, or Tiling mode is used.
+.Pp
+Multi shortcuts
+When this setting is disabled, and you
+create a shortcut with a key that is already
+associated to another shortcut, Grafx2 will
+unset the latter. If you enable this mode,
+Grafx2 will not make such check, so you can
+design shortcuts that trigger several
+actions at once.
+.
+.Ss CLEAR
+.
+.Dl LEFT CLICK
+.Pp
+Clears the picture with the color number 0,
+or the transparent color of the picture.
+.Pp
+.Dl RIGHT CLICK
+.
+Clears the picture with the Back-color.
+.Ss HELP STATS
+.
+.Dl LEFT CLICK
+.Pp
+Displays an info window where you\(aqll find
+some credits, help about the credits,
+different effects, greetings, registering...
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Displays a window where you\(aqll find
+miscellaneous information about the system.
+Note: you should take care to keep more
+than 128 Kb in order to let the   program
+run in a proper way.
+.Ss OOPS
+(UNDO/REDO)
+LEFT CLICK Allows you to undo the last
+modification on the picture.
+.Pp
+RIGHT CLICK Allows you to redo the last
+modification undone on the         picture.
+The maximum number of UNDO that you can
+perform can be defined in the   settings
+menu.
+Undo/Redo aren\(aqt effective after page
+switching, picture loading and   picture
+size modifications.
+.Ss KILL
+KILL CURRENT PAGE
+.Pp
+.
+Removes the current page from the list of
+"Undo" pages. This allows you to free some
+memory if you need it. For instance, this
+will allow you to delete the start-up page
+after having loaded an image. A message will
+appear if you\(aqve already erased all the
+pages except the last one.
+Note: Another way to free some memory is to
+decrease the number of   "Undo" pages. Or
+else, if you have recentlt grabbed a very
+big   brush that you don\(aqt use any more, you
+can grab a new smaller one.   The memory
+allocated by the big brush will be thus
+freed.
+.Ss QUIT
+.
+.
+Allows you to leave GrafX2. If there are
+unsaved modifications in the current or
+spare page, a confirmation box will ask you
+if you really want to quit GrafX2, if you
+want to save (Auto-save, no fileselector) or
+if you want to stay in GrafX2.
+.Ss PAL MENU
+.
+.Dl LEFT CLICK
+.Pp
+Displays a menu where the following options
+are available:
+.Pp
+- Palette: Allows you to choose a
+color-block to edit. If you click with the
+right mouse button, you\(aqll choose a new
+Back-color.
+.Pp
+- Gauges: Allow you to modify the
+current selection.
+.Pp
+- RGB or HSL above the gauges: Switches
+between RGB and HSL color spaces. In HSL
+mode, the three sliders allow you to set the
+Hue (tint), Saturation (from grayscale to
+pure color) and Lightness (from black to
+white).
+.Pp
+- numbers below the gauges: Allows you to
+type in a new color in hexadecimal RRGGBB
+or RGB: ie. to get blue, you can type either
+0000ff or 00f.
+.Pp
+- "+" and "-": Allow you to lighten or
+darken the current selection.
+.Pp
+- Preset: Restores the predefined GrafX2
+palette.
+.Pp
+- Gray: Transforms the current selection
+into its gray-scaled equivalent.
+.Pp
+- Neg: Transforms the current selection
+into its reverse video equivalent.
+.Pp
+- Invert: Swaps the colors of the current
+selection so that the first colors become
+the last ones.
+.Pp
+- X-Invert: Works as above but modifies the
+picture so that it looks the same.
+.Pp
+- Swap: Swaps the current selection with
+another color-block. Click on the beginning
+of the new color-block.
+.Pp
+- X-Swap: Works as above but modifies the
+picture so that it looks the same. This may
+be useful if you want to sort your palette.
+.Pp
+- Copy: Copies the current selection to
+another color-block. Click on the beginning
+of the new color-block.
+.Pp
+- Spread: Computes a gradation between two
+colors. If your selection is only made up of
+one color, select the second color in the
+palette. Otherwise, the two colors used will
+be its extremities.
+.Pp
+- Sort: sorts the palette by color ranges.
+If you click with the left mouse button, it
+will sort by H S L; and if you click with
+the right mouse button, it will sort by L
+only. Note that you can choose a range of
+colors before sorting, and instead of the
+whole palette it will sort this range.
+.Pp
+- Used: Indicates the number of colors used
+in the picture and opens a histogram screen.
+.Pp
+- Zap unused: Erases the unused colors with
+copies of the current selection. (The
+keyboard shortcut for this button is <Del>).
+.Pp
+- Reduce: Allows you to reduce the palette
+to the number of colors you want (and
+modifies the picture).
+.Pp
+- Undo: Allows you to recover the last
+modifications made on the palette. Note that
+it can\(aqt undo the changes that affect the
+pixels (remapping), you\(aqll need to Cancel
+them.
+.Pp
+.
+If you press <Backspace>, the program will
+replace, as well as possible, some unused
+colors by the four default colors of the
+menu. The image won\(aqt look altered because
+the modified colors (in the case they were
+used on a few points) will be replaced by
+the closest colors in the rest of the
+palette. This option is really useful when
+you modify the palette so that there are no
+colors that fit for the menu (eg: "Zap
+unused" while very little colors are used in
+the picture; or "Reduce" with a very small
+number of colors).
+.Pp
+If you press the key below <Escape> or <,>
+(QWERTY), the menu will disappear and you
+will be able to pick up a color from the
+picture easily. Press <Escape> to cancel.
+.Pp
+If only one color is selected (not a block),
+the <[> and <]> keys can be used to select
+the previous or next Forecolor (Backcolor if
+you press <Shift> at the same time).
+.Pp
+Warning! If you press Undo after an action
+that modifies the picture (X-Swap, X-Invert
+and Reduce colors), the picture won\(aqt be
+remapped as it was just before this action.
+Only Cancel will.
+.
+.Ss PALETTE OPTIONS
+.
+.Dl RIGHT CLICK
+.Pp
+Opens a menu from where you have the
+following options:
+.Pp
+- Colors for best match:
+A menu in which you can select the colors
+that have not to be used for smoothing, for
+the transparency mode, and for remapping.
+.Pp
+- User\(aqs color series:
+A menu in which you can define color series
+for next/previous user color shortcuts.
+It\(aqs the same settings than the shade mode.
+After you have some color ranges defined in
+this screen, you can use those shortcuts to
+move to the next or previous color according
+to your ranges:
+.Pp
+Foreground color
+.Pp
+.
+Background color
+.Pp
+.
+- Palette layout:
+Lets you customize the palette that appears
+on the right of the menu. You can choose the
+number of lines and columns.
+If you want the colors to run top to bottom,
+check the \(aqVertical\(aq button, otherwise the
+colors runs left to right.
+.Pp
+- RGB Scale:
+Lets you set the scale of the R G B sliders
+in the palette screen. You should normally
+leave it at 256 to get the full 0-255 range,
+but if you want to constrain the palette
+to the capabilities of some specific
+computers and consoles, you can choose eg:
+64 : VGA
+16 : Amiga
+4 : MSX2
+2 : Amstrad CPC
+.Ss SCROLL PAL
+.
+.Dl LEFT CLICK
+.Pp
+Scrolls the palette window in the right of
+the menu.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Same as above, but faster.
+.
+.Ss PALETTE
+.
+.Dl LEFT CLICK
+.Pp
+Defines the Fore-color.
+.Pp
+.Dl RIGHT CLICK
+.
+Defines the Back-color.
+.Ss HIDE MENU
+.
+.Dl LEFT CLICK
+.Pp
+Allows you to hide all toolbars, leaving
+only the status bar.
+Click again to show them again.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Opens a drop-down menu where you can choose
+Which toolbars are going to be visible in
+the menu.
+.Ss LAYERS MENU
+.
+.
+In this menu you can set the following
+options:
+.Pp
+* Transparent color : This determines which
+color index is considered transparent when
+using layers. Click the button and then
+click on the image to pick the right color,
+or use ESC to cancel.
+.Pp
+* Transparent background : When this option
+is checked, all pixels of the transparent
+color on layer 1 (background layer) will
+be tagged as transparent in the final image.
+Check this option if you want to make a
+transparent GIF or PNG. These are the only
+file formats that support this option.
+.Ss LAYERS TRANSPARENCY
+.
+.Dl LEFT CLICK
+.Pp
+Sets the transparent color as background pen
+color.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+The current Background color becomes the
+color considered transparent for the layers.
+.Ss LAYERS MERGE
+.
+.
+Merges the current layer with the one below
+it, and sets the resulting layer as current
+one for editing.
+This function has no effect if you\(aqre
+editing the lowest layer.
+.Ss ADD LAYER
+.
+.
+Add a new layer above the current one,
+and selects this new (empty) layer for
+editing.
+.Ss DROP LAYER
+.
+.
+Deletes the current layer.
+.Ss MOVE LAYER UP
+.
+.
+Swaps the current layer with the one
+above it. This has no effect if this
+layer is already on top.
+.Ss MOVE LAYER DOWN
+.
+.
+Swaps the current layer with the one
+below it. This has no effect if this
+layer is already on the bottom.
+.Ss LAYER SELECTION
+.
+.Dl LEFT CLICK
+.Pp
+Choose a layer as the current one for
+drawing.
+.Pp
+.Dl RIGHT CLICK
+.Pp
+Makes a layer visible or invisible.
+If you click the current layer, this toggles
+the visibility of all other layers instead.

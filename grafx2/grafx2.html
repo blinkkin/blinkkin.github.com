@@ -1,0 +1,1133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="resource-type" content="document">
+<link rel="stylesheet" href="./example.style.css" type="text/css" media="all">
+<title>
+GRAFX2(1)</title>
+</head>
+<body>
+<div class="mandoc">
+<table summary="Document Header" class="head">
+<tbody>
+<tr>
+<td class="head-ltitle">
+GRAFX2(1)</td>
+<td class="head-vol">
+General Commands Manual</td>
+<td class="head-rtitle">
+GRAFX2(1)</td>
+</tr>
+</tbody>
+</table>
+<div class="section">
+<h1 id="x4e414d45">NAME</h1> <b class="name">grafx2</b> &#8212; <span class="desc">graphic editor</span></div>
+<div class="section">
+<h1 id="x53594e4f50534953">SYNOPSIS</h1><table class="synopsis">
+<col style="width: 6.00ex;">
+<col>
+<tbody>
+<tr>
+<td>
+grafx2</td>
+<td>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section">
+<h1 id="x4445534352495054494f4e">DESCRIPTION</h1><div class="subsection">
+<h2 id="x47524146582032">GRAFX 2</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Dragon&#39;s Layers Edition</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">THE ULTIMATE MULTI-RESOLUTION GFX EDITOR</code></div>
+</blockquote>
+http://grafx2.googlecode.com atari build<p>
+Copyright 2007-2011, the Grafx2 project team Copyright 1996-2001, SUNSET DESIGN</div>
+<div class="subsection">
+<h2 id="x4c4943454e5345">LICENSE</h2> Grafx2 is FREE SOFTWARE, you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; version 2 of the License.<p>
+Grafx2 is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.<p>
+You should have received a copy of the GNU General Public License along with Grafx2; if not, see http://www.gnu.org/licenses/ or write to the Free Software Foundation, Inc. 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.</div>
+<div class="subsection">
+<h2 id="x48454c50">HELP</h2> Contextual help is available by pressing You can do it while hovering a menu icon, or while a window is open. When a keyboard shortcut is displayed it&#39;s your current configuration and you can change it by clicking it.</div>
+<div class="subsection">
+<h2 id="x4b4559424f4152442053484f525443555453">KEYBOARD SHORTCUTS</h2> Scroll visible area Emulate mouse Switch freehand Continuous freehand Bezier&#39;s curve with Magnifier mode<p>
+Scroll palette<p>
+Change brush attachement<p>
+Select foreground color<p>
+Select background color<p>
+Select user-defined foreground color<p>
+Select user-defined background color<p>
+LAYERS<p>
+Select : Toggle :</div>
+<div class="subsection">
+<h2 id="x4752414658322049532043524541544544204259">GRAFX2 IS CREATED BY</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">THE GRAFX2 PROJECT TEAM</code></div>
+</blockquote>
+<p>
+Adrien Destugues (pulkomandy) Yves Rizoud (yrizoud)<p>
+Got the source back to life in 2006<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">SUNSET DESIGN</code></div>
+</blockquote>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">AUTHORS OF GRAFX2.0 BETA 96.5%</code></div>
+</blockquote>
+<p>
+Guillaume Dorme alias "Robinson" (code) Karl Maritaud   alias "X-Man" (code&amp;gfx)<p>
+Re-licensed GrafX2 under the GPL in 2001 Huge thanks to them for their work !<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">OTHER CODE CONTRIBUTORS</code></div>
+</blockquote>
+<p>
+Karl Bartel SFont: bitmap fonts rendering<p>
+Petter Lindquist C64 file and image formats<p>
+Pasi Kallinen Better command-line handling<p>
+DawnBringer Lua scripts, image effects<p>
+Nitrofurano Lua scripts</div>
+<div class="subsection">
+<h2 id="x415254">ART</h2> Made (www.m4de.com) Logo (classic)<p>
+X-Man Buttons and fonts (classic)<p>
+iLKke (ilkke.blogspot.com) Buttons and logo (modern, scenish) Several fonts<p>
+Jamon Buttons, logo and font (DPaint tribute)<p>
+Hatch Vectorized icon<p>
+Pixelled all the graphics</div>
+<div class="subsection">
+<h2 id="x4f54484552204d414348494e455320504f525453">OTHER MACHINES PORTS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">AMIGA OS 3 PORT</code></div>
+</blockquote>
+<p>
+Artur Jarosik<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">AMIGA OS 4 PORT</code></div>
+</blockquote>
+<p>
+Peter Gordon (www.petergordon.org.uk)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">AROS PORT</code></div>
+</blockquote>
+<p>
+Fernando Mastandrea (masta.uy) Markus Weiss<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">FREEBSD PORT</code></div>
+</blockquote>
+<p>
+Jean-Baptiste Berlioz (Tobe)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">HAIKU OS AND BEOS PORT</code></div>
+</blockquote>
+<p>
+Luc Schrijvers (Begasus)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LINUX BINARIES</code></div>
+</blockquote>
+<p>
+Gentoo : Matteo &#39;Peach&#39; Pescarin Debian : Grkan Sengn<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">MAC OS X PORT</code></div>
+</blockquote>
+<p>
+Franck Charlet (hitchhikr) Per Olofsson (MagerValp)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">MORPHOS PORT</code></div>
+</blockquote>
+<p>
+Rusback OffseT<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">NETBSD PORT</code></div>
+</blockquote>
+<p>
+Jeff Read<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">SKYOS PORT</code></div>
+</blockquote>
+<p>
+Luc Schrijvers (Begasus)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">WIZ &amp; CAANOO PORT</code></div>
+</blockquote>
+<p>
+Alexander Filyanov (PheeL)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">ATARI PORT</code></div>
+</blockquote>
+<p>
+Pawel Goralski (Saulot)<p>
+<br>
+ made it work on your favourite toaster</div>
+<div class="subsection">
+<h2 id="x42554746494e44455253">BUGFINDERS</h2> anibiqme      blumunkee     BDCIron Ced           DarkDefende   DawnBringer El Topo       falenblood    fanickbux fano          fogbot121     Frost Grimmy        Grkan Sengn Hatch HoraK-FDF     iLKke         Iw2evk jackfrost128  Jamon         keito kusma         Lord Graga    Lorenzo Gatti MagerValp     maymunbeyin   mind MooZ          Pasi Kallinen the Peach petter        PheeL         Ravey1138 richienyhus   sm4tik        spratek Surt          tape.yrm      TeeEmCee tempest       Timo Kurrpa   titus^Rab Tob          yakumo2975    00ai99<p>
+<br>
+ posted the annoying bug reports.</div>
+<div class="subsection">
+<h2 id="x46494c4520464f524d4154532043524544495453">FILE FORMATS CREDITS</h2> BMP : Microsoft CEL,KCF : K.O.S. (KISekae Set system) GIF : Compuserve IMG : Bivas (W. Wiedmann?) LBM : Electronic Arts PAL : ermmh... nobody (?) PCX : Z-Soft PI1,PC1 : Degas Elite PKM : Sunset Design PNG : W3C SCx : Colorix (?)</div>
+<div class="subsection">
+<h2 id="x4f555220484f4d4550414745">OUR HOMEPAGE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">http://grafx2.googlecode.com</code></div>
+</blockquote>
+<p>
+Please report any bug you may find there</div>
+<div class="subsection">
+<h2 id="x4752454554494e4753">GREETINGS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Pulkomandy:</code></div>
+</blockquote>
+<p>
+To the Pouet.net BBS posters, the #CPC trolls and the bitfellas To every people who makes the scene alive! To all guys making nice pixelled pictures (with or without GrafX2)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Sunset Designs:</code></div>
+</blockquote>
+<p>
+We send our best regards to...<p>
+Access        Filter        Pink Ace           Fiver         Pixel AcidJam       Flan          Profil Acryl         Fred          Prowler Alexel        FreddyV       Puznik Alias         Frost         Quick Amiral        Gal(GDC)     Ra Arrakis       GainX         Raster Avocado       Gandalf       Ravian Baloo         Goblin        RedBug Barti         Greenpix7     Rem Bat           Grid          Rez Biro          GrosQuick     Roudoudou Bisounours    HackerCroll   Sacrilege BlackAxe      Haplo         Sam Bonnie        Hof           SandMan Boo           Hornet        Scape Boz           Hulud         Sbastien Carine        Java          Shodan Chandra       JBT           Skal Cheetah       Jrme        Skyfire Chill         Julien(JCA)   Sphair Cougar        KalMinDo      Sprocket Cremax        KaneWood      Stef Cyclone       Karma         Stony Dake          Keith303      Sumaleth Danny         Lazur         Sunday Danube        LightShow     Suny Darjul        Lluvia        Sybaris Darwin        Louie         TBF DarkAngel     Luk           Tempest Das           Made          Thor Decker        Mamos         TMK DerPiipo      Mandrixx      TwoFace Destop        Mangue        Underking Diabolo       Mars          Unreal DineS         Mephisto      VaeVictis Drac          Mercure       Vastator DrYes         Mirec         Vatin Edyx          Moa           Veckman Eller         Moxica        Wain Ellyn         MRK           Wally EOF           Nitch         WillBe Fall          Noal          Xoomie Fame          Nytrik        Xtrm Fantom        Optic         YannSulu Fear          Orome         Z Feather       Pahladin      Zeb Fennec        Phar          Zebig<p>
+and all #pixel, #demofr and #coders.<p>
+Some information taken from several docs (PCGPE, Intervue, PC Interdit...) gave us an invaluable help.<p>
+Thanks to Shawn Hargreaves for his filled polygon routine from Allegro v2.2.<p>
+Thanks to Carlos "Made" Pardo for his great GrafX2 logo.<p>
+This is our very first program compiled with the Gnu C Compiler. A thousand thanks to the authors of this compiler.<p>
+We also would like to thank all the people who gave us ideas to improve GrafX2.</div>
+<div class="subsection">
+<h2 id="x534e41494c204d41494c">SNAIL MAIL</h2> ADRIEN DESTUGUES (PulkoMandy) 3, rue Lapouble 64000 PAU (Send emails! Welcome in 21th century!)<p>
+GUILLAUME DORME (Robinson) 15, rue de l&#39;observatoire 87000 LIMOGES (FRANCE) (May take some years to get an answer)<p>
+KARL MARITAUD (X-Man) 10, rue de la Brasserie 87000 LIMOGES (FRANCE) (From 2001, current status: unknown)</div>
+<div class="subsection">
+<h2 id="x5041494e5442525553484553">PAINTBRUSHES</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Displays a menu where you can choose the shape of your paintbrush.<p>
+Paintbrushes are sorted by family. You can see some paintbrushes of the same family but with different sizes. There is at least one paint-brush from each family displayed in this menu. Here is the list of all the different paintbrush families:<p>
+*******      ***      * * * *      * * *******     *****      * * *      * * * *******    *******    * * * *    * * * * *******    *******     * * *      * * * *******    *******    * * * *    * * * * *******     *****      * * *      * * * *******      ***      * * * *      * *<p>
+Square      Disc       Sieve      Sieve square      disc *           *                    * ***       *    *                  * *****        *                     * *******               *******       * *****     *  *  *                  * ***                               * *         *  *                   * Diamond    Random      Horiz.    Vertical bar        bar<p>
+*    *          *     *       * *      *          *   *        * *        *          * *         * *          *          *       ******* *            *        * *         * *              *      *   *        * *                *    *     *       *<p>
+Slash      Back-     Cross X    Cross + slash<p>
+When using one of these, you can change the brush size by using the keys:<p>
+Other brushes are bitmaps, their size can&#39;t be adjusted.<p>
+Click with left mouse button to choose a paintbrush, and right mouse button to store your current brush in the slot. If your current brush is a grabbed brush, it will store a monochrome version of it, maximum 15x15. (See below &#39;Brush container&#39; to store backups of a big brush) The stored brushes are saved when you exit the program.<p>
+The &#39;Preset&#39; button allows you to pick a brush from any family. It&#39;s useful if you&#39;ve overwritten all normal slots with brushes that you use more often.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">BRUSH CONTAINER</code></div>
+</blockquote>
+<p>
+The bottom row, initially showing empty buttons, is the brush container. You can right-click a button to store the current brush in it, and then whenever you need the brush back, open this menu again and left-click the button. The container can memorize resizable brushes as well as brushes grabbed from the image. Brushes are lost when you exit the program.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Transforms your current user-defined brush into a paintbrush. This is actually a "monochromisation" of your user-defined brush. This means that every color of the brush that aren&#39;t the Back-color will be set to the Fore-color. But this option doesn&#39;t alter the brush: you&#39;ll just have to right-click on the "Get brush" buttons to get your brush back.<p>
+Note: When you press (not in the menu) the paintbrush becomes the smallest member of the "Disc" family: i.e one pixel.</div>
+<div class="subsection">
+<h2 id="x41444a555354204f52205452414e53464f524d2050494354555245">ADJUST OR TRANSFORM PICTURE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Allows you to scroll the picture to re-center your graph for example.<p>
+Any part of the picture that goes out of the image by a side comes back by the opposite one.<p>
+Left clicking the picture will scroll only the active layer. Right-clicking will scroll all of them.<p>
+It is assimilated to the drawing tools family.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens the Picture Transform menu.</div>
+<div class="subsection">
+<h2 id="x50494354555245205452414e53464f524d">PICTURE TRANSFORM</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RESCALE</code></div>
+</blockquote>
+<p>
+Allows you to change the image&#39;s size, rescaling it accordingly. Enter new size and press RESIZE to confirm.<p>
+When &#39;Lock proportions&#39; is checked and you change one dimension, the other one is automatically adjusted to preserve the proportions of the original image.<p>
+You can use the dropdown button to choose between three ways to enter the dimensions:<p>
+In &#39;Pixels&#39; mode, the column &#39;old&#39; shows the original dimensions, and you can set the new size in pixels.<p>
+In &#39;Percent&#39; mode, you set a percentage compared to the original image.<p>
+In &#39;Ratio&#39; mode, you can set 2 numbers for each dimension, and the resizing factor will be of &#39;new&#39;&#39;old&#39;. For example you can use 1:3 to divide the image by three, 2:1 to double it, and any fraction like 15:16.<p>
+Be careful that moving from one mode to the next can lose precision, if the selected dimensions cannot be represented exactly in the new mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">MIRROR</code></div>
+</blockquote>
+<p>
+- X: Flip the picture horizontally.<p>
+- Y: Flip the picture vertically.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">ROTATE</code></div>
+</blockquote>
+<p>
+-90: Rotates the image by 90 clockwise.<p>
++90: Rotates the image by 90 counter-clockwise. 180: Rotates the image by 180</div>
+<div class="subsection">
+<h2 id="x48414e442d44524157494e47">HAND-DRAWING</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the current hand-drawing mode as the active drawing tool. There are 4 hand-drawing modes:<p>
+Continuous hand-drawing: as you move the mouse, the paintbrush is regularily pasted on the picture. This drawing tool allows to change the fore and back colors when being in use.<p>
+Discontinuous hand-drawing: as you move the mouse, the paintbrush is pasted on the picture every time a delay is passed (actually, the delay is 1 VBL (vertical blanking)). This drawing tool allows to change the fore and back colors when being in use.<p>
+Dot by dot hand-drawing: the paintbrush is only pasted at the position where you first clicked.<p>
+Contour fill: Draws pixels like continuous mode, but when you release the button Grafx2 draws a line back to your starting position, and fills the area. This tool doesn&#39;t use the current brush, but single pixels.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Toggles the different hand-drawing modes and activates, at the same time, the hand-drawing tool.</div>
+<div class="subsection">
+<h2 id="x53504c494e4553">SPLINES</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the current curve-drawing mode as the active drawing tool. There are 2 different curve-drawing modes:<p>
+* 4 control points curves: define the basic line like a classical line, then move, with the left mouse button, the inner control points to choose the shape of your curve. When the curve has the shape you want, click with the right mouse button to draw it definitively.<p>
+* 3 control points curves: the same as above, but you&#39;ll have only one inner control point to place. Moreover, the spline will be traced just after placing this point.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Toggles the different curve-drawing modes and activates, at the same time, the curve-drawing tool.</div>
+<div class="subsection">
+<h2 id="x4c494e4553">LINES</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the current line-drawing mode as the active drawing tool. There are 3 line-drawing modes:<p>
+* Classical lines: when first clicking on the picture, you&#39;ll define the start of the line. Maintain your click to choose the end of the line and release the mouse button to set it. If you hold SHIFT when drawing, the line will be constrained to horizonal, vertical or diagonal.<p>
+* Knotted lines: works like classical lines, but the end of your line will automatically become the start of the next one. When you want to stop chaining lines, use the opposite mouse button. "The opposite button" means that if you started to draw lignes with the left button (Fore-color), you&#39;ll have to stop the procedure with the right button; and conversely.<p>
+* Concentric lines: when first clicking on the picture, you&#39;ll define center of the lines. In fact, the center is defined by the the position of the mouse when you release the mouse button. Then you can draw lines from the center to the current mouse position by clicking. To stop drawing concentric lines, use the opposite mouse button. This drawing tool allows to change the fore and back colors when being in use.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Toggles the different line-drawing modes and activates, at the same time, the line-drawing tool.</div>
+<div class="subsection">
+<h2 id="x5350524159">SPRAY</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the spray as the active drawing tool. This drawing tool allows to change the fore and back colors when being in use.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Displays a menu where you can configure the spray:<p>
+- Size: Defines the diameter of the circle in which will effectively fit the spray.<p>
+- Delay: Defines the number of VBLs that will be waited for between two flows of spray.<p>
+- Mode: Defines whether you want to use a monochrome spray or a multi- colored one.<p>
+- Mono-flow: Defines the number of paintbrushes that will be pasted in the circle of the spray at each cycle.<p>
+- Palette: Left-click on a color of the palette to see how much it will be used in the multicolored flow, and modify it by using the gauge on the right. If the flow of this color was equal to 0, then the "Init" value will be applied. Or set the flow of a color to 0 by clicking on it with the right mouse button.<p>
+- Clear: Removes all the colors from the multicolored flow. Actually, this puts a 0 value in the use of each color.<p>
+- Init: Allows you to define a value that will be set to the color you click on in the palette if its value is equal to 0. This permits to tag a set of colors more quickly.<p>
+- +1,-1,x2,/2: Modify the values of all the tagged colors (and only them).<p>
+Tip: If you often use the Shade mode, and are bored to click many times on a color to reach the color you want, you can define a spray with "Size"=1, "Mono-flow"=1, and "Delay"=2 (or more, according to your reflexes). And then, you&#39;ll just have to click a few hundredths of second to modify a color.</div>
+<div class="subsection">
+<h2 id="x464c4f4f4446494c4c">FLOODFILL</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the filler as the active drawing tool. The filler, as any drawing tool, will be affected by all the effects!<p>
+Note that only the visible part of the picture will be filled (as every other drawing tools, the floodfill only alters the visible part of the picture; this avoids unwanted effects that wouldn&#39;t be controlled by the user).<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Selects the color replacement as the active drawing tool.<p>
+Any rule has its exceptions and this one doesn&#39;t depart from that. Indeed, this tool is the only one to be affected by no effect (except Stencil) and to be able to modify non visible parts of the picture. The function of this tool being replacing all the occurences of a color in the picture by another, if would have been a shame to limit modifications only to the visible part of the picture.</div>
+<div class="subsection">
+<h2 id="x504f4c59474f4e5320504f4c59464f524d53">POLYGONS POLYFORMS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the polygons as the active drawing tool.<p>
+This works just like knotted-lines but loops the extremities when you&#39;re finished.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Selects the polyforms as the active drawing tool.<p>
+This works like a combination of free-hand drawing and knotted-lines. If you keep the mouse button pressed, you&#39;ll draw as if you were in free-hand drawing mode. And, if you release the mouse button, it will work like knotted lines.<p>
+Click on the opposite mouse button (i.e.: click right if you started to draw with the left mouse button, and vice versa) to terminate the operation. The two extremities will be linked automatically.</div>
+<div class="subsection">
+<h2 id="x46494c4c454420504f4c59">FILLED POLY</h2> Work exactly the same way as the polygons et polyforms above, but fill in the interior of the drawn shapes.</div>
+<div class="subsection">
+<h2 id="x52454354414e474c4553">RECTANGLES</h2> Selects the empty rectangles as the active drawing tool.<p>
+Set a corner of a rectangle. Maintain the click to move the opposite corner and release the mouse button to set it definitively.</div>
+<div class="subsection">
+<h2 id="x46494c4c45442052454354">FILLED RECT</h2> Selects the filled rectangles as the active drawing tool. Works like an empty rectangle.</div>
+<div class="subsection">
+<h2 id="x434952434c455320454c4c4950534553">CIRCLES ELLIPSES</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the empty circles as the active drawing tool.<p>
+Position the center of the cercle and maintain the mouse button to select its radius.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Selects the empty ellipses as the active drawing tool.<p>
+Position the center of the cercle and maintain the mouse button to select its dimensions.</div>
+<div class="subsection">
+<h2 id="x46494c4c454420434952434c455320414e4420454c4c4950534553">FILLED CIRCLES AND ELLIPSES</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">FILLED CIRCLES</code></div>
+</blockquote>
+<p>
+Works like empty circles.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">FILLED ELLIPSES</code></div>
+</blockquote>
+Works like empty ellipses.</div>
+<div class="subsection">
+<h2 id="x475241442052454354414e474c45">GRAD RECTANGLE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the rectangle with gradations as the active drawing tool.<p>
+Set a corner of a rectangle. Maintain the click to move the opposite corner and release the mouse button to set it definitively.<p>
+If you don&#39;t like what you have done and want to restart, you can use the right click to cancel everything at this point. If you think it&#39;s nice, then click and hold the mouse in a point you want to have the starting color, drag to a point where you want the ending color, and release the button. You can press SHIFT to enforce your line to be vertical, horizontal, or diagonal.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a window where you can define the way gradations are processed. The different sections of this menu are:<p>
+- Direction (arrow): Switches the direction of the gradation.<p>
+- Dithering method: Toggles the 3 following methods: - No dithering - Basical dithering - Enhanced dithering<p>
+- Mix: Mixes the gradation with a more or less random factor.<p>
+- Palette: Select a color range to build a gradation.<p>
+- Index scroller: Defines the current gradation among a set of 16 that will be memorised.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">COLOR CYCLING</code></div>
+</blockquote>
+<p>
+These options allow you to use animation of colors: Grafx2 will shift palette entries at real-time. Note that only the LBM file format can record these settings, and very few image viewers will play it back.<p>
+- Cycling: Activates or desactivates the cycling of colors when you&#39;re in the editor.<p>
+- Speed: Sets the speed for the cycling of this range. Zero means this range doesn&#39;t cycle. With 1, the range shifts 0.2856 times per second; at speed 64 it&#39;s 18.28 times per second. The program activates cycling while you hold the speed slider, so you can preview the speed.</div>
+<div class="subsection">
+<h2 id="x4752414420535048455245">GRAD SPHERE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Selects the spheres as the active drawing tool.<p>
+Position the center of the sphere and maintain the mouse button to select its radius. Then place the spot-light.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Selects the ellipses with gradation as the active drawing tool.<p>
+Draw the shape like a normal ellipse, and then position the spot-light and click the left mouse button to finish the shape.<p>
+If you trace a sphere or an ellipse with gradation with the right mouse button, the result will be the same figure filled with the Back-color.</div>
+<div class="subsection">
+<h2 id="x47524142204252555348">GRAB BRUSH</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">OR RESTORE BRUSH</code></div>
+</blockquote>
+<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Engages a brush grabbing.<p>
+Click on a corner of the rectangle containing the brush then maintain the click to define the opposite corner of the rectangle. Release the mouse button to grab the brush. Performing this operation with the right mouse button will erase the area where the brush was grabbed with the Back-color.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+Restores the old brush.</div>
+<div class="subsection">
+<h2 id="x504f4c592047524142">POLY GRAB</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Grabs a brush of any shape by defining a polyform (please refer to section 8 for more explanations).<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+Restores the old brush (same as above).</div>
+<div class="subsection">
+<h2 id="x4252555348204658">BRUSH FX</h2> Displays a menu where the following options are available:<p>
+Flip horizontally.<p>
+Flip vertically.<p>
+Rotates the brush by an angle of 90 degrees.<p>
+Rotates the brush by an angle of 180 degrees.<p>
+- Rotate by any angle: Triggers an interactive operation that allows you to rotate the brush. For this, start by placing the center or rotation with the left mouse button (if, at this moment, you press the right button, the operation with be cancelled). After that, you can define the angle of rotation as many times as you want by moving the mouse and left-clicking. Then validate with the right button when you are satisfied. Meanwhile, you can press on the 8 outer digits of the numeric pad for defining angles multiple of 45 degrees:<p>
+135     90      45 \     |     / &#39;7&#39; &#39;8&#39; &#39;9&#39; 180  -&#39;4&#39;     &#39;6&#39;- 0 &#39;1&#39; &#39;2&#39; &#39;3&#39; /     |     \ 225     270    315<p>
+Triggers an interactive operation that enables you to stretch the brush. For this, start by placing the upper-left cornerof the brush with the left mouse button (if, at this moment, you press the right button, the operation will be cancelled). after that, you can place the opposite corner as many times as you need, then validate with the right mouse button when you are satisfied. If you place this point at coordinates inferior to the ones of the first point, the brush will be inverted. Meanwhile, you can press the following keys whose effects are: &#39;D&#39;      : Double the brush &#39;H&#39;      : Reduce the brush by half &#39;X&#39;      : Double the brush in X &#39;Shift+X&#39;: Reduce the brush by half in X &#39;Y&#39;      : Double the brush in Y &#39;Shift+Y&#39;: Reduce the brush by half in Y &#39;N&#39;      : Restore the normal size of the brush (can be useful because it&#39;s the only way for cancelling)<p>
+Triggers an interactive operation that allows you to distort your brush. Start by placing the brush somewhere on the screen and left-click. The brush will appear, with a little peg at each corner. Use the left mouse button to displace the corners, which will deform the brush. When you&#39;re done, click the right mouse button.<p>
+This option permits to draw the outlines of the brush with the Fore- color.<p>
+This option "nibbles" the outlines of the brush. It&#39;s in some way the opposite effect of the Outline option.<p>
+Remaps the brush so that it looks like it would in the spare page, using the current palette.<p>
+Transfers the spare page&#39;s colors used by the brush to the current palette.<p>
+- Brush handle: Allows you to choose where to place the handle of the brush. Shortcuts are :<p>
+Load a brush from disk.<p>
+Save a brush to disk.</div>
+<div class="subsection">
+<h2 id="x425255534820464143544f5259">BRUSH FACTORY</h2> This menu allows you to run scripts. Scripts are written in the Lua language, and allow you to modify the brush (hence the name &#39;Brush factory&#39;), or even modify the image or palette, like a Photoshop filter. See the online documentation for more help on scripting.<p>
+You can select a script with the selector, the bottom panel shows a short description of what it does, and you can click Run to launch it.<p>
+The scripts are located in the application&#39;s data folder, under the &#39;/scripts&#39; subdirectory. The list is refreshed each time you open the window. Scripts are loaded from disk when you run them.</div>
+<div class="subsection">
+<h2 id="x44524157204d4f444553">DRAW MODES</h2> This button opens a menu where you can switch on or off the different   drawing modes. In this menu, the "All off" button switches all the drawing modes off.   The [Del] key is the keyboard shortcut for this button. The "Feedback" button is only used in "Shade", "Quick-shade, "Transparency" and "Smooth" modes. When it is set, it means that the _current_   state of the picture has to be taken into account for the effect instead   of the state in which the image was when you started to click for drawing. The best, as often, is that you try by yourself with and without Feedback   to see the difference. The other buttons are the following:</div>
+<div class="subsection">
+<h2 id="x5348414445">SHADE</h2> It consists in increasing or decreasing the color number within a user-defined range. This shows its real dimension when used with a range of colors that shade off. Then, you can work on a part of your picture where colors belong to the same range without having to change your brush color all the time. You can choose the incrementation or decrementation of the color by pressing the left or right mouse button while drawing. If you click on a color that does not belong to the range, it will remain unchanged.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Shade mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define one table of shades within a range of 8 memorised by the program. The different sections of this menu are:<p>
+- Palette: You can define in it the color blocks that will be inserted into the table of shades.<p>
+- Scroller: Used to change flick through the tables of shades.<p>
+- Table of shades definition area: The 512 squares should be widely sufficient to define the different shades since every 256 colors of the palette cannot be present more than once in each table.<p>
+- A window (on the top-right side) permits to visualize the different shades defined in he current table.<p>
+- Copy: Copy the contents of the table in a buffer. (Each time you open this menu, the current table is automatically transfered into this buffer).<p>
+- Paste: Copy the contents of the buffer above in the current table.<p>
+- Clear: Reset the "shades" table.<p>
+- Insert: Used to insert the block selected in the palette at the cursor&#39;s position in the table of shades. IF you click with the left mouse button on this button THEN IF a block of more than one color is selected in the table THEN   It is deleted and the block defined in the palette is inserted. ELSE   The block defined in the palette is inserted at the postion just before the selected square. END IF ELSE The block defined in the palette is inserted by erasing the colors following the beginning of the bloc selected in the table. END IF<p>
+- Delete: Delete the block selected in the table.<p>
+- Blank: Follows this algorithm: IF you click with the left mouse button on this button THEN Replace the block selected in the table by blank squares. ELSE IF a block of more than one color is selected in the table THEN   Insert blank squares to the left and to the right of the block.   (this is useful for isolating a shade quickly) ELSE   Insert blank squares to the left of the selected square. END IF END IF<p>
+- Invert: Invert the order of the block selected in the table.<p>
+- Swap: Allows you you move a block (this exchanges it with what is where you want to move it).<p>
+- Undo: Cancel the last modification of the table.<p>
+- The 2 numbers displayed on the right of these buttons are: (above) - the number of the color selected in the palette if only one color is selected. (below) - the number of the color contained in a square in the shades table if this square is the only one selected.<p>
+- The "mode" button displays 3 different modes: "Normal": Shades in the range and saturates to its boundaries. "Loop": Shades in the range and loops if boundaries are passed. "No saturation": Shades in the range and doesn&#39;t saturate if boundaries are passed. If the Step (see below) is set to 1, this option does exactly the same as the Normal mode.<p>
+- Set/Disable: If you want to define several shades in the same table but you&#39;d like these shades not to be effective at the same time, you can mask (disable) some parts of the table so that they will be interpreted a blank squares. To do that, select a block in the table of shades and click on "Set". The block will be underlined with a white line; this means that it is disabled.<p>
+- Clear/Enable: This does exactly the opposite as the button above.<p>
+- Step: Defines the step of incrementation of the shade. The bigger, the faster you run through the colors of the shade. For example: if the step is 2 and that you have defined a shade with the colors 0,1,4,5,9 and that you click on a pixel of color 1, it will take the value 5 which is 2 positions next in the la table.<p>
+(We are sorry for these technical considerations quite far from a purely artistic point of view; but know that this effect is really very useful and it is preferable that you understand its whole functionment if you want to fully take advantage of it).</div>
+<div class="subsection">
+<h2 id="x515549434b205348414445">QUICK SHADE</h2> This drawing mode has about the same effect as Shade mode&#39;s except that   it is faster to configurate but a little bit less powerful. When you draw on a color of the image which is between the fore- and the back-color in the palette, the color tends towards the fore-color   (according to the step defined) if you draw with the left mouse button, or   it tends towards the back-color if you are using the right mouse button.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Quick-shade mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu with a few parameters that mean exactly the same as in the menu of Shade mode. These parameters are the step and the loop/satu- ration mode (normal, loop, no saturation).</div>
+<div class="subsection">
+<h2 id="x5354454e43494c">STENCIL</h2> It is used to prevent some colors from being modified if you draw on   them. The main application of the stencil is when you want to change one   color or more into another.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Stencil mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define a stencil. The different sections of this menu are:<p>
+- Clear: No color is protected.<p>
+- Invert: Colors that were protected are unprotected and vice versa.<p>
+- Palette: Select colors that should be protected with the left mouse button or unprotect colors with the right mouse button.</div>
+<div class="subsection">
+<h2 id="x4d41534b">MASK</h2> This effect could have been called "True stencil" because it protects   some parts of the picture instead of some colors. The colors you tag   represent the pixels in the spare page, corresponding to the pixels in the   current page, that you don&#39;t want to alter. For example, draw a simple white figure on a black background in the   spare page. Then, tag the black color in the menu of the Mask mode. When   you&#39;ll draw in the current page, only the pixels corresponding to the   white (non-black) ones in the spare page will be modified.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Mask mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can set the colors of the Mask. This menu works the same way as the one of the Stencil, so please refer to the Stencil paragraph to know how to use it.</div>
+<div class="subsection">
+<h2 id="x47524944">GRID</h2> This is useful to snap the cursor to the cross-points of a grid. It&#39;s   generally used to draw a grid before drawing sprites of the same size such   as a font or tiles, or for drawing figures or grabbing brushes with their   dimensions multiple of the step of the grid.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Snap-to-grid mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define the grid parameters. These parameters are:<p>
+- X,Y: Steps of the grid.<p>
+- dX,dY: Offsets of the grid.<p>
+The following shortcut hides or shows the grid in the magnified view: The grid size will be according to your snap-to-grid settings.</div>
+<div class="subsection">
+<h2 id="x5349455645">SIEVE</h2> This effect allows you, by defining a pattern, to draw only on   particular points of the picture. If you are a Manga drawer, you might find this useful to make patterned shades or color transitions.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Sieve mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define the Sieve parameters. This menu consists in:<p>
+- 16x16 drawing area: You can define a pattern in it (left click =&gt; white pixel / right click =&gt; black pixel). All the white pixels indicate that, when you&#39;ll draw, pixels will be applied on the picture at the corresponding positions whereas black pixels won&#39;t modify the picture: whites pixels are the "holes of the sieve".<p>
+- 12 default patterns: They can be copied to the drawing area.<p>
+- "Transfer to brush": Copies the pattern to the brush (white pixels =&gt; Fore-color / black pixels =&gt; Back-color).<p>
+- "Get from brush": Puts the brush into the drawing area (back-color =&gt; black pixels / others =&gt; white pixels).<p>
+- Scrolling 4-arrows pad: Scrolls the pattern in the drawing area.<p>
+- Resizing 4-arrows pad: Defines the dimensions of the pattern.<p>
+- Default-value (black or white square): Indicates which value must be inserted when you increase the dimensions of the pattern.<p>
+- "Clear": Sets the whole pattern with the default value (see above).<p>
+- "Invert": It... inverts :) ... black and white pixels.</div>
+<div class="subsection">
+<h2 id="x5452414e53504152454e4359">TRANSPARENCY</h2> This allows to mix the color(s) of the paintbrush with the colors of the   picture. It&#39;s used to make transparency effects like with watercolors.<p>
+You can also use the following shortcuts to activate transparency mode and assign an amount of opacity: If you use two of these shortcuts quickly, the second will set the units for finer control. Ie: 4 5 makes 45%, 0 9 makes 9%.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Transparency mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define the Transparency parameters. These parameters are:<p>
+- Interpolation rate: Indicates the percentage of the applied color that will be considered upon the replaced color.<p>
+- Interpolation method: Uses an interpolation algorithm to compute the color, according to the interpolation rate.<p>
+- Additive method: Uses the lightest colors to choose the color to apply. For example: if you want to apply a color RGB:30,20,40 on a color RGB:10,50,20, the color applied will be the one, in the palette, that is the closest to the theoretic color RGB:30,50,40.<p>
+- Subtractive method: uses the darkest colors to choose the color to apply. For example: if you want to apply a color RGB:30,20,40 on a color RGB:10,50,20, the color applied will be the one, in the palette, that is the closest to the theoretic color RGB:10,20,20.</div>
+<div class="subsection">
+<h2 id="x534d4f4f5448">SMOOTH</h2> It provides an easy but not as efficient anti-aliasing as any artist&#39;s   touch. Anyway this effect finds a better use in making a blurry aspect.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Smooth mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define the Smooth matrix or choose one among the 4 ones predefined. The middle square represents the pixel on which you draw and the 8 others represent the neighbour pixels. Then, the point on which one draw will be replaced by the weighted average (according to values of each squares) of the 9 defined points.</div>
+<div class="subsection">
+<h2 id="x534d454152">SMEAR</h2> It smears pixels in the direction you are moving your paintbrush, just   as if you wanted to spread fresh paint with your fingers. You can combine   this effect with the transparency effect.<p>
+Switches the Smear mode.</div>
+<div class="subsection">
+<h2 id="x54494c494e47">TILING</h2> It consists in displaying parts of the brush that are adjusted on a   tiling when you are drawing. It&#39;s mainly used for quickly drawing a   background with a pattern, but there is a great number of other   possibilities.<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Switches the Tiling mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can define the Tiling parameters. These parameters are the offsets of the tiling.</div>
+<div class="subsection">
+<h2 id="x54455854">TEXT</h2> The text menu allows you to enter some text and render it as a brush. The current background and foreground colors are very important, they determine the text color, the transparent color, and also the color range to use for antialiasing. GrafX2 can use &#39;bitmap&#39; fonts as long as they are in the special layout supported by SFont. TrueType fonts can also be used if this version of GrafX2 was compiled with TrueType support.<p>
+- Txt: Click and enter your text here, a line of up to 250 characters.<p>
+- Clear txt: Empties the current text. When the text is empty, a standard string is shown instead in the preview area.<p>
+- Antialias: Click to enable or disable Antialiasing. Only affects TrueType fonts.<p>
+- Size: Determine the font height. Only affects TrueType fonts.<p>
+- Font selector: Choose a font. You can use the arrow keys (up and down) to quickly browse your fonts. TrueType fonts are indicated by &#39;TT&#39;.<p>
+- Preview area: Shows what the brush will look like.</div>
+<div class="subsection">
+<h2 id="x4d41474e4946494552">MAGNIFIER</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Engages/Disengages the choice of the zoomed window. If you&#39;re already in magnifier mode, you&#39;ll return to normal mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Displays a menu where you can choose the magnifying factor.<p>
+Note: When you are in Zoom mode, you can move the "split" bar by   clicking on it and moving your mouse left or right while holding the mouse   button down.</div>
+<div class="subsection">
+<h2 id="x50495045545445">PIPETTE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Engages a color grabbing.<p>
+Click on the picture to get the color of the pixel you&#39;re on. You can either get a new Fore-color or Back-color with respectively left or right mouse button.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Swap Fore-color and Back-color.<p>
+The color currently pointed will be displayed in the tool-bar right   after the coordinates. If you click outside the picture, the color 0 will be returned.</div>
+<div class="subsection">
+<h2 id="x5245534f4c5554494f4e20414e4420494d4147452053495a45">RESOLUTION AND IMAGE SIZE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Displays a menu where you can define the size of your picture and choose the screen resolution.<p>
+- Image size Click in the boxes named "Width" and "Height" to change the size of the image you&#39;re editing, up to 9999x9999. You can also right-click a video mode to copy its dimensions to the image&#39;s.<p>
+- Pixel size If you choose any Pixel size other than Normal, Grafx2 will emulate a lower resolution by scaling up everything it displays, including the menus and mouse cursor. In Double, Triple and Quadruple mode, the image will appear zoomed x2, x3 or x4, keeping the original proportions. The scaling is done in software, with no linear interpolation, so it can&#39;t cause blur. This setting is especially useful if your hardware or drivers don&#39;t support the low resolutions you need, but it also allows you to draw in low-resolution while staying in window mode. If you choose one of the scalers called Wide, Tall, Wide2 and Tall2, this will emulate a video mode which has rectangular pixels (longer horizontally or vertically), like some video modes of the C64, Amstrad CPC, and Commodore Amiga.<p>
+- Video mode Click on a video mode to select it. Grafx2 only lists modes that are detected as available on your computer. Depending on your video card and drivers, there can be a huge difference in the number of modes it can propose. The small buttons on the left-hand side of the lines in the list of modes have been designed to allow you to disable some modes that are not supported by your card. So, the modes that you will disable won&#39;t be used when loading pictures with "Auto-set resolution" ON.<p>
+When you click on one of these buttons, its color changes to one of the 4 following. The signification for each color of these buttons is:<p>
+- Light gray: The video mode is OK. It can be used by the auto-set resolution option when you load picture, and you can select it in the menu of resolutions.<p>
+- White: It works exactly the same as above. Moreover, it allows you to tag your favourite modes. Indeed, the huge number of video modes makes it more difficult to find the mode your want in the list; so you can tag your favoutite ones in white, so that it will be easier to locate them. (Note: you cannot disable the standard windowed mode)<p>
+- Dark gray: It allows you to indicate which modes are not really perfect (flickering, not centered, etc...) but which can be used even so. The difference with the light grey button is that these modes won&#39;t be used by the auto-set resolution option.<p>
+- Black: Use it for totally unsupported modes. Thus, these modes won&#39;t be selected the "auto-set res." and the program will not let you select them from the list of resolutions.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Automatically switches to the 640x400 window mode.</div>
+<div class="subsection">
+<h2 id="x5350415245">SPARE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Jumps to spare page. The current page is then considered as the new spare page, and the spare page considered as the new current page.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu where you can choose whether you want to copy the whole picture (keyboard short-cut in this menu is [Return]), only the pixels, only the palette, or only some colors. In this last case, a second menu (stencil-like) will propose you to tag the colors you want to copy (they are all selected by default). Please refer to section "Stencil" to know how to use this last menu. The last option the menu ("Copy palette and remap, remaps the spare page with the current palette and replicates this palette to the spare page. This option is useful to quickly remap a picture with the palette of another.</div>
+<div class="subsection">
+<h2 id="x53415645">SAVE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Displays a fileselector where the following options are available:<p>
+- Select drive: Allow you to change the current drive.or volume (depending on your operating system<p>
+- Format: Allows you to choose the file format you want. (PAL and KCF file formats are "palette" files).<p>
+- Filename: Allows you to give a new name to the picture. If no extension is given, the default (according to the format) will be used.<p>
+- Bookmarks: The four dropdown buttons allow you to bookmark frequently used directories. Use right-click to open a contextual menu to Set it (memorize current directory), Rename it to change its label, and Clear it if you no longer need it. Use left-click to change to the memorized directory.<p>
+- File-list: Allows you to flick through the disk tree or to overwrite an existing file.<p>
+- Delete: Allows you to delete the item under the selection bar. If the item is a directory, it must be empty to be removed.<p>
+- Save: Saves the picture with the current filename, with the chosen format. If the current filename represents a directory, you&#39;ll enter it.<p>
+- Comment (Txt): If you&#39;re using the PKM or PNG format, you can type in a comment on your picture. It will be memorized in the image.<p>
+Note: The Backspace key brings you directly to the parent directory. You can also type the first letters of a filename you are looking for, to access it faster.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Save the current picture with its current filename, format and comment.<p>
+If the file already exists, a confirmation box will appear.</div>
+<div class="subsection">
+<h2 id="x4c4f4144">LOAD</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+This works the same way as Save.<p>
+You&#39;ll have access in the format selector to a "*.*" filter. And of course, you won&#39;t be able to type in any comment.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Reloads the picture.<p>
+If you want to load a picture and that you haven&#39;t saved the last modifications of the current picture, a confirmation box will appear.</div>
+<div class="subsection">
+<h2 id="x53455454494e4753">SETTINGS</h2> Displays a menu where you can configure some miscellaneous elements of the program. Detailed description of each setting is available when this screen is open (Use the</div>
+<div class="subsection">
+<h2 id="x534b494e53">SKINS</h2> This window allow you to change the look and feel of the program.<p>
+- Font: determines whether you want to use GrafX2 with a classical font, or another one a bit funnier.<p>
+- Cursor: Allows you to choose the graphic mouse cursor: Solid and Thin are solid black and white cursors defined by the skin file, Transparent is a 1-pixel wide XOR cross.<p>
+- Graphic file: you can change the whole interface by selecting where the sprites for all buttons are. Look at the files in the "skin" directory if you want to create your own. There are two skins available, the default for 2.1 is called modern. Classic is for nostalgics who wish to remember the old days of Sunset Design. If you create a good skin, feel free to share it with us! We may include it in a future release...<p>
+- Separate colors: Draws a squaring around the colors of the tool-bar.<p>
+- Show/Hide picture limits: Indicates if the picture boundaries must be displayed when you are in a resolution bigger than the picture.</div>
+<div class="subsection">
+<h2 id="x44455441494c45442053455454494e4753">DETAILED SETTINGS</h2></div>
+<div class="subsection">
+<h2 id="x46494c452053454c4543544f52">FILE SELECTOR</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Show hidden files</code></div>
+</blockquote>
+Hidden files appear.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Show hidden directories</code></div>
+</blockquote>
+Hidden directories appear.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Preview delay</code></div>
+</blockquote>
+Delay before displaying a preview in file- selectors (in 18.2th of second). Possible values range from 1 to 256.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Maximize preview</code></div>
+</blockquote>
+Maximize the preview of the pictures so that it is as big as possible. If you&#39;re not in the same resolution as the picture&#39;s one, it can try to correct the aspect ratio, but if the picture does not fill the whole screen, it can be worse.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Find file fast</code></div>
+</blockquote>
+This option is used to place the selection bar on a filename by typing its first letters. For example, if you want to find the &#39;PICTURE.PKM&#39; in a directory that also contains &#39;PALETTE.PAL&#39;, you&#39;ll just have to type P and I. The different values of &#39;FFF&#39; indicate if you want to find the name in both files and directories or just in only one of these: 0: files and directories 1: files only 2: directories only<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Auto set resolution</code></div>
+</blockquote>
+Automatically set the resolution when loading a picture. You should set this value to &#39;yes&#39; after disabling the video modes that are notsupported by your video card or monitor.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Set resolution according to</code></div>
+</blockquote>
+If the variable above is set to &#39;yes&#39;, this one tells if you want to set the resolution according to: 1: the internal &#39;original screen&#39; dimensions of the picture 2: the actual dimensions of the picture<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Backup</code></div>
+</blockquote>
+Create a backup file when saving.</div>
+<div class="subsection">
+<h2 id="x46494c4520464f524d4154204f5054494f4e53">FILE FORMAT OPTIONS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Save screen size in GIF</code></div>
+</blockquote>
+Save the screen dimensions in GIF files. If you want to read these files with Photoshop or Alchemy, and maybe some other programs, you must set this option to &#39;no&#39;.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Clear palette</code></div>
+</blockquote>
+If you load a picture with a palette of less than 256 colors, this option defines if you want to clear the palette or to keep the colors of the previous picture that are over the number of colors of the new picture. For example, if you load a 32-color picture, the colors 32 to 255 will be set to black if this option is set to &#39;yes&#39;, or they will be kept unchanged if this option is set to &#39;no&#39;</div>
+<div class="subsection">
+<h2 id="x475549">GUI</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Opening message</code></div>
+</blockquote>
+Display a message at startup telling the version number of the program.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Menu ratio</code></div>
+</blockquote>
+Aspect ratio and size of the menus and the tool-bar. Possible values: 0: Do not adapt (pixels are not stretched) 1: Adapt the menus and the tool-bar according to the resolution 2: Slightly adapt the ratio of the menus and tool-bar -1:Do not adapt (like 0) -2:Stretch by x2 maximum -3:Stretch by x3 maximum -4:Stretch by x4 maximum<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Draw limits</code></div>
+</blockquote>
+Draw the limits of the picture.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Coordinates</code></div>
+</blockquote>
+Coordinates: 1: Relative 2: Absolute<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Separate colors</code></div>
+</blockquote>
+Separate the colors in the tool-bar by a black squaring.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Safety colors</code></div>
+</blockquote>
+When you reduce the palette or &#39;zap&#39; some colors out of it, it is possible that there are not enough colors left to draw the menus. Switching the following variable on will bring back the colors of the menu if there are less than 4 colors left after &#39;reducing&#39; or &#39;zapping&#39;.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Grid XOR color</code></div>
+</blockquote>
+This determines the color value for the grid. Each pixel of the grid will be displayed by XOR-ing the original color with the value of this setting. For example, if you always paint 16-color images, you can set it to 16 so the color of the grid are 16 for 0, 17 for 1, etc. Then you can set colors 16-31 as lighter/darker variants of your original palette, resulting in a pretty grid !<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Sync views</code></div>
+</blockquote>
+When this mode is active, scrolling the view (and the magnifier view) affects both the main image and the spare page - as long as they have the same dimensions.</div>
+<div class="subsection">
+<h2 id="x494e505554">INPUT</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Gauges scrolling speed Left</code></div>
+</blockquote>
+Speed of the scroll-bars (in VBLs waited) while clicking with the left or right button of the mouse. Values can be between 1 and 255. The bigger values, the slower.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Gauges scrolling speed Right</code></div>
+</blockquote>
+Speed of the scroll-bars (in VBLs waited) while clicking with the left or right button of the mouse. Values can be between 1 and 255. The bigger values, the slower.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Merge movement</code></div>
+</blockquote>
+This setting allows you merge successive mouse movements into a single mouse movement. You should only use it if you are using a mouse which reports at 200Hz or more, and you experience lag when using discontinuous hand-drawing with large brushes (this tool tries to paste the brush and update the screen on each new mouse position) In this case, set this to 2 or more, to ignore some intermediate mouse reports when a more recent one is present. Note that with a value superior to 1, you lose precision with continuous hand-drawing, as intermediate mouse positions are skipped.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Double click speed</code></div>
+</blockquote>
+This is the time (in milliseconds) between two clicks for Grafx2 to recognize a double-click. Double-click is used mostly in the palette area of the menu: double-click a color to open the palette.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Double key speed</code></div>
+</blockquote>
+When you press two digit keys in rapid succession (ex: 3 8), Grafx2 sets transparency to 38% (instead of 30% then 80%). This setting allows you to set the maximum delay between two keypresses for GrafX2 to recognize them as a combo.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Swap buttons</code></div>
+</blockquote>
+This setting determines which key inverts the mouse buttons when it&#39;s held : A left click is then interpreted as a right-click. It&#39;s especially useful for one-button controllers, such as touchscreens and tablets.</div>
+<div class="subsection">
+<h2 id="x45444954494e47">EDITING</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Adjust brush pick</code></div>
+</blockquote>
+Adjust the brush grabbing in &#39;grid&#39; mode.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Undo pages</code></div>
+</blockquote>
+Number of pages stored in memory for &#39;undoing&#39;. Values are between 1 and 99.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Vertices per polygon</code></div>
+</blockquote>
+Maximum number of vertices used in filled polygons and polyforms, and lasso. Possible values range from 2 to 16384.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Fast zoom</code></div>
+</blockquote>
+Automatically zoom into the pointed area when you press the short-key of the Magnifier button while being above the picture.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Clear with stencil</code></div>
+</blockquote>
+Take the Stencil into account when clearing the image.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Auto discontinuous</code></div>
+</blockquote>
+Directly set the discontinuous freehand drawing mode after brush grabbing.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Auto nb colors used</code></div>
+</blockquote>
+Automaticaly count the number of different colors used when opening the palette editor window. (Set it to &#39;no&#39; if you have a slow computer or if you edit huge pictures)<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">Right click colorpick</code></div>
+</blockquote>
+This enables a mode where the right mouse buttons acts as a color picker until it&#39;s released, and selects Foreground color. This mode prevents you from painting with Background color. This option is ignored when the Shade, Quick-shade, or Tiling mode is used.<p>
+Multi shortcuts When this setting is disabled, and you create a shortcut with a key that is already associated to another shortcut, Grafx2 will unset the latter. If you enable this mode, Grafx2 will not make such check, so you can design shortcuts that trigger several actions at once.</div>
+<div class="subsection">
+<h2 id="x434c454152">CLEAR</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Clears the picture with the color number 0, or the transparent color of the picture.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+Clears the picture with the Back-color.</div>
+<div class="subsection">
+<h2 id="x48454c50205354415453">HELP STATS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Displays an info window where you&#39;ll find some credits, help about the credits, different effects, greetings, registering...<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Displays a window where you&#39;ll find miscellaneous information about the system. Note: you should take care to keep more than 128 Kb in order to let the   program run in a proper way.</div>
+<div class="subsection">
+<h2 id="x4f4f5053">OOPS</h2> (UNDO/REDO) LEFT CLICK Allows you to undo the last modification on the picture.<p>
+RIGHT CLICK Allows you to redo the last modification undone on the         picture. The maximum number of UNDO that you can perform can be defined in the   settings menu. Undo/Redo aren&#39;t effective after page switching, picture loading and   picture size modifications.</div>
+<div class="subsection">
+<h2 id="x4b494c4c">KILL</h2> KILL CURRENT PAGE<p>
+Removes the current page from the list of "Undo" pages. This allows you to free some memory if you need it. For instance, this will allow you to delete the start-up page after having loaded an image. A message will appear if you&#39;ve already erased all the pages except the last one. Note: Another way to free some memory is to decrease the number of   "Undo" pages. Or else, if you have recentlt grabbed a very big   brush that you don&#39;t use any more, you can grab a new smaller one.   The memory allocated by the big brush will be thus freed.</div>
+<div class="subsection">
+<h2 id="x51554954">QUIT</h2> Allows you to leave GrafX2. If there are unsaved modifications in the current or spare page, a confirmation box will ask you if you really want to quit GrafX2, if you want to save (Auto-save, no fileselector) or if you want to stay in GrafX2.</div>
+<div class="subsection">
+<h2 id="x50414c204d454e55">PAL MENU</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Displays a menu where the following options are available:<p>
+- Palette: Allows you to choose a color-block to edit. If you click with the right mouse button, you&#39;ll choose a new Back-color.<p>
+- Gauges: Allow you to modify the current selection.<p>
+- RGB or HSL above the gauges: Switches between RGB and HSL color spaces. In HSL mode, the three sliders allow you to set the Hue (tint), Saturation (from grayscale to pure color) and Lightness (from black to white).<p>
+- numbers below the gauges: Allows you to type in a new color in hexadecimal RRGGBB or RGB: ie. to get blue, you can type either 0000ff or 00f.<p>
+- "+" and "-": Allow you to lighten or darken the current selection.<p>
+- Preset: Restores the predefined GrafX2 palette.<p>
+- Gray: Transforms the current selection into its gray-scaled equivalent.<p>
+- Neg: Transforms the current selection into its reverse video equivalent.<p>
+- Invert: Swaps the colors of the current selection so that the first colors become the last ones.<p>
+- X-Invert: Works as above but modifies the picture so that it looks the same.<p>
+- Swap: Swaps the current selection with another color-block. Click on the beginning of the new color-block.<p>
+- X-Swap: Works as above but modifies the picture so that it looks the same. This may be useful if you want to sort your palette.<p>
+- Copy: Copies the current selection to another color-block. Click on the beginning of the new color-block.<p>
+- Spread: Computes a gradation between two colors. If your selection is only made up of one color, select the second color in the palette. Otherwise, the two colors used will be its extremities.<p>
+- Sort: sorts the palette by color ranges. If you click with the left mouse button, it will sort by H S L; and if you click with the right mouse button, it will sort by L only. Note that you can choose a range of colors before sorting, and instead of the whole palette it will sort this range.<p>
+- Used: Indicates the number of colors used in the picture and opens a histogram screen.<p>
+- Zap unused: Erases the unused colors with copies of the current selection. (The keyboard shortcut for this button is &lt;Del&gt;).<p>
+- Reduce: Allows you to reduce the palette to the number of colors you want (and modifies the picture).<p>
+- Undo: Allows you to recover the last modifications made on the palette. Note that it can&#39;t undo the changes that affect the pixels (remapping), you&#39;ll need to Cancel them.<p>
+If you press &lt;Backspace&gt;, the program will replace, as well as possible, some unused colors by the four default colors of the menu. The image won&#39;t look altered because the modified colors (in the case they were used on a few points) will be replaced by the closest colors in the rest of the palette. This option is really useful when you modify the palette so that there are no colors that fit for the menu (eg: "Zap unused" while very little colors are used in the picture; or "Reduce" with a very small number of colors).<p>
+If you press the key below &lt;Escape&gt; or &lt;,&gt; (QWERTY), the menu will disappear and you will be able to pick up a color from the picture easily. Press &lt;Escape&gt; to cancel.<p>
+If only one color is selected (not a block), the &lt;[&gt; and &lt;]&gt; keys can be used to select the previous or next Forecolor (Backcolor if you press &lt;Shift&gt; at the same time).<p>
+Warning! If you press Undo after an action that modifies the picture (X-Swap, X-Invert and Reduce colors), the picture won&#39;t be remapped as it was just before this action. Only Cancel will.</div>
+<div class="subsection">
+<h2 id="x50414c45545445204f5054494f4e53">PALETTE OPTIONS</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a menu from where you have the following options:<p>
+- Colors for best match: A menu in which you can select the colors that have not to be used for smoothing, for the transparency mode, and for remapping.<p>
+- User&#39;s color series: A menu in which you can define color series for next/previous user color shortcuts. It&#39;s the same settings than the shade mode. After you have some color ranges defined in this screen, you can use those shortcuts to move to the next or previous color according to your ranges:<p>
+Foreground color<p>
+Background color<p>
+- Palette layout: Lets you customize the palette that appears on the right of the menu. You can choose the number of lines and columns. If you want the colors to run top to bottom, check the &#39;Vertical&#39; button, otherwise the colors runs left to right.<p>
+- RGB Scale: Lets you set the scale of the R G B sliders in the palette screen. You should normally leave it at 256 to get the full 0-255 range, but if you want to constrain the palette to the capabilities of some specific computers and consoles, you can choose eg: 64 : VGA 16 : Amiga 4 : MSX2 2 : Amstrad CPC</div>
+<div class="subsection">
+<h2 id="x5343524f4c4c2050414c">SCROLL PAL</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Scrolls the palette window in the right of the menu.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Same as above, but faster.</div>
+<div class="subsection">
+<h2 id="x50414c45545445">PALETTE</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Defines the Fore-color.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+Defines the Back-color.</div>
+<div class="subsection">
+<h2 id="x48494445204d454e55">HIDE MENU</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Allows you to hide all toolbars, leaving only the status bar. Click again to show them again.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Opens a drop-down menu where you can choose Which toolbars are going to be visible in the menu.</div>
+<div class="subsection">
+<h2 id="x4c4159455253204d454e55">LAYERS MENU</h2> In this menu you can set the following options:<p>
+* Transparent color : This determines which color index is considered transparent when using layers. Click the button and then click on the image to pick the right color, or use ESC to cancel.<p>
+* Transparent background : When this option is checked, all pixels of the transparent color on layer 1 (background layer) will be tagged as transparent in the final image. Check this option if you want to make a transparent GIF or PNG. These are the only file formats that support this option.</div>
+<div class="subsection">
+<h2 id="x4c4159455253205452414e53504152454e4359">LAYERS TRANSPARENCY</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Sets the transparent color as background pen color.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+The current Background color becomes the color considered transparent for the layers.</div>
+<div class="subsection">
+<h2 id="x4c4159455253204d45524745">LAYERS MERGE</h2> Merges the current layer with the one below it, and sets the resulting layer as current one for editing. This function has no effect if you&#39;re editing the lowest layer.</div>
+<div class="subsection">
+<h2 id="x414444204c41594552">ADD LAYER</h2> Add a new layer above the current one, and selects this new (empty) layer for editing.</div>
+<div class="subsection">
+<h2 id="x44524f50204c41594552">DROP LAYER</h2> Deletes the current layer.</div>
+<div class="subsection">
+<h2 id="x4d4f5645204c41594552205550">MOVE LAYER UP</h2> Swaps the current layer with the one above it. This has no effect if this layer is already on top.</div>
+<div class="subsection">
+<h2 id="x4d4f5645204c4159455220444f574e">MOVE LAYER DOWN</h2> Swaps the current layer with the one below it. This has no effect if this layer is already on the bottom.</div>
+<div class="subsection">
+<h2 id="x4c415945522053454c454354494f4e">LAYER SELECTION</h2><blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">LEFT CLICK</code></div>
+</blockquote>
+<p>
+Choose a layer as the current one for drawing.<p>
+<blockquote style="margin-top: 0.00em;margin-bottom: 0.00em;">
+<div class="display">
+<code class="lit">RIGHT CLICK</code></div>
+</blockquote>
+<p>
+Makes a layer visible or invisible. If you click the current layer, this toggles the visibility of all other layers instead.</div>
+</div>
+<table summary="Document Footer" class="foot">
+<tbody>
+<tr>
+<td class="foot-date">
+December 1, 2011</td>
+<td class="foot-os">
+Linux 2.6.18-274.7.1.el5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</body>
+</html>
+
